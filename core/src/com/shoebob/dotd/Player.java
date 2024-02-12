@@ -6,9 +6,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+
 public class Player { // TODO: Entity class
     // TODO: also better way of animating
     protected int x = 0, y = 0, width = 64, height = 64;
+    private Vector2 velocity = new Vector2(0, 0);
     private float stateTime = 0f;
 
     Animation<TextureRegion> idleAnimation;
@@ -29,27 +32,32 @@ public class Player { // TODO: Entity class
         // TODO: PLayer moves faster on diagonal. Something something normalize vector?
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
             if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+                velocity.y = 1;
                 frame = walkAnimation.getKeyFrame(stateTime, true);
-                y += (int) (100 * Gdx.graphics.getDeltaTime());
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+                velocity.y = -1;
                 frame = walkAnimation.getKeyFrame(stateTime, true);
-                y -= (int) (100 * Gdx.graphics.getDeltaTime());
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+                velocity.x = -1;
                 frame = walkAnimation.getKeyFrame(stateTime, true);
-                x -= (int) (100 * Gdx.graphics.getDeltaTime());
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+                velocity.x = 1;
                 frame = walkAnimation.getKeyFrame(stateTime, true);
-                x += (int) (100 * Gdx.graphics.getDeltaTime());
             }
         } else {
             frame = idleAnimation.getKeyFrame(stateTime, true);
+            velocity.setZero();
         }
+
+        velocity.nor();
+        x += velocity.x;
+        y += velocity.y;
 
 
         stateTime += Gdx.graphics.getDeltaTime();
