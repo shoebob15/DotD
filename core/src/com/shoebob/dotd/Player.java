@@ -27,6 +27,7 @@ public class Player { // TODO: Entity class
     public void draw(SpriteBatch s) {
         TextureRegion frame = idleAnimation.getKeyFrame(stateTime, true);
         // TODO: PLayer moves faster on diagonal. Something something normalize vector?
+        // TODO: Probably use delta time, but womp womp
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
             if (Gdx.input.isKeyPressed(Input.Keys.W)) {
                 frame = walkAnimation.getKeyFrame(stateTime, true);
