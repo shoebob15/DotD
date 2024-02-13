@@ -9,53 +9,72 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player { // TODO: Entity class
-    // TODO: also better way of animating
-    protected int x = 0, y = 0, width = 64, height = 64;
+    protected float x = 0, y = 0, width = 64, height = 64;
     private Vector2 velocity = new Vector2(0, 0);
     private float stateTime = 0f;
 
     Animation<TextureRegion> idleAnimation;
     Texture idleSheet;
 
-    Animation<TextureRegion> walkAnimation;
-    Texture walkSheet;
+    Animation<TextureRegion> walkRAnimation;
+    Texture walkRSheet;
+
+    Animation<TextureRegion> walkLAnimation;
+    Texture walkLSheet;
+
+    Animation<TextureRegion> walkBAnimation;
+    Texture walkBSheet;
+
+    Animation<TextureRegion> walkFAnimation;
 
     public Player() {
         idleSheet = new Texture(Gdx.files.internal("player_idle.png"));
-        idleAnimation = new Animation<TextureRegion>(0.5f, getIdleFrames());
-        walkSheet = new Texture(Gdx.files.internal("player_walk_l.png"));
-        walkAnimation = new Animation<TextureRegion>(0.125f, getWalkFrames());
+        idleAnimation = new Animation<TextureRegion>(0.5f, getFrames(idleSheet, 2));
+
+        walkRSheet = new Texture(Gdx.files.internal("player_walk_r.png"));
+        walkRAnimation = new Animation<TextureRegion>(0.125f, getFrames(walkRSheet, 2));
+
+        walkLSheet = new Texture(Gdx.files.internal("player_walk_l.png"));
+        walkLAnimation = new Animation<TextureRegion>(0.125f, getFrames(walkLSheet, 2));
+
+        walkBSheet = new Texture(Gdx.files.internal("player_walk_b.png"));
+        walkBAnimation = new Animation<TextureRegion>(0.125f, getFrames(walkBSheet, 2));
+
+        // sheet for forward walk is just sped up idle
+        walkFAnimation = new Animation<TextureRegion>(0.125f, getFrames(idleSheet, 2));
     }
 
     public void draw(SpriteBatch s) {
         TextureRegion frame = idleAnimation.getKeyFrame(stateTime, true);
-        // TODO: PLayer moves faster on diagonal. Something something normalize vector?
+
+        float expX = 0, expY = 0;
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
             if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-                velocity.y = 1;
-                frame = walkAnimation.getKeyFrame(stateTime, true);
+                expY += 1;
+                frame = walkBAnimation.getKeyFrame(stateTime, true);
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-                velocity.y = -1;
-                frame = walkAnimation.getKeyFrame(stateTime, true);
+                expY += -1;
+                frame = walkFAnimation.getKeyFrame(stateTime, true);
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                velocity.x = -1;
-                frame = walkAnimation.getKeyFrame(stateTime, true);
+                expX += -1;
+                frame = walkLAnimation.getKeyFrame(stateTime, true);
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                velocity.x = 1;
-                frame = walkAnimation.getKeyFrame(stateTime, true);
+                expX += 1;
+                frame = walkRAnimation.getKeyFrame(stateTime, true);
             }
         } else {
             frame = idleAnimation.getKeyFrame(stateTime, true);
-            velocity.setZero();
         }
 
+        velocity.set(expX, expY);
         velocity.nor();
+
         x += velocity.x;
         y += velocity.y;
 
@@ -63,24 +82,17 @@ public class Player { // TODO: Entity class
         stateTime += Gdx.graphics.getDeltaTime();
 
         s.draw(frame, x, y, width, height);
+        System.out.println(velocity);
     }
 
     public void dispose() {
         idleSheet.dispose();
     }
 
-    private TextureRegion[] getIdleFrames() {
-        TextureRegion[] tmp = new TextureRegion[2];
+    private TextureRegion[] getFrames(Texture sheet, int length) {
+        TextureRegion[] tmp = new TextureRegion[length];
         for (int i = 0; i < tmp.length; i++) {
-            tmp[i] = new TextureRegion(idleSheet, i * 16, 0, 16, 16);
-        }
-        return tmp;
-    }
-
-    private TextureRegion[] getWalkFrames() {
-        TextureRegion[] tmp = new TextureRegion[2];
-        for (int i = 0; i < tmp.length; i++) {
-            tmp[i] = new TextureRegion(walkSheet, i * 16, 0, 16, 16);
+            tmp[i] = new TextureRegion(sheet, i * 16, 0, 16, 16);
         }
         return tmp;
     }
