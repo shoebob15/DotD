@@ -82,7 +82,6 @@ public class Player { // TODO: Entity class
         stateTime += Gdx.graphics.getDeltaTime();
 
         s.draw(frame, x, y, width, height);
-        System.out.println(velocity);
     }
 
     public void dispose() {
