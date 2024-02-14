@@ -26,7 +26,7 @@ public class DotDGame extends ApplicationAdapter {
 	private OrthogonalTiledMapRenderer mapRenderer;
 	
 	@Override
-	public void create () {
+	public void create() {
 		float h = Gdx.graphics.getHeight();
 		float w = Gdx.graphics.getWidth();
 
@@ -34,7 +34,7 @@ public class DotDGame extends ApplicationAdapter {
 		player = new Player();
 		tiledMap = new TmxMapLoader().load("maps/testmap.tmx");
 		water = (TiledMapTileLayer)tiledMap.getLayers().get(0);
-		camera = new OrthographicCamera(100, 100 * (h / w));
+		camera = new OrthographicCamera(300, 300 * (h / w));
 		mapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 
 		camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
@@ -42,19 +42,25 @@ public class DotDGame extends ApplicationAdapter {
 	}
 
 	@Override
-	public void render () {
+	public void render() {
 		ScreenUtils.clear(.12f, .6f, .7f, 1);
+		camera.position.x = player.x;
+		camera.position.y = player.y;
 		camera.update();
 		mapRenderer.setView(camera);
 		mapRenderer.render();
+
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
+		// TODO: Somehow attach weapon to player. Need a ROBUST system with animation, since
+		// TODO: there will be many more weapons and objects
+		batch.draw(new Texture(Gdx.files.internal("weapons/sword.png")), 0, 0);
 		player.draw(batch);
 		batch.end();
 	}
 	
 	@Override
-	public void dispose () {
+	public void dispose() {
 		batch.dispose();
 		player.dispose();
 		tiledMap.dispose();

@@ -87,6 +87,7 @@ public class Player { // TODO: Entity class
         stateTime += Gdx.graphics.getDeltaTime();
 
         s.draw(frame, x, y, width, height);
+        System.out.println(this);
     }
 
     public void dispose() {
@@ -99,5 +100,14 @@ public class Player { // TODO: Entity class
             tmp[i] = new TextureRegion(sheet, i * 16, 0, 16, 16);
         }
         return tmp;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "x=" + x +
+                ", y=" + y +
+                ", velocity=" + velocity +
+                '}';
     }
 }
