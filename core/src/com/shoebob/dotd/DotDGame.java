@@ -1,24 +1,53 @@
 package com.shoebob.dotd;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g3d.decals.SimpleOrthoGroupStrategy;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.sun.org.apache.xpath.internal.operations.Or;
 
-// TODO: Make a dungeon tilemap
+// TODO: Draw a dungeon that has collisions
 public class DotDGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	Player player;
+	static final int WORLD_HEIGHT = 20;
+	static final int WORLD_WIDTH = 30;
+
+	private SpriteBatch batch;
+	private Player player;
+	private TiledMap tiledMap;
+	private TiledMapTileLayer water;
+	private OrthographicCamera camera;
+	private OrthogonalTiledMapRenderer mapRenderer;
 	
 	@Override
 	public void create () {
+		float h = Gdx.graphics.getHeight();
+		float w = Gdx.graphics.getWidth();
+
 		batch = new SpriteBatch();
 		player = new Player();
+		tiledMap = new TmxMapLoader().load("maps/testmap.tmx");
+		water = (TiledMapTileLayer)tiledMap.getLayers().get(0);
+		camera = new OrthographicCamera(100, 100 * (h / w));
+		mapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+
+		camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
+		camera.update();
 	}
 
 	@Override
 	public void render () {
 		ScreenUtils.clear(.12f, .6f, .7f, 1);
+		camera.update();
+		mapRenderer.setView(camera);
+		mapRenderer.render();
+		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		player.draw(batch);
 		batch.end();
@@ -28,5 +57,6 @@ public class DotDGame extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		player.dispose();
+		tiledMap.dispose();
 	}
 }

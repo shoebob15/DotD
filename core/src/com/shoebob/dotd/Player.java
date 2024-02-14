@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player { // TODO: Entity class
-    protected float x = 0, y = 0, width = 64, height = 64;
+    protected float x = 0, y = 0, width = 32, height = 32;
     private Vector2 velocity = new Vector2(0, 0);
     private float stateTime = 0f;
 
