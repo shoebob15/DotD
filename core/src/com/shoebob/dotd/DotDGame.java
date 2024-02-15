@@ -15,9 +15,6 @@ import com.sun.org.apache.xpath.internal.operations.Or;
 
 // TODO: Draw a dungeon that has collisions
 public class DotDGame extends ApplicationAdapter {
-	static final int WORLD_HEIGHT = 20;
-	static final int WORLD_WIDTH = 30;
-
 	private SpriteBatch batch;
 	private Player player;
 	private TiledMap tiledMap;
@@ -54,7 +51,7 @@ public class DotDGame extends ApplicationAdapter {
 		batch.begin();
 		// TODO: Somehow attach weapon to player. Need a ROBUST system with animation, since
 		// TODO: there will be many more weapons and objects
-		batch.draw(new Texture(Gdx.files.internal("weapons/sword.png")), 0, 0);
+		player.update();
 		player.draw(batch);
 		batch.end();
 	}
