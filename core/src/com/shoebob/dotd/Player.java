@@ -14,8 +14,8 @@ public class Player { // TODO: Entity class
     private float stateTime = 0f;
     TextureRegion currentFrame;
 
-    Animation<TextureRegion> idleAnimation;
-    Texture idleSheet;
+    AttachableAnimation idleAnimation;
+    Texture idleSheet = new Texture(Gdx.files.internal("player/player_idle.png"));
 
     Animation<TextureRegion> walkRAnimation;
     Texture walkRSheet;
@@ -32,8 +32,13 @@ public class Player { // TODO: Entity class
     PlayerAttachment sword;
 
     public Player() {
-        idleSheet = new Texture(Gdx.files.internal("player/player_idle.png"));
-        idleAnimation = new Animation<TextureRegion>(0.5f, getFrames(idleSheet, 2));
+        idleAnimation = new AttachableAnimation(
+                new Texture(Gdx.files.internal("player/player_idle.png")),
+                0.5f,
+                new Vector2[]{
+                    new Vector2(2, 9),
+                    new Vector2(19, 11),
+                });
 
         walkRSheet = new Texture(Gdx.files.internal("player/player_walk_r.png"));
         walkRAnimation = new Animation<TextureRegion>(0.125f, getFrames(walkRSheet, 2));
@@ -57,7 +62,7 @@ public class Player { // TODO: Entity class
     }
 
     public void update() {
-        currentFrame = idleAnimation.getKeyFrame(stateTime, true);
+        currentFrame = idleAnimation.animation.getKeyFrame(stateTime, true);
 
         float expX = 0, expY = 0;
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
@@ -81,12 +86,12 @@ public class Player { // TODO: Entity class
                 currentFrame = walkRAnimation.getKeyFrame(stateTime, true);
             }
         } else {
-            currentFrame = idleAnimation.getKeyFrame(stateTime, true);
+            currentFrame = idleAnimation.animation.getKeyFrame(stateTime, true);
         }
 
         // if velocity is 0, then do idle animation
         if (velocity.isZero()) {
-            currentFrame = idleAnimation.getKeyFrame(stateTime, true);
+            currentFrame = idleAnimation.animation.getKeyFrame(stateTime, true);
         }
 
         velocity.set(expX, expY);
@@ -107,10 +112,11 @@ public class Player { // TODO: Entity class
         walkRSheet.dispose();
     }
 
-    private TextureRegion[] getFrames(Texture sheet, int length) {
+
+    private TextureRegion[] getFrames(Texture texture, int length) {
         TextureRegion[] tmp = new TextureRegion[length];
         for (int i = 0; i < tmp.length; i++) {
-            tmp[i] = new TextureRegion(sheet, i * 16, 0, 16, 16);
+            tmp[i] = new TextureRegion(texture, i * 16, 0, 16, 16);
         }
         return tmp;
     }
