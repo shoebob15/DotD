@@ -2,6 +2,7 @@ package com.shoebob.dotd;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 public class PlayerAttachment {
     private Texture texture;
@@ -28,5 +29,10 @@ public class PlayerAttachment {
 
     public void setTexture(Texture texture) {
         this.texture = texture;
+    }
+
+    public void setVectorLocation(Vector2 vector) {
+        this.x = vector.x;
+        this.y = vector.y;
     }
 }

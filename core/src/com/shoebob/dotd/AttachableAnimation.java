@@ -3,25 +3,25 @@ package com.shoebob.dotd;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 
-// has coordinates for an attachment to render at for each frame.
+// provides coordinate data on where to put a player's attachment based on the current animation frame
 public class AttachableAnimation {
     protected Animation<TextureRegion> animation;
     private Texture spritesheet;
 
-    // represents the LOCAL coordinates of the spritesheet for the position of the players hand
-    // !! MUST BE IN ORDER OF SPRITESHEET FRAMES !!
-
     protected Vector2[] coordinates;
-    protected Vector2 currentVector;
 
 
     public AttachableAnimation(Texture spritesheet, float update, Vector2[] coordinates) {
         this.spritesheet = spritesheet;
-        this.animation = new Animation<TextureRegion>(update, getFrames(spritesheet.getWidth() / 16));
+        this.animation = new Animation<>(update, getFrames(spritesheet.getWidth() / 16));
         this.coordinates = coordinates;
+
+    }
+
+    public Vector2 getLocalAttachmentLocation(float statetime) {
+        return coordinates[animation.getKeyFrameIndex(statetime)];
     }
 
     private TextureRegion[] getFrames(int length) {
@@ -31,4 +31,5 @@ public class AttachableAnimation {
         }
         return tmp;
     }
+
 }

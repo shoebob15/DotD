@@ -29,6 +29,8 @@ public class Player { // TODO: Entity class
     Animation<TextureRegion> walkFAnimation;
     // no texture sheet for walk forward, just sped up idle
 
+    Animation<TextureRegion> currentAnimation;
+
     PlayerAttachment sword;
 
     public Player() {
@@ -37,7 +39,7 @@ public class Player { // TODO: Entity class
                 0.5f,
                 new Vector2[]{
                     new Vector2(2, 9),
-                    new Vector2(19, 11),
+                    new Vector2(2, 11),
                 });
 
         walkRSheet = new Texture(Gdx.files.internal("player/player_walk_r.png"));
@@ -72,12 +74,12 @@ public class Player { // TODO: Entity class
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-                expY += -1;
+                expY -= 1;
                 currentFrame = walkFAnimation.getKeyFrame(stateTime, true);
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                expX += -1;
+                expX -= 1;
                 currentFrame = walkLAnimation.getKeyFrame(stateTime, true);
             }
 
@@ -87,6 +89,12 @@ public class Player { // TODO: Entity class
             }
         } else {
             currentFrame = idleAnimation.animation.getKeyFrame(stateTime, true);
+            Vector2 loc = idleAnimation.getLocalAttachmentLocation(stateTime);
+            System.out.println("1: " + loc);
+            loc.add(x, y);
+            System.out.println("2: " + loc);
+            sword.setVectorLocation(loc);
+            System.out.println(idleAnimation.getLocalAttachmentLocation(stateTime));
         }
 
         // if velocity is 0, then do idle animation
@@ -94,13 +102,13 @@ public class Player { // TODO: Entity class
             currentFrame = idleAnimation.animation.getKeyFrame(stateTime, true);
         }
 
+
         velocity.set(expX, expY);
         velocity.nor();
 
         x += velocity.x;
         y += velocity.y;
 
-        sword.update(this);
 
         stateTime += Gdx.graphics.getDeltaTime();
     }
