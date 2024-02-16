@@ -29,15 +29,13 @@ public class Player { // TODO: Entity class
     Animation<TextureRegion> walkFAnimation;
     // no texture sheet for walk forward, just sped up idle
 
-    Animation<TextureRegion> currentAnimation;
-
     PlayerAttachment sword;
 
     public Player() {
         idleAnimation = new AttachableAnimation(
                 new Texture(Gdx.files.internal("player/player_idle.png")),
                 0.5f,
-                new Vector2[]{
+                new Vector2[] {
                     new Vector2(2, 9),
                     new Vector2(2, 11),
                 });
@@ -89,17 +87,13 @@ public class Player { // TODO: Entity class
             }
         } else {
             currentFrame = idleAnimation.animation.getKeyFrame(stateTime, true);
-            Vector2 loc = idleAnimation.getLocalAttachmentLocation(stateTime);
-            System.out.println("1: " + loc);
-            loc.add(x, y);
-            System.out.println("2: " + loc);
-            sword.setVectorLocation(loc);
-            System.out.println(idleAnimation.getLocalAttachmentLocation(stateTime));
+            System.out.println(idleAnimation.animation.getKeyFrameIndex(stateTime));
         }
 
         // if velocity is 0, then do idle animation
         if (velocity.isZero()) {
             currentFrame = idleAnimation.animation.getKeyFrame(stateTime, true);
+            sword.setVectorLocation(idleAnimation.getWorldAttachmentLocation(stateTime, this));
         }
 
 

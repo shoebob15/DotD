@@ -18,19 +18,6 @@ public class PlayerAttachment {
         s.draw(texture, x, y);
     }
 
-    public void update(Player player) {
-        x = player.x;
-        y = player.y;
-    }
-
-    public Texture getTexture() {
-        return texture;
-    }
-
-    public void setTexture(Texture texture) {
-        this.texture = texture;
-    }
-
     public void setVectorLocation(Vector2 vector) {
         this.x = vector.x;
         this.y = vector.y;
