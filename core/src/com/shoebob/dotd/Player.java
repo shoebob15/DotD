@@ -58,7 +58,6 @@ public class Player { // TODO: Entity class
     public void draw(SpriteBatch s) {
         s.draw(currentFrame, x, y, width, height);
         sword.draw(s);
-        System.out.println(this);
     }
 
     public void update() {
