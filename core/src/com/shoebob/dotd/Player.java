@@ -12,24 +12,23 @@ public class Player { // TODO: Entity class
     protected float x = 0, y = 0, width = 32, height = 32;
     private Vector2 velocity = new Vector2(0, 0);
     private float stateTime = 0f;
-    TextureRegion currentFrame;
 
-    AttachableAnimation idleAnimation;
-    Texture idleSheet = new Texture(Gdx.files.internal("player/player_idle.png"));
+    private TextureRegion currentFrame;
+    private AttachableAnimation currentAnimation;
 
-    Animation<TextureRegion> walkRAnimation;
-    Texture walkRSheet;
+    private final AttachableAnimation idleAnimation;
+    private final Texture idleSheet;
 
-    Animation<TextureRegion> walkLAnimation;
-    Texture walkLSheet;
+    private final AttachableAnimation walkRAnimation;
 
-    Animation<TextureRegion> walkBAnimation;
-    Texture walkBSheet;
+    private final AttachableAnimation walkLAnimation;
 
-    Animation<TextureRegion> walkFAnimation;
+    private final AttachableAnimation walkBAnimation;
+
+    private final Animation<TextureRegion> walkFAnimation;
     // no texture sheet for walk forward, just sped up idle
 
-    PlayerAttachment sword;
+    private final PlayerAttachment sword;
 
     public Player() {
         idleAnimation = new AttachableAnimation(
@@ -39,15 +38,37 @@ public class Player { // TODO: Entity class
                     new Vector2(2, 11),
                     new Vector2(2, 9),
                 });
+        idleSheet = new Texture(Gdx.files.internal("player/player_idle.png"));
 
-        walkRSheet = new Texture(Gdx.files.internal("player/player_walk_r.png"));
-        walkRAnimation = new Animation<TextureRegion>(0.125f, getFrames(walkRSheet, 2));
+        walkRAnimation = new AttachableAnimation(
+                new Texture(Gdx.files.internal("player/player_walk_r.png")),
+                0.25f,
+                new Vector2[] {
+                        new Vector2(3, 11),
+                        new Vector2(3, 10)
+                }
+        );
 
-        walkLSheet = new Texture(Gdx.files.internal("player/player_walk_l.png"));
-        walkLAnimation = new Animation<TextureRegion>(0.125f, getFrames(walkLSheet, 2));
+        walkLAnimation = new AttachableAnimation(
+                new Texture(Gdx.files.internal("player/player_walk_l.png")),
+                0.25f,
+                new Vector2[]{
+                        new Vector2(6, 11),
+                        new Vector2(6, 10)
+                },
+                false
+        );
 
-        walkBSheet = new Texture(Gdx.files.internal("player/player_walk_b.png"));
-        walkBAnimation = new Animation<TextureRegion>(0.125f, getFrames(walkBSheet, 2));
+        walkBAnimation = new AttachableAnimation(
+                new Texture(Gdx.files.internal("player/player_walk_b.png")),
+                0.25f,
+                // just make it render behind the player - doesn't need to be visible
+                new Vector2[]{
+                        new Vector2(19, 10),
+                        new Vector2(19, 10)
+                },
+                false
+        );
 
         // sheet for forward walk is just sped up idle
         walkFAnimation = new Animation<TextureRegion>(0.125f, getFrames(idleSheet, 2));
@@ -56,8 +77,13 @@ public class Player { // TODO: Entity class
     }
 
     public void draw(SpriteBatch s) {
-        s.draw(currentFrame, x, y, width, height);
-        sword.draw(s);
+        if (currentAnimation.shouldRenderOnTop()) {
+            s.draw(currentFrame, x, y, width, height);
+            sword.draw(s);
+        } else {
+            sword.draw(s);
+            s.draw(currentFrame, x, y, width, height);
+        }
     }
 
     public void update() {
@@ -67,7 +93,7 @@ public class Player { // TODO: Entity class
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
             if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
                 expY += 1;
-                currentFrame = walkBAnimation.getKeyFrame(stateTime, true);
+                currentAnimation = walkBAnimation;
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
@@ -77,24 +103,25 @@ public class Player { // TODO: Entity class
 
             if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
                 expX -= 1;
-                currentFrame = walkLAnimation.getKeyFrame(stateTime, true);
+                currentAnimation = walkLAnimation;
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
                 expX += 1;
-                currentFrame = walkRAnimation.getKeyFrame(stateTime, true);
+                currentAnimation = walkRAnimation;
             }
         } else {
-            currentFrame = idleAnimation.animation.getKeyFrame(stateTime, true);
-            System.out.println(idleAnimation.animation.getKeyFrameIndex(stateTime));
+            currentAnimation = idleAnimation;
         }
 
         // if velocity is 0, then do idle animation
         if (velocity.isZero()) {
-            currentFrame = idleAnimation.animation.getKeyFrame(stateTime, true);
+            currentAnimation = idleAnimation;
             sword.setVectorLocation(idleAnimation.getWorldAttachmentLocation(stateTime, this));
         }
 
+        currentFrame = currentAnimation.animation.getKeyFrame(stateTime, true);
+        sword.setVectorLocation(currentAnimation.getWorldAttachmentLocation(stateTime, this));
 
         velocity.set(expX, expY);
         velocity.nor();
@@ -107,12 +134,16 @@ public class Player { // TODO: Entity class
     }
 
     public void dispose() {
-        idleSheet.dispose();
-        walkBSheet.dispose();
-        walkLSheet.dispose();
-        walkRSheet.dispose();
+        idleAnimation.dispose();
+        walkRAnimation.dispose();
+        walkLAnimation.dispose();
+        walkBAnimation.dispose();
     }
 
+
+    public AttachableAnimation getCurrentAnimation() {
+        return currentAnimation;
+    }
 
     private TextureRegion[] getFrames(Texture texture, int length) {
         TextureRegion[] tmp = new TextureRegion[length];

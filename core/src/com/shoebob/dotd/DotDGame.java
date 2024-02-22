@@ -46,8 +46,7 @@ public class DotDGame extends ApplicationAdapter {
 
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		// TODO: Somehow attach weapon to player. Need a ROBUST system with animation, since
-		// TODO: there will be many more weapons and objects
+
 		player.update();
 		player.draw(batch);
 		batch.end();

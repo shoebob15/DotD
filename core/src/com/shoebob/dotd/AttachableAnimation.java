@@ -7,11 +7,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 // provides coordinate data on where to put a player's attachment based on the current animation frame
+// TODO: Add rotation
 public class AttachableAnimation {
     protected Animation<TextureRegion> animation;
     private Texture spritesheet;
     private Vector2[] coordinates;
     private Vector2 handPos = new Vector2(6.5f, 5.3f);
+    private boolean renderOnTop = true;
 
 
     public AttachableAnimation(Texture spritesheet, float update, Vector2[] coordinates) {
@@ -22,6 +24,17 @@ public class AttachableAnimation {
                 Animation.PlayMode.LOOP
         );
         this.coordinates = coordinates;
+    }
+
+    public AttachableAnimation(Texture spritesheet, float update, Vector2[] coordinates, boolean renderOnTop) {
+        this.spritesheet = spritesheet;
+        this.animation = new Animation<>(
+                update,
+                new Array<TextureRegion>(getFrames(spritesheet.getWidth() / 16)),
+                Animation.PlayMode.LOOP
+        );
+        this.coordinates = coordinates;
+        this.renderOnTop = renderOnTop;
     }
 
     public Vector2 getLocalAttachmentLocation(float statetime) {
@@ -36,6 +49,10 @@ public class AttachableAnimation {
         return tmp2.add(new Vector2(player.x - handPos.x, player.y - handPos.y));
     }
 
+    public boolean shouldRenderOnTop() {
+        return renderOnTop;
+    }
+
     private TextureRegion[] getFrames(int length) {
         TextureRegion[] tmp = new TextureRegion[length];
         for (int i = 0; i < tmp.length; i++) {
@@ -44,4 +61,7 @@ public class AttachableAnimation {
         return tmp;
     }
 
+    public void dispose() {
+        spritesheet.dispose();
+    }
 }
