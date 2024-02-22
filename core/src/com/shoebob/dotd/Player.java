@@ -25,7 +25,7 @@ public class Player { // TODO: Entity class
 
     private final AttachableAnimation walkBAnimation;
 
-    private final Animation<TextureRegion> walkFAnimation;
+    private final AttachableAnimation walkFAnimation;
     // no texture sheet for walk forward, just sped up idle
 
     private final PlayerAttachment sword;
@@ -37,7 +37,9 @@ public class Player { // TODO: Entity class
                 new Vector2[] {
                     new Vector2(2, 11),
                     new Vector2(2, 9),
-                });
+                },
+                0
+        );
         idleSheet = new Texture(Gdx.files.internal("player/player_idle.png"));
 
         walkRAnimation = new AttachableAnimation(
@@ -46,7 +48,8 @@ public class Player { // TODO: Entity class
                 new Vector2[] {
                         new Vector2(3, 11),
                         new Vector2(3, 10)
-                }
+                },
+                0
         );
 
         walkLAnimation = new AttachableAnimation(
@@ -56,7 +59,8 @@ public class Player { // TODO: Entity class
                         new Vector2(6, 11),
                         new Vector2(6, 10)
                 },
-                false
+                false,
+                0
         );
 
         walkBAnimation = new AttachableAnimation(
@@ -67,11 +71,20 @@ public class Player { // TODO: Entity class
                         new Vector2(19, 10),
                         new Vector2(19, 10)
                 },
-                false
+                false,
+                -90
         );
 
         // sheet for forward walk is just sped up idle
-        walkFAnimation = new Animation<TextureRegion>(0.125f, getFrames(idleSheet, 2));
+        walkFAnimation = new AttachableAnimation(
+                new Texture(Gdx.files.internal("player/player_idle.png")),
+                0.25f,
+                new Vector2[]{
+                        new Vector2(2, 11),
+                        new Vector2(2, 9)
+                },
+                0
+        );
 
         sword = new PlayerAttachment(x, y, new Texture(Gdx.files.internal("weapons/sword.png")));
     }
@@ -79,9 +92,9 @@ public class Player { // TODO: Entity class
     public void draw(SpriteBatch s) {
         if (currentAnimation.shouldRenderOnTop()) {
             s.draw(currentFrame, x, y, width, height);
-            sword.draw(s);
+            sword.draw(s, currentAnimation.getRotation());
         } else {
-            sword.draw(s);
+            sword.draw(s, currentAnimation.getRotation());
             s.draw(currentFrame, x, y, width, height);
         }
     }
@@ -98,7 +111,7 @@ public class Player { // TODO: Entity class
 
             if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
                 expY -= 1;
-                currentFrame = walkFAnimation.getKeyFrame(stateTime, true);
+                currentAnimation = walkFAnimation;
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
@@ -138,6 +151,7 @@ public class Player { // TODO: Entity class
         walkRAnimation.dispose();
         walkLAnimation.dispose();
         walkBAnimation.dispose();
+        walkFAnimation.dispose();
     }
 
 

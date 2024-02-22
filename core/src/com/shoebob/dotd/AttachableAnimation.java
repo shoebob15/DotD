@@ -14,9 +14,10 @@ public class AttachableAnimation {
     private Vector2[] coordinates;
     private Vector2 handPos = new Vector2(6.5f, 5.3f);
     private boolean renderOnTop = true;
+    private float rotation;
 
 
-    public AttachableAnimation(Texture spritesheet, float update, Vector2[] coordinates) {
+    public AttachableAnimation(Texture spritesheet, float update, Vector2[] coordinates, float rotation) {
         this.spritesheet = spritesheet;
         this.animation = new Animation<>(
                 update,
@@ -24,9 +25,10 @@ public class AttachableAnimation {
                 Animation.PlayMode.LOOP
         );
         this.coordinates = coordinates;
+        this.rotation = rotation;
     }
 
-    public AttachableAnimation(Texture spritesheet, float update, Vector2[] coordinates, boolean renderOnTop) {
+    public AttachableAnimation(Texture spritesheet, float update, Vector2[] coordinates, boolean renderOnTop, float rotation) {
         this.spritesheet = spritesheet;
         this.animation = new Animation<>(
                 update,
@@ -35,6 +37,7 @@ public class AttachableAnimation {
         );
         this.coordinates = coordinates;
         this.renderOnTop = renderOnTop;
+        this.rotation = rotation;
     }
 
     public Vector2 getLocalAttachmentLocation(float statetime) {
@@ -51,6 +54,10 @@ public class AttachableAnimation {
 
     public boolean shouldRenderOnTop() {
         return renderOnTop;
+    }
+
+    public float getRotation() {
+        return rotation;
     }
 
     private TextureRegion[] getFrames(int length) {

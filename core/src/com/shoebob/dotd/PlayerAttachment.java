@@ -15,7 +15,14 @@ public class PlayerAttachment {
     }
 
     public void draw(SpriteBatch s) {
-        s.draw(texture, x, y);
+        s.draw(texture, x, y, 0, 0, 8, 8, 2, 2, 0f, 0, 0,
+                16, 16, false, false);
+    }
+
+    public void draw(SpriteBatch s, float rotation) {
+        s.draw(texture, x + 8, y + 8, (float) texture.getWidth() / 2, (float) texture.getHeight() / 2,
+                8, 8, 2, 2, rotation, 0, 0, texture.getWidth(),
+                texture.getHeight(), false, false);
     }
 
     public void setVectorLocation(Vector2 vector) {
