@@ -4,17 +4,23 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 // provides coordinate data on where to put a player's attachment based on the current animation frame
 public class AttachableAnimation {
     protected Animation<TextureRegion> animation;
     private Texture spritesheet;
     private Vector2[] coordinates;
+    private Vector2 handPos = new Vector2(6.5f, 5.3f);
 
 
     public AttachableAnimation(Texture spritesheet, float update, Vector2[] coordinates) {
         this.spritesheet = spritesheet;
-        this.animation = new Animation<>(update, getFrames(spritesheet.getWidth() / 16));
+        this.animation = new Animation<>(
+                update,
+                new Array<TextureRegion>(getFrames(spritesheet.getWidth() / 16)),
+                Animation.PlayMode.LOOP
+        );
         this.coordinates = coordinates;
     }
 
@@ -27,7 +33,7 @@ public class AttachableAnimation {
         Vector2 tmp = getLocalAttachmentLocation(statetime);
         Vector2 tmp2 = new Vector2(tmp.x, tmp.y);
 
-        return tmp2.add(new Vector2(player.x, player.y));
+        return tmp2.add(new Vector2(player.x - handPos.x, player.y - handPos.y));
     }
 
     private TextureRegion[] getFrames(int length) {

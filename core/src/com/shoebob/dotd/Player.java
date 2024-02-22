@@ -36,8 +36,8 @@ public class Player { // TODO: Entity class
                 new Texture(Gdx.files.internal("player/player_idle.png")),
                 0.5f,
                 new Vector2[] {
-                    new Vector2(2, 9),
                     new Vector2(2, 11),
+                    new Vector2(2, 9),
                 });
 
         walkRSheet = new Texture(Gdx.files.internal("player/player_walk_r.png"));
