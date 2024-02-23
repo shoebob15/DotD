@@ -65,7 +65,7 @@ public class Player { // TODO: Entity class
         walkBAnimation = new AttachableAnimation(
                 new Texture(Gdx.files.internal("player/player_walk_b.png")),
                 0.25f,
-                // just make it render behind the player - doesn't need to be visible
+                // just make it render behind the player - doesn't need to be completely visible
                 new Vector2[]{
                         new Vector2(23, 3), // sort of jank, but whatever
                         new Vector2(23, 2)
@@ -85,7 +85,7 @@ public class Player { // TODO: Entity class
                 0
         );
 
-        sword = new PlayerAttachment(x, y, new Texture(Gdx.files.internal("weapons/sword.png")));
+        sword = new PlayerAttachment(x, y, new Texture(Gdx.files.internal("weapons/sword.png")), 2000);
     }
 
     public void draw(SpriteBatch s) {
@@ -122,11 +122,16 @@ public class Player { // TODO: Entity class
                 expX += 1;
                 currentAnimation = walkRAnimation;
             }
+
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) { // temporary control - will probably change later
+                sword.swing();
+            }
         } else {
             currentAnimation = idleAnimation;
         }
 
         // if velocity is 0, then do idle animation
+        // necessary if player is holding multiple keys at once
         if (velocity.isZero()) {
             currentAnimation = idleAnimation;
             sword.setVectorLocation(idleAnimation.getWorldAttachmentLocation(stateTime, this));

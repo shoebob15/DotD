@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 // provides coordinate data on where to put a player's attachment based on the current animation frame
-// TODO: Add rotation
 public class AttachableAnimation {
     protected Animation<TextureRegion> animation;
     private Texture spritesheet;
