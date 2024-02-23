@@ -3,7 +3,6 @@ package com.shoebob.dotd;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -68,8 +67,8 @@ public class Player { // TODO: Entity class
                 0.25f,
                 // just make it render behind the player - doesn't need to be visible
                 new Vector2[]{
-                        new Vector2(19, 10),
-                        new Vector2(19, 10)
+                        new Vector2(23, 3), // sort of jank, but whatever
+                        new Vector2(23, 2)
                 },
                 false,
                 -90
@@ -80,8 +79,8 @@ public class Player { // TODO: Entity class
                 new Texture(Gdx.files.internal("player/player_idle.png")),
                 0.25f,
                 new Vector2[]{
-                        new Vector2(2, 11),
-                        new Vector2(2, 9)
+                        new Vector2(1, 11),
+                        new Vector2(1, 9)
                 },
                 0
         );
