@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-public class Player { // TODO: Entity class
+public class Player extends Entity { // TODO: Entity class
     protected float x = 0, y = 0, width = 32, height = 32;
     private Vector2 velocity = new Vector2(0, 0);
     private float stateTime = 0f;
@@ -26,7 +26,7 @@ public class Player { // TODO: Entity class
     private final AttachableAnimation walkFAnimation;
     // no texture sheet for walk forward, just sped up idle
 
-    private final PlayerAttachment sword;
+    private final Attachment magic_staff;
 
     public Player() {
         idleAnimation = new AttachableAnimation(
@@ -83,15 +83,15 @@ public class Player { // TODO: Entity class
                 0
         );
 
-        sword = new MagicAttachment(x, y, new Texture(Gdx.files.internal("weapons/magic_staff.png")));
+        magic_staff = new MagicAttachment(x, y, new Texture(Gdx.files.internal("weapons/magic_staff.png")));
     }
 
     public void draw(SpriteBatch s) {
         if (currentAnimation.shouldRenderOnTop()) {
             s.draw(currentFrame, x, y, width, height);
-            sword.draw(s, currentAnimation.getRotation());
+            magic_staff.draw(s, currentAnimation.getRotation());
         } else {
-            sword.draw(s, currentAnimation.getRotation());
+            magic_staff.draw(s, currentAnimation.getRotation());
             s.draw(currentFrame, x, y, width, height);
         }
     }
@@ -122,7 +122,7 @@ public class Player { // TODO: Entity class
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) { // temporary control - will probably change later
-
+                magic_staff.use();
             }
         } else {
             currentAnimation = idleAnimation;
@@ -132,11 +132,11 @@ public class Player { // TODO: Entity class
         // necessary if player is holding multiple keys at once
         if (velocity.isZero()) {
             currentAnimation = idleAnimation;
-            sword.setVectorLocation(idleAnimation.getWorldAttachmentLocation(stateTime, this));
+            magic_staff.setVectorLocation(idleAnimation.getWorldAttachmentLocation(stateTime, this));
         }
 
         currentFrame = currentAnimation.animation.getKeyFrame(stateTime, true);
-        sword.setVectorLocation(currentAnimation.getWorldAttachmentLocation(stateTime, this));
+        magic_staff.setVectorLocation(currentAnimation.getWorldAttachmentLocation(stateTime, this));
 
         velocity.set(expX, expY);
         velocity.nor();
@@ -146,6 +146,8 @@ public class Player { // TODO: Entity class
 
 
         stateTime += Gdx.graphics.getDeltaTime();
+
+        magic_staff.use();
     }
 
     public void dispose() {
