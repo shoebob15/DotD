@@ -16,7 +16,6 @@ public class Player { // TODO: Entity class
     private AttachableAnimation currentAnimation;
 
     private final AttachableAnimation idleAnimation;
-    private final Texture idleSheet;
 
     private final AttachableAnimation walkRAnimation;
 
@@ -39,7 +38,6 @@ public class Player { // TODO: Entity class
                 },
                 0
         );
-        idleSheet = new Texture(Gdx.files.internal("player/player_idle.png"));
 
         walkRAnimation = new AttachableAnimation(
                 new Texture(Gdx.files.internal("player/player_walk_r.png")),
@@ -67,8 +65,8 @@ public class Player { // TODO: Entity class
                 0.25f,
                 // just make it render behind the player - doesn't need to be completely visible
                 new Vector2[]{
-                        new Vector2(23, 3), // sort of jank, but whatever
-                        new Vector2(23, 2)
+                        new Vector2(3, 3), // sort of jank, but whatever
+                        new Vector2(3, 2)
                 },
                 false,
                 -90
@@ -85,7 +83,7 @@ public class Player { // TODO: Entity class
                 0
         );
 
-        sword = new PlayerAttachment(x, y, new Texture(Gdx.files.internal("weapons/sword.png")), 2000);
+        sword = new MagicAttachment(x, y, new Texture(Gdx.files.internal("weapons/magic_staff.png")));
     }
 
     public void draw(SpriteBatch s) {
@@ -124,7 +122,7 @@ public class Player { // TODO: Entity class
             }
 
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) { // temporary control - will probably change later
-                sword.swing();
+
             }
         } else {
             currentAnimation = idleAnimation;
