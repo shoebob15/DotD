@@ -34,7 +34,7 @@ public class Player extends Entity { // TODO: Entity class
                 0.5f,
                 new Vector2[] {
                     new Vector2(2, 11),
-                    new Vector2(2, 9),
+                    new Vector2(2, 8.5f),
                 },
                 0
         );
@@ -65,8 +65,8 @@ public class Player extends Entity { // TODO: Entity class
                 0.25f,
                 // just make it render behind the player - doesn't need to be completely visible
                 new Vector2[]{
-                        new Vector2(3, 3), // sort of jank, but whatever
-                        new Vector2(3, 2)
+                        new Vector2(23, 3), // sort of jank, but whatever
+                        new Vector2(23, 2)
                 },
                 false,
                 -90
@@ -78,7 +78,7 @@ public class Player extends Entity { // TODO: Entity class
                 0.25f,
                 new Vector2[]{
                         new Vector2(1, 11),
-                        new Vector2(1, 9)
+                        new Vector2(1, 8.5f)
                 },
                 0
         );
