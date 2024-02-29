@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.shoebob.dotd.entities.Player;
 
 // provides coordinate data on where to put a player's attachment based on the current animation frame
 public class AttachableAnimation {
@@ -48,7 +49,7 @@ public class AttachableAnimation {
         Vector2 tmp = getLocalAttachmentLocation(statetime);
         Vector2 tmp2 = new Vector2(tmp.x, tmp.y);
 
-        return tmp2.add(new Vector2(player.x - handPos.x, player.y - handPos.y));
+        return tmp2.add(new Vector2(player.getX() - handPos.x, player.getY() - handPos.y));
     }
 
     public boolean shouldRenderOnTop() {
@@ -57,6 +58,10 @@ public class AttachableAnimation {
 
     public float getRotation() {
         return rotation;
+    }
+
+    public Animation<TextureRegion> getAnimation() {
+        return animation;
     }
 
     private TextureRegion[] getFrames(int length) {

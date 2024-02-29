@@ -9,6 +9,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.shoebob.dotd.entities.Player;
 
 // TODO: Draw a dungeon that has collisions
 public class DotDGame extends ApplicationAdapter {
@@ -38,8 +39,8 @@ public class DotDGame extends ApplicationAdapter {
 	@Override
 	public void render() {
 		ScreenUtils.clear(.12f, .6f, .7f, 1);
-		camera.position.x = player.x;
-		camera.position.y = player.y;
+		camera.position.x = player.getX();
+		camera.position.y = player.getY();
 		camera.update();
 		mapRenderer.setView(camera);
 		mapRenderer.render();

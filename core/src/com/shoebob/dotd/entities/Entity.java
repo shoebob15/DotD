@@ -1,8 +1,9 @@
-package com.shoebob.dotd;
+package com.shoebob.dotd.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 public abstract class Entity {
     protected float x, y;
@@ -28,7 +29,30 @@ public abstract class Entity {
 
     public abstract void update();
 
-    public abstract void draw(SpriteBatch s);
+    public void draw(SpriteBatch s) {
+        s.draw(texture, x, y);
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public void addVector(Vector2 v) {
+        x += v.x;
+        y += v.y;
+    }
 
     public void dispose() {
         texture.dispose();

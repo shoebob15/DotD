@@ -1,4 +1,4 @@
-package com.shoebob.dotd;
+package com.shoebob.dotd.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -6,9 +6,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.shoebob.dotd.AttachableAnimation;
+import com.shoebob.dotd.Attachment;
+import com.shoebob.dotd.MagicAttachment;
 
 public class Player extends Entity { // TODO: Entity class
-    protected float x = 0, y = 0, width = 32, height = 32;
+    protected float width = 32, height = 32;
     private Vector2 velocity = new Vector2(0, 0);
     private float stateTime = 0f;
 
@@ -97,7 +100,7 @@ public class Player extends Entity { // TODO: Entity class
     }
 
     public void update() {
-        currentFrame = idleAnimation.animation.getKeyFrame(stateTime, true);
+        currentFrame = idleAnimation.getAnimation().getKeyFrame(stateTime, true);
 
         float expX = 0, expY = 0;
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
@@ -135,7 +138,7 @@ public class Player extends Entity { // TODO: Entity class
             magic_staff.setVectorLocation(idleAnimation.getWorldAttachmentLocation(stateTime, this));
         }
 
-        currentFrame = currentAnimation.animation.getKeyFrame(stateTime, true);
+        currentFrame = currentAnimation.getAnimation().getKeyFrame(stateTime, true);
         magic_staff.setVectorLocation(currentAnimation.getWorldAttachmentLocation(stateTime, this));
 
         velocity.set(expX, expY);
