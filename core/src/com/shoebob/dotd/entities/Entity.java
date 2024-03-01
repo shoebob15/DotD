@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public abstract class Entity {
     protected float x, y;
-    private Texture texture;
+    protected Texture texture;
 
     public Entity(float x, float y, Texture texture) {
         this.x = x;
@@ -56,5 +56,14 @@ public abstract class Entity {
 
     public void dispose() {
         texture.dispose();
+    }
+
+    @Override
+    public String toString() {
+        return "Entity{" +
+                "x=" + x +
+                ", y=" + y +
+                ", texture=" + texture +
+                '}';
     }
 }

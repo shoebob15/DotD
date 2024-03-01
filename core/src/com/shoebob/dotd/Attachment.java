@@ -3,16 +3,13 @@ package com.shoebob.dotd;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.shoebob.dotd.entities.Entity;
 
 // renders a texture on a player's hand
-public abstract class Attachment {
-    private Texture texture; // texture
-    protected float x, y; // position
-
+public abstract class Attachment extends Entity {
     public Attachment(float x, float y, Texture texture) {
-        this.x = x;
-        this.y = y;
-        this.texture = texture;}
+        super(x, y, texture);
+}
 
     public void draw(SpriteBatch s) {
         s.draw(texture, x, y);

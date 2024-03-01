@@ -2,6 +2,7 @@ package com.shoebob.dotd.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -86,7 +87,9 @@ public class Player extends Entity { // TODO: Entity class
                 0
         );
 
-        magic_staff = new MagicAttachment(x, y, new Texture(Gdx.files.internal("weapons/magic_staff.png")));
+        magic_staff = new MagicAttachment(x, y, new Texture(Gdx.files.internal("weapons/magic_staff.png")),
+                new MagicProjectileEntity(x, y, new Texture(new Pixmap(16, 16, Pixmap.Format.RGBA8888)))
+        );
     }
 
     public void draw(SpriteBatch s) {
@@ -150,7 +153,7 @@ public class Player extends Entity { // TODO: Entity class
 
         stateTime += Gdx.graphics.getDeltaTime();
 
-        magic_staff.use();
+        System.out.println(magic_staff);
     }
 
     public void dispose() {
