@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.shoebob.dotd.AttachableAnimation;
 
-public class Player extends AnimatedEntity { // TODO: Entity class
+public class Player extends AnimatedEntity {
 
     private final Attachment magic_staff;
 
