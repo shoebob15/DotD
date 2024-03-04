@@ -65,7 +65,7 @@ public abstract class Entity {
     }
 
     public double getDirection() {
-        return 1/Math.tan(vector.y/vector.x);
+        return Math.toDegrees(Math.atan2(vector.y, vector.x));
     }
 
     public void dispose() {

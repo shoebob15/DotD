@@ -29,9 +29,10 @@ public class AnimatedEntity extends Entity {
         this.walkFAnimation = walkFAnimation;
     }
 
+    // super.update should always be called
     @Override
     public void update() {
-
+        System.out.println(getDirection());
     }
 
     @Override

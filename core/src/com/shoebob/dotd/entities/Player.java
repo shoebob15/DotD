@@ -25,19 +25,12 @@ public class Player extends AnimatedEntity { // TODO: Entity class
     }
 
     public void draw(SpriteBatch s) {
-        if (getCurrentAnimation().shouldRenderOnTop()) {
-            s.draw(getCurrentFrame(), x, y, width, height);
-            magic_staff.draw(s, getCurrentAnimation().getRotation());
-        } else {
-            magic_staff.draw(s, getCurrentAnimation().getRotation());
-            s.draw(getCurrentFrame(), x, y, width, height);
-        }
+        magic_staff.draw(s, 0);
+        s.draw(new Texture(Gdx.files.internal("util/broken_texture.png")), x, y, width, height);
     }
 
     public void update() {
-
-
-        System.out.println(magic_staff);
+        System.out.println(getDirection());
     }
 
     public void dispose() {
