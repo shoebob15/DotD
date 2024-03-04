@@ -3,7 +3,9 @@ package com.shoebob.dotd.entities;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.AttachableAnimation;
+import com.shoebob.dotd.DotDGame;
 
 public class AnimatedEntity extends Entity {
     private TextureRegion currentFrame;
@@ -19,9 +21,10 @@ public class AnimatedEntity extends Entity {
 
     private final AttachableAnimation walkFAnimation;
 
-    public AnimatedEntity(float x, float y, AttachableAnimation idleAnimation,
+    public AnimatedEntity(float x, float y, float width, float height, AttachableAnimation idleAnimation,
                           AttachableAnimation walkRAnimation, AttachableAnimation walkLAnimation,
                           AttachableAnimation walkBAnimation, AttachableAnimation walkFAnimation) {
+        super(x, y, width, height, new Vector2(), null);
         this.idleAnimation = idleAnimation;
         this.walkRAnimation = walkRAnimation;
         this.walkLAnimation = walkLAnimation;
@@ -32,7 +35,16 @@ public class AnimatedEntity extends Entity {
     // super.update should always be called
     @Override
     public void update() {
-        System.out.println(getDirection());
+        double direction = getDirection();
+
+        if (direction == 180) currentAnimation = walkLAnimation;
+        else if (direction == 0) currentAnimation = walkRAnimation;
+        else if (direction >= -135 && direction <= -45) currentAnimation = walkFAnimation;
+        else if (direction <= 135 && direction >= 45) currentAnimation = walkBAnimation;
+
+        if (vector.isZero()) currentAnimation = idleAnimation;
+
+        currentFrame = currentAnimation.getAnimation().getKeyFrame(DotDGame.statetime);
     }
 
     @Override

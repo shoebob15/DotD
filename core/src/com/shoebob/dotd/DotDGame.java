@@ -29,7 +29,7 @@ public class DotDGame extends ApplicationAdapter {
 		float w = Gdx.graphics.getWidth();
 
 		batch = new SpriteBatch();
-		player = new Player(0, 0,
+		player = new Player(0, 0, 32, 32,
 				Consts.Animations.playerIdleAnimation, Consts.Animations.playerWalkRAnimation,
 				Consts.Animations.playerWalkLAnimation, Consts.Animations.playerWalkBAnimation,
 				Consts.Animations.playerWalkFAnimation);
