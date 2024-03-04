@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.shoebob.dotd.entities.Player;
+import com.shoebob.dotd.util.Consts;
 
 // TODO: Draw a dungeon that has collisions
 public class DotDGame extends ApplicationAdapter {
@@ -26,7 +27,11 @@ public class DotDGame extends ApplicationAdapter {
 		float w = Gdx.graphics.getWidth();
 
 		batch = new SpriteBatch();
-		player = new Player();
+		player = new Player(0, 0,
+				Consts.Animations.playerIdleAnimation, Consts.Animations.playerWalkRAnimation,
+				Consts.Animations.playerWalkLAnimation, Consts.Animations.playerWalkBAnimation,
+				Consts.Animations.playerWalkFAnimation);
+
 		tiledMap = new TmxMapLoader().load("maps/testmap.tmx");
 		water = (TiledMapTileLayer)tiledMap.getLayers().get(0);
 		camera = new OrthographicCamera(300, 300 * (h / w));

@@ -7,7 +7,7 @@ public class ProjectileEntity extends Entity {
     Vector2 velocity;
 
     public ProjectileEntity(float x, float y, Texture texture) {
-        super(x, y, texture);
+        super(x, y, texture.getWidth(), texture.getHeight(), texture);
     }
 
     @Override

@@ -6,24 +6,30 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class Entity {
-    protected float x, y;
+    protected float x, y, width, height;
     protected Texture texture;
 
-    public Entity(float x, float y, Texture texture) {
+    public Entity(float x, float y, float width, float height, Texture texture) {
         this.x = x;
         this.y = y;
+        this.width = width;
+        this.height = height;
         this.texture = texture;
     }
 
     public Entity(Texture texture) {
         this.x = 0;
         this.y = 0;
+        this.width = 16;
+        this.height = 16;
         this.texture = texture;
     }
 
     public Entity() {
         this.x = 0;
         this.y = 0;
+        this.width = 16;
+        this.height = 16;
         this.texture = new Texture(Gdx.files.internal("util/broken_texture.png"));
     }
 

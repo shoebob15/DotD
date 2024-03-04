@@ -11,85 +11,15 @@ import com.shoebob.dotd.AttachableAnimation;
 import com.shoebob.dotd.Attachment;
 import com.shoebob.dotd.MagicAttachment;
 
-public class Player extends Entity { // TODO: Entity class
-    protected float width = 32, height = 32;
+public class Player extends AnimatedEntity { // TODO: Entity class
     private Vector2 velocity = new Vector2(0, 0);
-    private float stateTime = 0f;
+    private float stateTime = 0f; // TODO: Don't store statetime in player - why?
 
-    private TextureRegion currentFrame;
-    private AttachableAnimation currentAnimation;
-
-    private final AttachableAnimation idleAnimation;
-
-    private final AttachableAnimation walkRAnimation;
-
-    private final AttachableAnimation walkLAnimation;
-
-    private final AttachableAnimation walkBAnimation;
-
-    private final AttachableAnimation walkFAnimation;
-    // no texture sheet for walk forward, just sped up idle
 
     private final Attachment magic_staff;
 
-    public Player() {
-        idleAnimation = new AttachableAnimation(
-                new Texture(Gdx.files.internal("player/player_idle.png")),
-                0.5f,
-                new Vector2[] {
-                    new Vector2(2, 11),
-                    new Vector2(2, 8.5f),
-                },
-                0
-        );
-
-        walkRAnimation = new AttachableAnimation(
-                new Texture(Gdx.files.internal("player/player_walk_r.png")),
-                0.25f,
-                new Vector2[] {
-                        new Vector2(3, 11),
-                        new Vector2(3, 10)
-                },
-                0
-        );
-
-        walkLAnimation = new AttachableAnimation(
-                new Texture(Gdx.files.internal("player/player_walk_l.png")),
-                0.25f,
-                new Vector2[]{
-                        new Vector2(6, 11),
-                        new Vector2(6, 10)
-                },
-                false,
-                0
-        );
-
-        walkBAnimation = new AttachableAnimation(
-                new Texture(Gdx.files.internal("player/player_walk_b.png")),
-                0.25f,
-                // just make it render behind the player - doesn't need to be completely visible
-                new Vector2[]{
-                        new Vector2(23, 3), // sort of jank, but whatever
-                        new Vector2(23, 2)
-                },
-                false,
-                -90
-        );
-
-        // sheet for forward walk is just sped up idle
-        walkFAnimation = new AttachableAnimation(
-                new Texture(Gdx.files.internal("player/player_idle.png")),
-                0.25f,
-                new Vector2[]{
-                        new Vector2(1, 11),
-                        new Vector2(1, 8.5f)
-                },
-                0
-        );
-
-        magic_staff = new MagicAttachment(x, y, new Texture(Gdx.files.internal("weapons/magic_staff.png")),
-                new MagicProjectileEntity(x, y, new Texture(new Pixmap(16, 16, Pixmap.Format.RGBA8888)))
-        );
+    public Player(float x, float y, AttachableAnimation idleAnimation, AttachableAnimation walkRAnimation, AttachableAnimation walkLAnimation, AttachableAnimation walkBAnimation, AttachableAnimation walkFAnimation) {
+        super(x, y, idleAnimation, walkRAnimation, walkLAnimation, walkBAnimation, walkFAnimation);
     }
 
     public void draw(SpriteBatch s) {
@@ -162,19 +92,6 @@ public class Player extends Entity { // TODO: Entity class
         walkLAnimation.dispose();
         walkBAnimation.dispose();
         walkFAnimation.dispose();
-    }
-
-
-    public AttachableAnimation getCurrentAnimation() {
-        return currentAnimation;
-    }
-
-    private TextureRegion[] getFrames(Texture texture, int length) {
-        TextureRegion[] tmp = new TextureRegion[length];
-        for (int i = 0; i < tmp.length; i++) {
-            tmp[i] = new TextureRegion(texture, i * 16, 0, 16, 16);
-        }
-        return tmp;
     }
 
     @Override
