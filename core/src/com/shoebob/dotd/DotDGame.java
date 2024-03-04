@@ -20,6 +20,8 @@ public class DotDGame extends ApplicationAdapter {
 	private TiledMapTileLayer water;
 	private OrthographicCamera camera;
 	private OrthogonalTiledMapRenderer mapRenderer;
+
+	public static float statetime;
 	
 	@Override
 	public void create() {
@@ -56,6 +58,8 @@ public class DotDGame extends ApplicationAdapter {
 		player.update();
 		player.draw(batch);
 		batch.end();
+
+		statetime += Gdx.graphics.getDeltaTime();
 	}
 	
 	@Override

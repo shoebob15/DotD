@@ -8,12 +8,14 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class Entity {
     protected float x, y, width, height;
     protected Texture texture;
+    protected Vector2 vector;
 
-    public Entity(float x, float y, float width, float height, Texture texture) {
+    public Entity(float x, float y, float width, float height, Vector2 vector, Texture texture) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.vector = vector;
         this.texture = texture;
     }
 
@@ -22,6 +24,7 @@ public abstract class Entity {
         this.y = 0;
         this.width = 16;
         this.height = 16;
+        this.vector = new Vector2(0, 0);
         this.texture = texture;
     }
 
@@ -30,6 +33,7 @@ public abstract class Entity {
         this.y = 0;
         this.width = 16;
         this.height = 16;
+        this.vector = new Vector2(0, 0);
         this.texture = new Texture(Gdx.files.internal("util/broken_texture.png"));
     }
 
@@ -58,6 +62,10 @@ public abstract class Entity {
     public void addVector(Vector2 v) {
         x += v.x;
         y += v.y;
+    }
+
+    public double getDirection() {
+        return 1/Math.tan(vector.y/vector.x);
     }
 
     public void dispose() {

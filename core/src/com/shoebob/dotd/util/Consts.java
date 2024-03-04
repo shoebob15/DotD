@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.AttachableAnimation;
 
 public class Consts {
-    public class Animations {
+    public static class Animations {
         public static final AttachableAnimation playerIdleAnimation = new AttachableAnimation(
                 new Texture(Gdx.files.internal("player/player_idle.png")),
                 0.5f,

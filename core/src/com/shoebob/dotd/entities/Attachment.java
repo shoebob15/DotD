@@ -1,4 +1,4 @@
-package com.shoebob.dotd;
+package com.shoebob.dotd.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,7 +8,7 @@ import com.shoebob.dotd.entities.Entity;
 // renders a texture on a player's hand
 public abstract class Attachment extends Entity {
     public Attachment(float x, float y, Texture texture) {
-        super(x, y, texture);
+        super(x, y, texture.getWidth(), texture.getHeight(), new Vector2(), texture);
 }
 
     public void draw(SpriteBatch s) {

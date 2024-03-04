@@ -2,6 +2,7 @@ package com.shoebob.dotd;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.shoebob.dotd.entities.Attachment;
 import com.shoebob.dotd.entities.MagicProjectileEntity;
 
 // used for wands, staffs, etc.
@@ -25,10 +26,10 @@ public class MagicAttachment extends Attachment {
     }
 
     public void use() {
-        summonProjectile();
+        spawnProjectile();
     }
 
-    private void summonProjectile() {
+    private void spawnProjectile() {
 
     }
 

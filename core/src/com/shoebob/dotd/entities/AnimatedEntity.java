@@ -1,6 +1,7 @@
 package com.shoebob.dotd.entities;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.shoebob.dotd.AttachableAnimation;
 
@@ -31,5 +32,28 @@ public class AnimatedEntity extends Entity {
     @Override
     public void update() {
 
+    }
+
+    @Override
+    public void draw(SpriteBatch s) {
+        s.draw(currentFrame, x, y, width, height);
+    }
+
+    public TextureRegion getCurrentFrame() {
+        return currentFrame;
+    }
+
+    public AttachableAnimation getCurrentAnimation() {
+        return currentAnimation;
+    }
+
+    @Override
+    public void dispose() {
+        currentAnimation.dispose();
+        idleAnimation.dispose();
+        walkRAnimation.dispose();
+        walkLAnimation.dispose();
+        walkBAnimation.dispose();
+        walkFAnimation.dispose();
     }
 }
