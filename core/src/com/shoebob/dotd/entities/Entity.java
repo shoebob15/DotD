@@ -1,6 +1,5 @@
 package com.shoebob.dotd.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -17,24 +16,6 @@ public abstract class Entity {
         this.height = height;
         this.vector = vector;
         this.texture = texture;
-    }
-
-    public Entity(Texture texture) {
-        this.x = 0;
-        this.y = 0;
-        this.width = 16;
-        this.height = 16;
-        this.vector = new Vector2(0, 0);
-        this.texture = texture;
-    }
-
-    public Entity() {
-        this.x = 0;
-        this.y = 0;
-        this.width = 16;
-        this.height = 16;
-        this.vector = new Vector2(0, 0);
-        this.texture = new Texture(Gdx.files.internal("util/broken_texture.png"));
     }
 
     public abstract void update();

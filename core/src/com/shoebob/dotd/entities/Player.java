@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.shoebob.dotd.AttachableAnimation;
+import com.shoebob.dotd.DotDGame;
 
 public class Player extends AnimatedEntity {
 
@@ -26,8 +27,14 @@ public class Player extends AnimatedEntity {
     }
 
     public void draw(SpriteBatch s) {
-        magic_staff.draw(s, 0);
-        s.draw(getCurrentFrame(), x, y, width, height);
+        if (getCurrentAnimation().shouldRenderOnTop()) {
+            s.draw(getCurrentFrame(), x, y, width, height);
+            magic_staff.draw(s, getCurrentAnimation().getRotation());
+        } else {
+            magic_staff.draw(s, getCurrentAnimation().getRotation());
+            s.draw(getCurrentFrame(), x, y, width, height);
+        }
+
     }
 
     public void update() {
@@ -57,8 +64,8 @@ public class Player extends AnimatedEntity {
         x += vector.x;
         y += vector.y;
 
-        System.out.println(getDirection());
-        super.update();
+        super.update(); // must be called after changing vector values
+        magic_staff.setVectorLocation(getCurrentAnimation().getWorldAttachmentLocation(DotDGame.statetime, this));
     }
 
     public void dispose() {

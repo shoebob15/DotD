@@ -45,7 +45,7 @@ public class DotDGame extends ApplicationAdapter {
 
 	@Override
 	public void render() {
-		ScreenUtils.clear(.12f, .6f, .7f, 1);
+		ScreenUtils.clear(0f, 0, 0f, 0);
 		camera.position.x = player.getX();
 		camera.position.y = player.getY();
 		camera.update();
