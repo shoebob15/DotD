@@ -3,7 +3,6 @@ package com.shoebob.dotd.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.shoebob.dotd.AttachableAnimation;
 
 public class Consts {
     public static class Animations {

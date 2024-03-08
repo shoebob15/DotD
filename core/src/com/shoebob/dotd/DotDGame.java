@@ -2,6 +2,7 @@ package com.shoebob.dotd;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -10,7 +11,10 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.shoebob.dotd.entities.Player;
+import com.shoebob.dotd.util.CameraShake;
 import com.shoebob.dotd.util.Consts;
+
+import java.util.concurrent.CancellationException;
 
 // TODO: Draw a dungeon that has collisions
 public class DotDGame extends ApplicationAdapter {
@@ -48,6 +52,12 @@ public class DotDGame extends ApplicationAdapter {
 		ScreenUtils.clear(0f, 0, 0f, 0);
 		camera.position.x = player.getX();
 		camera.position.y = player.getY();
+
+		if (CameraShake.getTime() > 0) {
+			CameraShake.tick(statetime);
+			camera.translate(CameraShake.getPos());
+			System.out.println("translating");
+		}
 		camera.update();
 		mapRenderer.setView(camera);
 		mapRenderer.render();

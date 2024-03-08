@@ -1,12 +1,11 @@
-package com.shoebob.dotd.entities;
+package com.shoebob.dotd.entities.attachments;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.shoebob.dotd.entities.Attachment;
 import com.shoebob.dotd.entities.MagicProjectileEntity;
 
 // used for wands, staffs, etc.
-public class MagicAttachment extends Attachment {
+public abstract class MagicAttachment extends Attachment {
     private MagicProjectileEntity projectile;
 
     public MagicAttachment(float x, float y, Texture texture, MagicProjectileEntity projectile) {
@@ -15,9 +14,7 @@ public class MagicAttachment extends Attachment {
     }
 
     @Override
-    public void update() {
-
-    }
+    public abstract void update();
 
     @Override
     public void draw(SpriteBatch s) {
@@ -25,13 +22,8 @@ public class MagicAttachment extends Attachment {
         projectile.draw(s);
     }
 
-    public void use() {
-        spawnProjectile();
-    }
+    public abstract void use();
 
-    private void spawnProjectile() {
-
-    }
 
     @Override
     public String toString() {

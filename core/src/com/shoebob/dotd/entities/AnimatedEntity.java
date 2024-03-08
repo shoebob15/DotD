@@ -1,10 +1,9 @@
 package com.shoebob.dotd.entities;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.shoebob.dotd.AttachableAnimation;
+import com.shoebob.dotd.util.AttachableAnimation;
 import com.shoebob.dotd.DotDGame;
 
 public class AnimatedEntity extends Entity {

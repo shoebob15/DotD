@@ -1,4 +1,4 @@
-package com.shoebob.dotd.entities;
+package com.shoebob.dotd.entities.attachments;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
