@@ -3,11 +3,15 @@ package com.shoebob.dotd.entities;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.shoebob.dotd.components.PositionComponent;
+import com.shoebob.dotd.components.TextureComponent;
+import com.shoebob.dotd.components.VelocityComponent;
 
 public abstract class Entity {
-    protected float x, y, width, height;
-    protected Texture texture;
-    protected Vector2 vector;
+    protected float width, height;
+    public PositionComponent position = new PositionComponent();
+    public TextureComponent texture;
+    public VelocityComponent velocity = new VelocityComponent();
 
     public Entity(float x, float y, float width, float height, Vector2 vector, Texture texture) {
         this.x = x;
