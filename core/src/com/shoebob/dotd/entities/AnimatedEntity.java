@@ -6,7 +6,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.util.AttachableAnimation;
 import com.shoebob.dotd.DotDGame;
 
-public class AnimatedEntity extends Entity {
+
+// TODO: Change to animation component (somehow)
+public class AnimatedEntity implements Entity {
     private TextureRegion currentFrame;
     private AttachableAnimation currentAnimation;
 
