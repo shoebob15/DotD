@@ -2,30 +2,39 @@ package com.shoebob.dotd.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.shoebob.dotd.util.AttachableAnimation;
 import com.shoebob.dotd.DotDGame;
+import com.shoebob.dotd.components.BodyComponent;
+import com.shoebob.dotd.components.PositionComponent;
+import com.shoebob.dotd.components.SpriteAnimationComponent;
+import com.shoebob.dotd.components.VelocityComponent;
 import com.shoebob.dotd.entities.attachments.Attachment;
-import com.shoebob.dotd.entities.attachments.MagicStaffAttachment;
 
-public class Player extends AnimatedEntity {
-
+public class Player implements Entity {
+    public PositionComponent position; // bad oop, but idk
+    public BodyComponent body;
+    public VelocityComponent velocity;
+    public SpriteAnimationComponent animationComponent;
     private final Attachment magic_staff;
 
-    public Player(float x, float y, float width, float height, AttachableAnimation idleAnimation, AttachableAnimation walkRAnimation, AttachableAnimation walkLAnimation, AttachableAnimation walkBAnimation, AttachableAnimation walkFAnimation) {
-        super(x, y, width, height, idleAnimation, walkRAnimation, walkLAnimation, walkBAnimation, walkFAnimation);
-        magic_staff = new MagicStaffAttachment(x, y, new Texture(Gdx.files.internal("weapons/magic_staff.png")),
-                new MagicProjectileEntity(x, y, new Texture(Gdx.files.internal("util/broken_texture.png"))));
+
+    @Override
+    public void create() {
+        position = new PositionComponent();
+        body = new BodyComponent();
+        body.width = 16;
+        body.height = 16;
+        velocity = new VelocityComponent();
+        animationComponent = new SpriteAnimationComponent();
     }
 
     public void draw(SpriteBatch s) {
         if (getCurrentAnimation().shouldRenderOnTop()) {
-            s.draw(getCurrentFrame(), x, y, width, height);
+            s.draw(getCurrentFrame(), position.x, position.y, body.width, body.height);
             magic_staff.draw(s, getCurrentAnimation().getRotation());
         } else {
             magic_staff.draw(s, getCurrentAnimation().getRotation());
-            s.draw(getCurrentFrame(), x, y, width, height);
+            s.draw(getCurrentFrame(), position.x, position.y, body.width, body.height);
         }
 
     }
