@@ -49,7 +49,7 @@ public class AttachableAnimation {
         Vector2 tmp = getLocalAttachmentLocation(statetime);
         Vector2 tmp2 = new Vector2(tmp.x, tmp.y);
 
-        return tmp2.add(new Vector2(player.getX() - handPos.x, player.getY() - handPos.y));
+        return tmp2.add(new Vector2(player.getX() - handPos.x, player.position.y() - handPos.y));
     }
 
     public boolean shouldRenderOnTop() {

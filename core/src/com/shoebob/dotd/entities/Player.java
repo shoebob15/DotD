@@ -3,19 +3,23 @@ package com.shoebob.dotd.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.shoebob.dotd.DotDGame;
 import com.shoebob.dotd.components.BodyComponent;
 import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.components.SpriteAnimationComponent;
 import com.shoebob.dotd.components.VelocityComponent;
 import com.shoebob.dotd.entities.attachments.Attachment;
+import com.shoebob.dotd.systems.AnimationSystem;
+import com.shoebob.dotd.systems.LocationSystem;
+import com.shoebob.dotd.util.AttachableAnimation;
 
 public class Player implements Entity {
     public PositionComponent position; // bad oop, but idk
     public BodyComponent body;
     public VelocityComponent velocity;
-    public SpriteAnimationComponent animationComponent;
-    private final Attachment magic_staff;
+    public SpriteAnimationComponent animation;
+    private Attachment magic_staff;
 
 
     @Override
@@ -25,16 +29,36 @@ public class Player implements Entity {
         body.width = 16;
         body.height = 16;
         velocity = new VelocityComponent();
-        animationComponent = new SpriteAnimationComponent();
+        animation = new SpriteAnimationComponent();
+
+        magic_staff = new Attachment() {
+            @Override
+            public void use() {
+
+            }
+
+            @Override
+            public void update() {
+
+            }
+
+            @Override
+            public void dispose() {
+                // TODO : dispose in Attachment class
+            }
+        };
     }
 
     public void draw(SpriteBatch s) {
-        if (getCurrentAnimation().shouldRenderOnTop()) {
-            s.draw(getCurrentFrame(), position.x, position.y, body.width, body.height);
-            magic_staff.draw(s, getCurrentAnimation().getRotation());
+        AttachableAnimation current = AnimationSystem.getAnimation(animation, velocity);
+        TextureRegion frame = current.getAnimation().getKeyFrame(DotDGame.statetime);
+
+        if (current.shouldRenderOnTop()) {
+            s.draw(frame, position.x, position.y, body.width, body.height);
+            magic_staff.draw(s, current.getRotation());
         } else {
-            magic_staff.draw(s, getCurrentAnimation().getRotation());
-            s.draw(getCurrentFrame(), position.x, position.y, body.width, body.height);
+            magic_staff.draw(s, current.getRotation());
+            s.draw(frame, position.x, position.y, body.width, body.height);
         }
 
     }
@@ -60,27 +84,25 @@ public class Player implements Entity {
             }
         }
 
-        vector.set(expX, expY);
-        vector.nor();
+        velocity.vector.set(expX, expY);
+        velocity.vector.nor();
 
-        x += vector.x;
-        y += vector.y;
+        LocationSystem.addVelocity(position, velocity);
 
-        super.update(); // must be called after changing vector values
-        magic_staff.setVectorLocation(getCurrentAnimation().getWorldAttachmentLocation(DotDGame.statetime, this));
+        magic_staff.position = position;
         magic_staff.update();
     }
 
     public void dispose() {
-        super.dispose();
+        AnimationSystem.disposeSpriteAnimation(animation);
     }
 
     @Override
     public String toString() {
         return "Player{" +
-                "x=" + x +
-                ", y=" + y +
-                ", velocity=" + vector +
+                "x=" + position.x +
+                ", y=" + position.y +
+                ", velocity=" + velocity.vector +
                 '}';
     }
 }
