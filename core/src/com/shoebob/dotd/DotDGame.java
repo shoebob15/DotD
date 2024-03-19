@@ -34,6 +34,7 @@ public class DotDGame extends ApplicationAdapter {
 
 		batch = new SpriteBatch();
 		player = new Player();
+		player.create();
 
 		tiledMap = new TmxMapLoader().load("maps/testmap.tmx");
 		water = (TiledMapTileLayer)tiledMap.getLayers().get(0);

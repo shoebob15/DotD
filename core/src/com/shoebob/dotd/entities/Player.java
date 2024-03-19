@@ -2,13 +2,11 @@ package com.shoebob.dotd.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.shoebob.dotd.DotDGame;
-import com.shoebob.dotd.components.BodyComponent;
-import com.shoebob.dotd.components.PositionComponent;
-import com.shoebob.dotd.components.SpriteAnimationComponent;
-import com.shoebob.dotd.components.VelocityComponent;
+import com.shoebob.dotd.components.*;
 import com.shoebob.dotd.entities.attachments.Attachment;
 import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.systems.LocationSystem;
@@ -26,12 +24,18 @@ public class Player implements Entity {
     public void create() {
         position = new PositionComponent();
         body = new BodyComponent();
-        body.width = 16;
-        body.height = 16;
+        body.width = 32;
+        body.height = 32;
         velocity = new VelocityComponent();
         animation = new SpriteAnimationComponent();
 
         magic_staff = new Attachment() {
+            @Override
+            public void create() {
+                super.create();
+                texture.texture = new Texture("weapons/magic_staff.png");
+            }
+
             @Override
             public void use() {
 
@@ -47,6 +51,8 @@ public class Player implements Entity {
                 // TODO : dispose in Attachment class
             }
         };
+
+        magic_staff.create();
     }
 
     public void draw(SpriteBatch s) {
