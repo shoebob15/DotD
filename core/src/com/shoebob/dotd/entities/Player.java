@@ -54,7 +54,7 @@ public class Player implements Entity {
 
         magic_staff.create();
     }
-
+    // TODO: Make rendering system - no stupid local calls
     public void draw(SpriteBatch s) {
         AttachableAnimation current = AnimationSystem.getAnimation(animation, velocity);
         TextureRegion frame = current.getAnimation().getKeyFrame(DotDGame.statetime);
