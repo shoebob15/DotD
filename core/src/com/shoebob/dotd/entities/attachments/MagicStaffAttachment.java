@@ -15,6 +15,11 @@ public class MagicStaffAttachment extends MagicAttachment {
     }
 
     @Override
+    public void dispose() {
+
+    }
+
+    @Override
     public void use() {
         CameraShake.shake(1, .2f);
     }

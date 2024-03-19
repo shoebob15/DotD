@@ -4,28 +4,67 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.shoebob.dotd.util.AttachableAnimation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.shoebob.dotd.DotDGame;
+import com.shoebob.dotd.components.*;
 import com.shoebob.dotd.entities.attachments.Attachment;
-import com.shoebob.dotd.entities.attachments.MagicStaffAttachment;
+import com.shoebob.dotd.systems.AnimationSystem;
+import com.shoebob.dotd.systems.LocationSystem;
+import com.shoebob.dotd.util.AttachableAnimation;
 
-public class Player extends AnimatedEntity {
+public class Player implements Entity {
+    public PositionComponent position; // bad oop, but idk
+    public BodyComponent body;
+    public VelocityComponent velocity;
+    public SpriteAnimationComponent animation;
+    private Attachment magic_staff;
 
-    private final Attachment magic_staff;
 
-    public Player(float x, float y, float width, float height, AttachableAnimation idleAnimation, AttachableAnimation walkRAnimation, AttachableAnimation walkLAnimation, AttachableAnimation walkBAnimation, AttachableAnimation walkFAnimation) {
-        super(x, y, width, height, idleAnimation, walkRAnimation, walkLAnimation, walkBAnimation, walkFAnimation);
-        magic_staff = new MagicStaffAttachment(x, y, new Texture(Gdx.files.internal("weapons/magic_staff.png")),
-                new MagicProjectileEntity(x, y, new Texture(Gdx.files.internal("util/broken_texture.png"))));
+    @Override
+    public void create() {
+        position = new PositionComponent();
+        body = new BodyComponent();
+        body.width = 32;
+        body.height = 32;
+        velocity = new VelocityComponent();
+        animation = new SpriteAnimationComponent();
+
+        magic_staff = new Attachment() {
+            @Override
+            public void create() {
+                super.create();
+                texture.texture = new Texture("weapons/magic_staff.png");
+            }
+
+            @Override
+            public void use() {
+
+            }
+
+            @Override
+            public void update() {
+
+            }
+
+            @Override
+            public void dispose() {
+                // TODO : dispose in Attachment class
+            }
+        };
+
+        magic_staff.create();
     }
-
+    // TODO: Make rendering system - no stupid local calls
     public void draw(SpriteBatch s) {
-        if (getCurrentAnimation().shouldRenderOnTop()) {
-            s.draw(getCurrentFrame(), x, y, width, height);
-            magic_staff.draw(s, getCurrentAnimation().getRotation());
+        AttachableAnimation current = AnimationSystem.getAnimation(animation, velocity);
+        TextureRegion frame = current.getAnimation().getKeyFrame(DotDGame.statetime);
+
+        if (current.shouldRenderOnTop()) {
+            s.draw(frame, position.x, position.y, body.width, body.height);
+            magic_staff.draw(s, current.getRotation());
         } else {
-            magic_staff.draw(s, getCurrentAnimation().getRotation());
-            s.draw(getCurrentFrame(), x, y, width, height);
+            magic_staff.draw(s, current.getRotation());
+            s.draw(frame, position.x, position.y, body.width, body.height);
         }
 
     }
@@ -51,27 +90,25 @@ public class Player extends AnimatedEntity {
             }
         }
 
-        vector.set(expX, expY);
-        vector.nor();
+        velocity.vector.set(expX, expY);
+        velocity.vector.nor();
 
-        x += vector.x;
-        y += vector.y;
+        LocationSystem.addVelocity(position, velocity);
 
-        super.update(); // must be called after changing vector values
-        magic_staff.setVectorLocation(getCurrentAnimation().getWorldAttachmentLocation(DotDGame.statetime, this));
+        magic_staff.position = position;
         magic_staff.update();
     }
 
     public void dispose() {
-        super.dispose();
+        AnimationSystem.disposeSpriteAnimation(animation);
     }
 
     @Override
     public String toString() {
         return "Player{" +
-                "x=" + x +
-                ", y=" + y +
-                ", velocity=" + vector +
+                "x=" + position.x +
+                ", y=" + position.y +
+                ", velocity=" + velocity.vector +
                 '}';
     }
 }

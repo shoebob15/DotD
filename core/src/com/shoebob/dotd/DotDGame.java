@@ -33,10 +33,8 @@ public class DotDGame extends ApplicationAdapter {
 		float w = Gdx.graphics.getWidth();
 
 		batch = new SpriteBatch();
-		player = new Player(0, 0, 32, 32,
-				Consts.Animations.playerIdleAnimation, Consts.Animations.playerWalkRAnimation,
-				Consts.Animations.playerWalkLAnimation, Consts.Animations.playerWalkBAnimation,
-				Consts.Animations.playerWalkFAnimation);
+		player = new Player();
+		player.create();
 
 		tiledMap = new TmxMapLoader().load("maps/testmap.tmx");
 		water = (TiledMapTileLayer)tiledMap.getLayers().get(0);
@@ -50,8 +48,8 @@ public class DotDGame extends ApplicationAdapter {
 	@Override
 	public void render() {
 		ScreenUtils.clear(0f, 0, 0f, 0);
-		camera.position.x = player.getX();
-		camera.position.y = player.getY();
+		camera.position.x = player.position.x;
+		camera.position.y = player.position.y;
 
 		if (CameraShake.getTime() > 0) {
 			CameraShake.tick(statetime);
