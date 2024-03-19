@@ -17,13 +17,16 @@ public class AnimationSystem {
     public static AttachableAnimation getAnimation(SpriteAnimationComponent animation, VelocityComponent velocity) {
         float direction = LocationSystem.getDirection(velocity);
 
+        if (velocity.vector.isZero()) {
+            return animation.idleAnimation;
+        }
+
         if (direction == 180) return animation.moveLAnimation;
         else if (direction == 0) return animation.moveRAnimation;
         else if (direction >= -135 && direction <= -45) return animation.moveFAnimation;
         else if (direction <= 135 && direction >= 45) return animation.moveBAnimation;
-        else if (velocity.vector.isZero()) {
-            return animation.idleAnimation;
-        }
+
+
         else return animation.idleAnimation;
     }
 
