@@ -1,10 +1,12 @@
 package com.shoebob.dotd.entities;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.DotDGame;
 import com.shoebob.dotd.components.*;
 import com.shoebob.dotd.entities.attachments.Attachment;
@@ -56,14 +58,13 @@ public class Player implements Entity {
     }
     // TODO: Make rendering system - no stupid local calls
     public void draw(SpriteBatch s) {
-        AttachableAnimation current = AnimationSystem.getAnimation(animation, velocity);
-        TextureRegion frame = current.getAnimation().getKeyFrame(DotDGame.statetime);
+        TextureRegion frame = animation.currentAnimation.getAnimation().getKeyFrame(DotDGame.statetime);
 
-        if (current.shouldRenderOnTop()) {
+        if (animation.currentAnimation.shouldRenderOnTop()) {
             s.draw(frame, position.x, position.y, body.width, body.height);
-            magic_staff.draw(s, current.getRotation());
+            magic_staff.draw(s, animation.currentAnimation.getRotation());
         } else {
-            magic_staff.draw(s, current.getRotation());
+            magic_staff.draw(s, animation.currentAnimation.getRotation());
             s.draw(frame, position.x, position.y, body.width, body.height);
         }
 
@@ -95,7 +96,14 @@ public class Player implements Entity {
 
         LocationSystem.addVelocity(position, velocity);
 
-        magic_staff.position = position;
+        animation.currentAnimation = AnimationSystem.getAnimation(animation, velocity);
+
+        Vector2 loc = animation.currentAnimation.getWorldAttachmentLocation(DotDGame.statetime, this);
+        PositionComponent loc2 = new PositionComponent();
+        loc2.x = loc.x;
+        loc2.y = loc.y;
+
+        magic_staff.position = loc2;
         magic_staff.update();
     }
 
