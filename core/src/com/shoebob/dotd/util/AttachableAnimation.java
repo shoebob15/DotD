@@ -45,7 +45,6 @@ public class AttachableAnimation {
     }
 
     public Vector2 getWorldAttachmentLocation(float statetime, Player player) {
-        System.out.println(player);
         Vector2 tmp = getLocalAttachmentLocation(statetime);
         Vector2 tmp2 = new Vector2(tmp.x, tmp.y);
 

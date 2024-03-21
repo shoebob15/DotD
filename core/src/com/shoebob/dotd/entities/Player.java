@@ -1,6 +1,5 @@
 package com.shoebob.dotd.entities;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,16 +9,18 @@ import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.DotDGame;
 import com.shoebob.dotd.components.*;
 import com.shoebob.dotd.entities.attachments.Attachment;
+import com.shoebob.dotd.entities.attachments.MagicStaffAttachment;
 import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.systems.LocationSystem;
-import com.shoebob.dotd.util.AttachableAnimation;
 
 public class Player implements Entity {
     public PositionComponent position; // bad oop, but idk
     public BodyComponent body;
     public VelocityComponent velocity;
     public SpriteAnimationComponent animation;
-    private Attachment magic_staff;
+    private MagicStaffAttachment magic_staff;
+
+    public Attachment currentAttachment; // for outside classes
 
 
     @Override
@@ -31,29 +32,8 @@ public class Player implements Entity {
         velocity = new VelocityComponent();
         animation = new SpriteAnimationComponent();
 
-        magic_staff = new Attachment() {
-            @Override
-            public void create() {
-                super.create();
-                texture.texture = new Texture("weapons/magic_staff.png");
-            }
-
-            @Override
-            public void use() {
-
-            }
-
-            @Override
-            public void update() {
-
-            }
-
-            @Override
-            public void dispose() {
-                // TODO : dispose in Attachment class
-            }
-        };
-
+        magic_staff = new MagicStaffAttachment(new FireballProjectile());
+        currentAttachment = magic_staff;
         magic_staff.create();
     }
     // TODO: Make rendering system - no stupid local calls

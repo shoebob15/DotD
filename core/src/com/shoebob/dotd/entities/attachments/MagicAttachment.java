@@ -1,14 +1,13 @@
 package com.shoebob.dotd.entities.attachments;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.shoebob.dotd.entities.MagicProjectileEntity;
+import com.shoebob.dotd.entities.ProjectileEntity;
 
 // used for wands, staffs, etc.
 public abstract class MagicAttachment extends Attachment {
-    private MagicProjectileEntity projectile;
+    private ProjectileEntity projectile;
 
-    public MagicAttachment(float x, float y, Texture texture, MagicProjectileEntity projectile) {
+    public MagicAttachment(ProjectileEntity projectile) {
         this.projectile = projectile;
     }
 
