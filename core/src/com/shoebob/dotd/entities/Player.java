@@ -5,19 +5,22 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.DotDGame;
 import com.shoebob.dotd.components.*;
 import com.shoebob.dotd.entities.attachments.Attachment;
+import com.shoebob.dotd.entities.attachments.MagicStaffAttachment;
 import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.systems.LocationSystem;
-import com.shoebob.dotd.util.AttachableAnimation;
 
 public class Player implements Entity {
     public PositionComponent position; // bad oop, but idk
     public BodyComponent body;
     public VelocityComponent velocity;
     public SpriteAnimationComponent animation;
-    private Attachment magic_staff;
+    private MagicStaffAttachment magic_staff;
+
+    public Attachment currentAttachment; // for outside classes
 
 
     @Override
@@ -29,41 +32,19 @@ public class Player implements Entity {
         velocity = new VelocityComponent();
         animation = new SpriteAnimationComponent();
 
-        magic_staff = new Attachment() {
-            @Override
-            public void create() {
-                super.create();
-                texture.texture = new Texture("weapons/magic_staff.png");
-            }
-
-            @Override
-            public void use() {
-
-            }
-
-            @Override
-            public void update() {
-
-            }
-
-            @Override
-            public void dispose() {
-                // TODO : dispose in Attachment class
-            }
-        };
-
+        magic_staff = new MagicStaffAttachment(new FireballProjectile());
+        currentAttachment = magic_staff;
         magic_staff.create();
     }
     // TODO: Make rendering system - no stupid local calls
     public void draw(SpriteBatch s) {
-        AttachableAnimation current = AnimationSystem.getAnimation(animation, velocity);
-        TextureRegion frame = current.getAnimation().getKeyFrame(DotDGame.statetime);
+        TextureRegion frame = animation.currentAnimation.getAnimation().getKeyFrame(DotDGame.statetime);
 
-        if (current.shouldRenderOnTop()) {
+        if (animation.currentAnimation.shouldRenderOnTop()) {
             s.draw(frame, position.x, position.y, body.width, body.height);
-            magic_staff.draw(s, current.getRotation());
+            magic_staff.draw(s, animation.currentAnimation.getRotation());
         } else {
-            magic_staff.draw(s, current.getRotation());
+            magic_staff.draw(s, animation.currentAnimation.getRotation());
             s.draw(frame, position.x, position.y, body.width, body.height);
         }
 
@@ -95,7 +76,14 @@ public class Player implements Entity {
 
         LocationSystem.addVelocity(position, velocity);
 
-        magic_staff.position = position;
+        animation.currentAnimation = AnimationSystem.getAnimation(animation, velocity);
+
+        Vector2 loc = animation.currentAnimation.getWorldAttachmentLocation(DotDGame.statetime, this);
+        PositionComponent loc2 = new PositionComponent();
+        loc2.x = loc.x;
+        loc2.y = loc.y;
+
+        magic_staff.position = loc2;
         magic_staff.update();
     }
 

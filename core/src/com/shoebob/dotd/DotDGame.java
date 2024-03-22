@@ -19,7 +19,7 @@ import java.util.concurrent.CancellationException;
 // TODO: Draw a dungeon that has collisions
 public class DotDGame extends ApplicationAdapter {
 	private SpriteBatch batch;
-	private Player player;
+	public Player player; // should be accessible from other classes
 	private TiledMap tiledMap;
 	private TiledMapTileLayer water;
 	private OrthographicCamera camera;

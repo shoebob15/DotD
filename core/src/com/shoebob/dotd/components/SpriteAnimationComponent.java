@@ -4,6 +4,8 @@ import com.shoebob.dotd.util.AttachableAnimation;
 import com.shoebob.dotd.util.Consts;
 
 public class SpriteAnimationComponent {
+    public AttachableAnimation currentAnimation = Consts.Animations.playerIdleAnimation;
+
     public AttachableAnimation idleAnimation = Consts.Animations.playerIdleAnimation;
 
     public AttachableAnimation moveRAnimation = Consts.Animations.playerWalkRAnimation;
