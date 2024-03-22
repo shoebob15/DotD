@@ -2,7 +2,6 @@ package com.shoebob.dotd;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -12,14 +11,11 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.shoebob.dotd.entities.Player;
 import com.shoebob.dotd.util.CameraShake;
-import com.shoebob.dotd.util.Consts;
-
-import java.util.concurrent.CancellationException;
 
 // TODO: Draw a dungeon that has collisions
 public class DotDGame extends ApplicationAdapter {
 	private SpriteBatch batch;
-	public Player player; // should be accessible from other classes
+	public static Player player; // should be accessible from other classes
 	private TiledMap tiledMap;
 	private TiledMapTileLayer water;
 	private OrthographicCamera camera;

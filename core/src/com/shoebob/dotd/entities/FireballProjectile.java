@@ -1,10 +1,12 @@
 package com.shoebob.dotd.entities;
 
+import com.shoebob.dotd.DotDGame;
+
 public class FireballProjectile extends ProjectileEntity {
     @Override
     public void create() {
         super.create();
-        position = player.position;
+        position = DotDGame.player.position;
     }
 
     @Override

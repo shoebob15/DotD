@@ -32,7 +32,7 @@ public class Player implements Entity {
         velocity = new VelocityComponent();
         animation = new SpriteAnimationComponent();
 
-        magic_staff = new MagicStaffAttachment(new FireballProjectile());
+        magic_staff = new MagicStaffAttachment();
         currentAttachment = magic_staff;
         magic_staff.create();
     }
