@@ -1,8 +1,9 @@
-package com.shoebob.dotd.entities;
+package com.shoebob.dotd.entities.projectiles;
 
 import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.components.TextureComponent;
 import com.shoebob.dotd.components.VelocityComponent;
+import com.shoebob.dotd.entities.Entity;
 
 public class ProjectileEntity implements Entity {
     public PositionComponent position;

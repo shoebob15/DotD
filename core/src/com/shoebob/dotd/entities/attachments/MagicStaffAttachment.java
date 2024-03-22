@@ -1,8 +1,7 @@
 package com.shoebob.dotd.entities.attachments;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.shoebob.dotd.entities.FireballProjectile;
-import com.shoebob.dotd.entities.ProjectileEntity;
+import com.shoebob.dotd.entities.projectiles.FireballProjectile;
 import com.shoebob.dotd.util.CameraShake;
 
 public class MagicStaffAttachment extends Attachment {

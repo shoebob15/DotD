@@ -1,4 +1,4 @@
-package com.shoebob.dotd.entities;
+package com.shoebob.dotd.entities.projectiles;
 
 import com.shoebob.dotd.DotDGame;
 
