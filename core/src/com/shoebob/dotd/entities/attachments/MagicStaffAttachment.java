@@ -1,11 +1,14 @@
 package com.shoebob.dotd.entities.attachments;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
+import com.shoebob.dotd.DotDGame;
 import com.shoebob.dotd.entities.projectiles.FireballProjectile;
 import com.shoebob.dotd.util.CameraShake;
 
 public class MagicStaffAttachment extends Attachment {
     private FireballProjectile projectile;
+
 
     @Override
     public void create() {
@@ -27,7 +30,8 @@ public class MagicStaffAttachment extends Attachment {
 
     @Override
     public void use() {
-        CameraShake.shake(1, .2f);
-        System.out.println("use");
+        if (cooldown()) {
+
+        }
     }
 }

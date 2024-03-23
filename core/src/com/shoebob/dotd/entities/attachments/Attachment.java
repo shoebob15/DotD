@@ -12,6 +12,9 @@ public abstract class Attachment implements Entity {
     public TextureComponent texture;
     public PositionComponent position;
 
+    protected long cooldown = 2000;
+    protected long lastAttack = 0;
+
     @Override
     public void create() {
         texture = new TextureComponent();
@@ -26,6 +29,18 @@ public abstract class Attachment implements Entity {
         s.draw(texture.texture, position.x + 8, position.y + 8, 8, 8,
                 8, 8, 2, 2, rotation, 0, 0, texture.texture.getWidth(),
                 texture.texture.getHeight(), false, false);
+    }
+
+
+    // will return true if NOT on cooldown, else return false
+    // also will reset cooldown
+    protected boolean cooldown() {
+        long time = System.currentTimeMillis();
+        if (time > lastAttack + cooldown) {
+            lastAttack = time;
+            return true;
+        }
+        return false;
     }
 
     public abstract void use();
