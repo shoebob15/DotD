@@ -12,7 +12,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.crashinvaders.vfx.VfxManager;
 import com.crashinvaders.vfx.effects.OldTvEffect;
-import com.crashinvaders.vfx.effects.VfxEffect;
+import com.crashinvaders.vfx.effects.CrtEffect;
 import com.shoebob.dotd.entities.Player;
 import com.shoebob.dotd.util.CameraShake;
 
@@ -27,6 +27,7 @@ public class DotDGame extends ApplicationAdapter {
 
 	private VfxManager vfxManager;
 	private OldTvEffect tvEffect;
+	private CrtEffect crtEffect;
 
 	public static float statetime;
 	
@@ -46,9 +47,11 @@ public class DotDGame extends ApplicationAdapter {
 
 		vfxManager = new VfxManager(Pixmap.Format.RGBA8888);
 		tvEffect = new OldTvEffect();
+		crtEffect = new CrtEffect();
 		vfxManager.addEffect(tvEffect);
+		vfxManager.addEffect(crtEffect);
 
-		camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
+		camera.position.set(0, 0, 0);
 		camera.update();
 	}
 
