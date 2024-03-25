@@ -2,7 +2,6 @@ package com.shoebob.dotd.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -17,7 +16,7 @@ public class Player implements Entity {
     public PositionComponent position; // bad oop, but idk
     public BodyComponent body;
     public VelocityComponent velocity;
-    public SpriteAnimationComponent animation;
+    public AnimatedSpriteComponent animation;
     private MagicStaffAttachment magic_staff;
 
     public Attachment currentAttachment; // for outside classes
@@ -30,7 +29,7 @@ public class Player implements Entity {
         body.width = 32;
         body.height = 32;
         velocity = new VelocityComponent();
-        animation = new SpriteAnimationComponent();
+        animation = new AnimatedSpriteComponent();
 
         magic_staff = new MagicStaffAttachment();
         currentAttachment = magic_staff;
