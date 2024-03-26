@@ -3,9 +3,11 @@ package com.shoebob.dotd.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.shoebob.dotd.components.AnimationComponent;
+import com.shoebob.dotd.systems.AnimationSystem;
 
 public class Consts {
-    public static class Animations {
+    public static class AttachedAnimations {
         public static final AttachableAnimation playerIdleAnimation = new AttachableAnimation(
                 new Texture(Gdx.files.internal("player/player_idle.png")),
                 0.5f,
@@ -59,5 +61,10 @@ public class Consts {
                 },
                 0
         );
+    }
+
+    public static class AnimationComponents {
+        public static final AnimationComponent fireball =
+                AnimationSystem.buildAnimationComponent("projectiles/fireball/", "fireball", 5, 0.1f);
     }
 }

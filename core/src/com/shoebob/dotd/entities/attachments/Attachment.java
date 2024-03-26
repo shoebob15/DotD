@@ -44,4 +44,9 @@ public abstract class Attachment implements Entity {
     }
 
     public abstract void use();
+
+    @Override
+    public void dispose() {
+        texture.texture.dispose();
+    }
 }

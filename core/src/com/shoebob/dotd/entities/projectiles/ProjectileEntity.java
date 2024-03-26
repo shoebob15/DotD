@@ -8,13 +8,12 @@ import com.shoebob.dotd.entities.Entity;
 public class ProjectileEntity implements Entity {
     public PositionComponent position;
     public VelocityComponent velocity;
-    public TextureComponent texture;
+
 
     @Override
     public void create() {
         position = new PositionComponent();
         velocity = new VelocityComponent();
-        texture = new TextureComponent();
     }
 
     @Override

@@ -75,7 +75,7 @@ public class Player implements Entity {
 
         LocationSystem.addVelocity(position, velocity);
 
-        animation.currentAnimation = AnimationSystem.getAnimation(animation, velocity);
+        animation.currentAnimation = AnimationSystem.getSpriteAnimation(animation, velocity);
 
         Vector2 loc = animation.currentAnimation.getWorldAttachmentLocation(DotDGame.statetime, this);
         PositionComponent loc2 = new PositionComponent();
