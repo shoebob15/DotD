@@ -45,7 +45,10 @@ public class AnimationSystem {
 
     public static AnimationComponent buildAnimationComponent(String path, String name, int numFrames, float frameDuration) {
         AnimationComponent component = new AnimationComponent();
-        component.animation = new Animation<TextureRegion>(frameDuration, new TextureRegion[numFrames]);
+        component.animation = new Animation<>(frameDuration,
+                new Array<TextureRegion>(new TextureRegion[numFrames]),
+                Animation.PlayMode.LOOP
+        );
 
         for (int i = 0; i < component.animation.getKeyFrames().length; i++) {
             component.animation.getKeyFrames()[i] = new TextureRegion(
