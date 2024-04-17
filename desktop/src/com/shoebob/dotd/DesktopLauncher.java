@@ -9,6 +9,7 @@ public class DesktopLauncher {
 		config.setForegroundFPS(60);
 		config.setTitle("Depths of the Dungeon");
 		config.setDecorated(false);
+		config.setWindowIcon("logo.png");
 		new Lwjgl3Application(new DotDGame(), config);
 	}
 }

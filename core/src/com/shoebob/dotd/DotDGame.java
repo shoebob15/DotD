@@ -65,10 +65,11 @@ public class DotDGame extends ApplicationAdapter {
 		camera.position.y = player.position.y;
 
 		if (CameraShake.getTime() > 0) {
-			CameraShake.tick(statetime);
+			CameraShake.tick();
 			camera.translate(CameraShake.getPos());
 			System.out.println("translating");
 		}
+
 		camera.update();
 		mapRenderer.setView(camera);
 		mapRenderer.render();

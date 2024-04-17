@@ -14,4 +14,11 @@ public class LocationSystem {
     public static float getDirection(VelocityComponent velocity) {
         return (float) Math.toDegrees(Math.atan2(velocity.vector.y, velocity.vector.x));
     }
+
+    public static PositionComponent clonePos(PositionComponent pos) {
+        PositionComponent temp = new PositionComponent();
+        temp.x = pos.x;
+        temp.y = pos.y;
+        return temp;
+    }
 }

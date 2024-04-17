@@ -13,13 +13,13 @@ import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.systems.LocationSystem;
 
 public class Player implements Entity {
-    public PositionComponent position; // bad oop, but idk
+    public PositionComponent position; // bad oop, but idc
     public BodyComponent body;
     public VelocityComponent velocity;
     public AnimatedSpriteComponent animation;
     private MagicStaffAttachment magic_staff;
 
-    public Attachment currentAttachment; // for outside classes
+    public Attachment currentAttachment; // for outside classes -- TODO: Inventory system
 
 
     @Override
