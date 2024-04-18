@@ -61,8 +61,8 @@ public class DotDGame extends ApplicationAdapter {
 		vfxManager.cleanUpBuffers();
 		vfxManager.beginInputCapture();
 
-		camera.position.x = player.position.x;
-		camera.position.y = player.position.y;
+		camera.position.x = player.position.x + 8;
+		camera.position.y = player.position.y + 8;
 
 		if (CameraShake.getTime() > 0) {
 			CameraShake.tick();
