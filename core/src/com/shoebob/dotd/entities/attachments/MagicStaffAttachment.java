@@ -31,25 +31,11 @@ public class MagicStaffAttachment extends Attachment {
     @Override
     public void draw(SpriteBatch s, float rotation) {
         super.draw(s, rotation);
+
         // draw projectile - TODO: Change fireball to spritesheet
-        // TODO: Draw in Projectile class not attachment
         // TODO: Move all files to spritesheet for production - will require rewrite of spritesheet loading code
 
-        // Calculate the angle of rotation based on the projectile's velocity vector
-        float angle = projectile.velocity.vector.angleDeg();
-
-        // Draw the projectile with rotation
-        s.draw(AnimationSystem.getAnimationFrame(projectile.animationComponent),
-                projectile.position.x,
-                projectile.position.y,
-                (float) projectile.animationComponent.animation.getKeyFrames()[0].getRegionWidth() / 2,
-                (float) projectile.animationComponent.animation.getKeyFrames()[0].getRegionHeight() / 2,
-                (float) projectile.animationComponent.animation.getKeyFrames()[0].getRegionWidth(),
-                (float) projectile.animationComponent.animation.getKeyFrames()[0].getRegionHeight(),
-                0.5F,
-                0.5F,
-                angle
-        );
+        projectile.draw(s);
     }
 
 

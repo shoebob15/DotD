@@ -35,6 +35,7 @@ public class Player implements Entity {
         currentAttachment = magic_staff;
         magic_staff.create();
     }
+
     // TODO: Make rendering system - no stupid local calls
     public void draw(SpriteBatch s) {
         TextureRegion frame = animation.currentAnimation.getAnimation().getKeyFrame(DotDGame.statetime);
