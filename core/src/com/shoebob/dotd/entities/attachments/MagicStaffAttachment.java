@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.DotDGame;
 import com.shoebob.dotd.components.VelocityComponent;
 import com.shoebob.dotd.entities.projectiles.FireballProjectile;
-import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.systems.LocationSystem;
 import com.shoebob.dotd.systems.VelocitySystem;
 
@@ -45,12 +44,9 @@ public class MagicStaffAttachment extends Attachment {
         vel.vector = new Vector2(Gdx.input.getX() - ((float) Gdx.graphics.getWidth() / 2),
                 (Gdx.input.getY() - ((float) Gdx.graphics.getHeight() / 2)) * -1);
 
-        System.out.println(Gdx.input.getX() - ((float) Gdx.graphics.getWidth() / 2) + ", " +
-                (Gdx.input.getY() - ((float) Gdx.graphics.getHeight() / 2)));
-
         vel.vector.nor();
 
-        vel.vector = VelocitySystem.mulVec(3, vel.vector);
+        vel.vector = VelocitySystem.mulVec(vel.vector, 3);
 
         projectile.velocity = vel;
         projectile.position = LocationSystem.clonePos(DotDGame.player.position);

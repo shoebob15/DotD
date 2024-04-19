@@ -18,13 +18,14 @@ import com.shoebob.dotd.util.CameraShake;
 
 // TODO: Draw a dungeon that has collisions
 public class DotDGame extends ApplicationAdapter {
-	private SpriteBatch batch;
+	public static SpriteBatch batch;
 	public static Player player; // should be accessible from other classes
 	private TiledMap tiledMap;
 	private TiledMapTileLayer water;
 	private OrthographicCamera camera;
 	private OrthogonalTiledMapRenderer mapRenderer;
 
+	// vfx shader stuff
 	private VfxManager vfxManager;
 	private OldTvEffect tvEffect;
 	private CrtEffect crtEffect;
