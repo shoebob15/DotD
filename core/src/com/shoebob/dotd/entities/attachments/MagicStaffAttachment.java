@@ -9,6 +9,7 @@ import com.shoebob.dotd.components.VelocityComponent;
 import com.shoebob.dotd.entities.projectiles.FireballProjectile;
 import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.systems.LocationSystem;
+import com.shoebob.dotd.systems.VelocitySystem;
 
 public class MagicStaffAttachment extends Attachment {
     private FireballProjectile projectile;
@@ -29,18 +30,43 @@ public class MagicStaffAttachment extends Attachment {
 
     @Override
     public void draw(SpriteBatch s, float rotation) {
-        super.draw(s);
+        super.draw(s, rotation);
         // draw projectile - TODO: Change fireball to spritesheet
-        s.draw(AnimationSystem.getAnimationFrame(projectile.animationComponent), projectile.position.x, projectile.position.y);
+        // TODO: Draw in Projectile class not attachment
+        // TODO: Move all files to spritesheet for production - will require rewrite of spritesheet loading code
+
+        // Calculate the angle of rotation based on the projectile's velocity vector
+        float angle = projectile.velocity.vector.angleDeg();
+
+        // Draw the projectile with rotation
+        s.draw(AnimationSystem.getAnimationFrame(projectile.animationComponent),
+                projectile.position.x,
+                projectile.position.y,
+                (float) projectile.animationComponent.animation.getKeyFrames()[0].getRegionWidth() / 2,
+                (float) projectile.animationComponent.animation.getKeyFrames()[0].getRegionHeight() / 2,
+                (float) projectile.animationComponent.animation.getKeyFrames()[0].getRegionWidth(),
+                (float) projectile.animationComponent.animation.getKeyFrames()[0].getRegionHeight(),
+                0.5F,
+                0.5F,
+                angle
+        );
     }
+
 
     @Override
     public void use() {
-            VelocityComponent vel = new VelocityComponent();
-            vel.vector = new Vector2(Gdx.input.getX(), Gdx.input.getY());
-            vel.vector.nor();
+        VelocityComponent vel = new VelocityComponent();
+        vel.vector = new Vector2(Gdx.input.getX() - ((float) Gdx.graphics.getWidth() / 2),
+                (Gdx.input.getY() - ((float) Gdx.graphics.getHeight() / 2)) * -1);
 
-            projectile.velocity = vel;
-            projectile.position = LocationSystem.clonePos(DotDGame.player.position);
+        System.out.println(Gdx.input.getX() - ((float) Gdx.graphics.getWidth() / 2) + ", " +
+                (Gdx.input.getY() - ((float) Gdx.graphics.getHeight() / 2)));
+
+        vel.vector.nor();
+
+        vel.vector = VelocitySystem.mulVec(3, vel.vector);
+
+        projectile.velocity = vel;
+        projectile.position = LocationSystem.clonePos(DotDGame.player.position);
     }
 }
