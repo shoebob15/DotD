@@ -4,6 +4,8 @@ import com.shoebob.dotd.DotDGame;
 import com.shoebob.dotd.systems.LocationSystem;
 import com.shoebob.dotd.util.Consts;
 
+
+// TODO: shouldn't be its own class
 public class FireballProjectile extends AnimatedProjectile {
     @Override
     public void create() {

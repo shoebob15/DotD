@@ -14,6 +14,7 @@ import com.crashinvaders.vfx.VfxManager;
 import com.crashinvaders.vfx.effects.OldTvEffect;
 import com.crashinvaders.vfx.effects.CrtEffect;
 import com.shoebob.dotd.entities.Player;
+import com.shoebob.dotd.managers.ProjectileManager;
 import com.shoebob.dotd.util.CameraShake;
 
 // TODO: Draw a dungeon that has collisions
@@ -56,6 +57,7 @@ public class DotDGame extends ApplicationAdapter {
 		camera.update();
 	}
 
+	// acts as update method (it should be called that)
 	@Override
 	public void render() {
 		ScreenUtils.clear(0f, 0, 0f, 0);
@@ -78,10 +80,15 @@ public class DotDGame extends ApplicationAdapter {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 
+		// START UPDATES
 		player.update();
 		player.draw(batch);
-		batch.end();
 
+		ProjectileManager.update();
+
+		// END UPDATES
+
+		batch.end();
 		statetime += Gdx.graphics.getDeltaTime();
 
 		vfxManager.endInputCapture();

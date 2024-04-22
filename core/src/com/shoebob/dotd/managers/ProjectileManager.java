@@ -8,18 +8,27 @@ import java.util.ArrayList;
 
 // class to manage projectiles
 public class ProjectileManager {
-    private static ArrayList<ProjectileEntity> projectiles;
-    private static ArrayList<AnimatedProjectile> animatedProjectiles;
+    private static final ArrayList<ProjectileEntity> projectiles = new ArrayList<>();
+    private static final ArrayList<AnimatedProjectile> animatedProjectiles = new ArrayList<>();
 
     public static void update() {
-        for (ProjectileEntity projectile : projectiles) {
-            projectile.update();
-            projectile.draw(DotDGame.batch);
+        if (!projectiles.isEmpty()) {
+            System.out.println("test");
+            for (ProjectileEntity projectile : projectiles) {
+                projectile.update();
+                projectile.draw(DotDGame.batch);
+            }
         }
 
-        for (AnimatedProjectile projectile : animatedProjectiles) {
-            projectile.update();
-            projectile.draw(DotDGame.batch);
+        if (!animatedProjectiles.isEmpty()) {
+            int count = 0;
+
+            for (AnimatedProjectile projectile : animatedProjectiles) {
+                projectile.update();
+                projectile.draw(DotDGame.batch);
+                System.out.println("Drawing projectile #" + count);
+                count++;
+            }
         }
     }
 
@@ -29,6 +38,8 @@ public class ProjectileManager {
 
     public static void addAnimatedProjectile(AnimatedProjectile projectile, float lifespan) {
         animatedProjectiles.add(projectile);
+        System.out.println("projectile added");
+        System.out.println(animatedProjectiles.toString());
     }
 
 }
