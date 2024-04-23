@@ -8,7 +8,6 @@ import com.shoebob.dotd.DotDGame;
 import com.shoebob.dotd.components.VelocityComponent;
 import com.shoebob.dotd.entities.projectiles.FireballProjectile;
 import com.shoebob.dotd.managers.ProjectileManager;
-import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.systems.LocationSystem;
 import com.shoebob.dotd.systems.VelocitySystem;
 import com.shoebob.dotd.util.Consts;
@@ -38,6 +37,7 @@ public class MagicStaffAttachment extends Attachment {
     @Override
     public void use() {
         if (cooldown()) {
+            // TODO: Fireball shouldn't be its own class
             FireballProjectile proj = new FireballProjectile();
             VelocityComponent vel = new VelocityComponent();
             vel.vector = new Vector2(Gdx.input.getX() - ((float) Gdx.graphics.getWidth() / 2),
@@ -50,7 +50,7 @@ public class MagicStaffAttachment extends Attachment {
             proj.velocity = vel;
             proj.position = LocationSystem.clonePos(DotDGame.player.position);
             proj.animationComponent = Consts.AnimationComponents.fireball;
-            System.out.println("adding projectile");
+
             ProjectileManager.addAnimatedProjectile(proj, 5f);
         }
     }
