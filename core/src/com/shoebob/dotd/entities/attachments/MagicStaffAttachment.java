@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.DotDGame;
+import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.components.VelocityComponent;
 import com.shoebob.dotd.entities.projectiles.FireballProjectile;
 import com.shoebob.dotd.managers.ProjectileManager;
@@ -36,22 +37,28 @@ public class MagicStaffAttachment extends Attachment {
 
     @Override
     public void use() {
-        if (cooldown()) {
-            // TODO: Fireball shouldn't be its own class
+//        if (cooldown()) {
+            // TODO: Fireball shouldn't be its own class - possibly adapt builder model
             FireballProjectile proj = new FireballProjectile();
             VelocityComponent vel = new VelocityComponent();
+
             vel.vector = new Vector2(Gdx.input.getX() - ((float) Gdx.graphics.getWidth() / 2),
                     (Gdx.input.getY() - ((float) Gdx.graphics.getHeight() / 2)) * -1);
 
             vel.vector.nor();
 
-            vel.vector = VelocitySystem.mulVec(vel.vector, 3);
+            vel.vector = VelocitySystem.mulVec(vel.vector, .5f);
 
             proj.velocity = vel;
-            proj.position = LocationSystem.clonePos(DotDGame.player.position);
+
+            PositionComponent pos = new PositionComponent();
+            pos.x = DotDGame.player.position.x - 30;
+            pos.y = DotDGame.player.position.y;
+            proj.position = pos;
+
             proj.animationComponent = Consts.AnimationComponents.fireball;
 
             ProjectileManager.addAnimatedProjectile(proj, 5f);
-        }
+//        }
     }
 }
