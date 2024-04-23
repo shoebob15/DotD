@@ -14,8 +14,12 @@ import com.crashinvaders.vfx.VfxManager;
 import com.crashinvaders.vfx.effects.OldTvEffect;
 import com.crashinvaders.vfx.effects.CrtEffect;
 import com.shoebob.dotd.entities.Player;
+import com.shoebob.dotd.entities.ui.InventoryBar;
+import com.shoebob.dotd.entities.ui.OverlayEntity;
 import com.shoebob.dotd.managers.ProjectileManager;
 import com.shoebob.dotd.util.CameraShake;
+
+import javax.swing.*;
 
 // TODO: Draw a dungeon that has collisions
 public class DotDGame extends ApplicationAdapter {
@@ -32,7 +36,7 @@ public class DotDGame extends ApplicationAdapter {
 	private TiledMapTileLayer water;
 
 	// screen camera
-	private OrthographicCamera camera;
+	public static OrthographicCamera camera;
 
 	// object for rendering map
 	private OrthogonalTiledMapRenderer mapRenderer;
@@ -42,6 +46,8 @@ public class DotDGame extends ApplicationAdapter {
 	private OldTvEffect tvEffect;
 	private CrtEffect crtEffect;
 
+	// ui stuff
+	InventoryBar inventoryBar;
 
 	// stores the statetime
 	public static float statetime;
@@ -59,6 +65,9 @@ public class DotDGame extends ApplicationAdapter {
 		water = (TiledMapTileLayer)tiledMap.getLayers().get(0);
 		camera = new OrthographicCamera(300, 300 * (h / w));
 		mapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+
+		inventoryBar = new InventoryBar();
+		inventoryBar.create();
 
 		vfxManager = new VfxManager(Pixmap.Format.RGBA8888);
 		tvEffect = new OldTvEffect();
@@ -98,6 +107,8 @@ public class DotDGame extends ApplicationAdapter {
 		player.draw(batch);
 
 		ProjectileManager.update();
+
+		inventoryBar.update();
 
 		// END UPDATES
 
