@@ -3,7 +3,7 @@ package com.shoebob.dotd.components;
 import com.shoebob.dotd.util.AttachableAnimation;
 import com.shoebob.dotd.util.Consts;
 
-public class AnimatedSpriteComponent {
+public class AnimatedSpriteComponent implements Component {
     public AttachableAnimation currentAnimation = Consts.AttachedAnimations.playerIdleAnimation;
 
     public AttachableAnimation idleAnimation = Consts.AttachedAnimations.playerIdleAnimation;
