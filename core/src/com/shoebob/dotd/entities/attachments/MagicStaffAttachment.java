@@ -9,7 +9,6 @@ import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.components.VelocityComponent;
 import com.shoebob.dotd.entities.projectiles.FireballProjectile;
 import com.shoebob.dotd.managers.ProjectileManager;
-import com.shoebob.dotd.systems.LocationSystem;
 import com.shoebob.dotd.systems.VelocitySystem;
 import com.shoebob.dotd.util.Consts;
 

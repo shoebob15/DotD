@@ -10,10 +10,12 @@ import com.shoebob.dotd.systems.UISystem;
 public class OverlayEntity implements Entity {
     public TextureComponent texture;
 
-    // represents a postion relative to the top-right 0,0, not the world-space coordinate
+    // represents a position relative to the top-right 0,0, not the world-space coordinate
+    // always < 1, "percentage"
+    // higher the value, the more right/down it goes
     public PositionComponent screenPos;
 
-    // represents the actual game-space location of the overlay
+    // represents the actual game-space location of the overlay - used for rendering & math
     public PositionComponent gamePos;
 
     @Override
@@ -25,8 +27,9 @@ public class OverlayEntity implements Entity {
 
     @Override
     public void update() {
-        UISystem.setOverlayPosition(this);
-        DotDGame.batch.draw(texture.texture, screenPos.x, screenPos.y);
+        System.out.println(UISystem.getOverlayPosition(this).x);
+        gamePos = UISystem.getOverlayPosition(this);
+        DotDGame.batch.draw(texture.texture, gamePos.x, gamePos.y);
     }
 
     @Override

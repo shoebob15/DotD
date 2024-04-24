@@ -9,5 +9,7 @@ public class InventoryBar extends OverlayEntity {
     public void create() {
         super.create();
         texture.texture = new Texture(Gdx.files.internal("ui/inventory.png"));
+        screenPos.x = 0.5f;
+        screenPos.y = 0.95f;
     }
 }
