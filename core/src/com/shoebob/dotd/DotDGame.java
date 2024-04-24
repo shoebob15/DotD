@@ -82,8 +82,6 @@ public class DotDGame extends ApplicationAdapter {
 	// acts as update method (it should be called that)
 	@Override
 	public void render() {
-
-		System.out.println(camera.position);
 		ScreenUtils.clear(0f, 0, 0f, 0);
 		vfxManager.cleanUpBuffers();
 		vfxManager.beginInputCapture();

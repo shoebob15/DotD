@@ -12,7 +12,7 @@ public class OverlayEntity implements Entity {
 
     // represents a position relative to the top-right 0,0, not the world-space coordinate
     // always < 1, "percentage"
-    // higher the value, the more right/down it goes
+    // higher the value, the more right/up it goes
     public PositionComponent screenPos;
 
     // represents the actual game-space location of the overlay - used for rendering & math
@@ -27,7 +27,7 @@ public class OverlayEntity implements Entity {
 
     @Override
     public void update() {
-        System.out.println(UISystem.getOverlayPosition(this).x);
+        System.out.println(UISystem.getOverlayPosition(this).x + ", " + UISystem.getOverlayPosition(this).y);
         gamePos = UISystem.getOverlayPosition(this);
         DotDGame.batch.draw(texture.texture, gamePos.x, gamePos.y);
     }
