@@ -10,7 +10,7 @@ import com.shoebob.dotd.components.VelocityComponent;
 import com.shoebob.dotd.entities.projectiles.FireballProjectile;
 import com.shoebob.dotd.managers.ProjectileManager;
 import com.shoebob.dotd.systems.VelocitySystem;
-import com.shoebob.dotd.util.Consts;
+import com.shoebob.dotd.game.Consts;
 
 // TODO: This code could be cleaned up a lot and this class could be deleted or turned into a different one
 public class MagicStaffAttachment extends Attachment {

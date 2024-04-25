@@ -1,7 +1,7 @@
 package com.shoebob.dotd.entities.projectiles;
 
 import com.shoebob.dotd.systems.LocationSystem;
-import com.shoebob.dotd.util.Consts;
+import com.shoebob.dotd.game.Consts;
 
 
 // TODO: shouldn't be its own class

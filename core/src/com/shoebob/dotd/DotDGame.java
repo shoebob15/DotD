@@ -47,7 +47,7 @@ public class DotDGame extends ApplicationAdapter {
 	private CrtEffect crtEffect;
 
 	// ui stuff
-	InventoryBar inventoryBar;
+	private InventoryBar inventoryBar;
 
 	// stores the statetime
 	public static float statetime;

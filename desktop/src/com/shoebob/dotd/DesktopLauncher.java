@@ -2,6 +2,7 @@ package com.shoebob.dotd;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
+import com.shoebob.dotd.game.DotD;
 
 public class DesktopLauncher {
 	public static void main(String[] arg) {
@@ -10,6 +11,6 @@ public class DesktopLauncher {
 		config.setTitle("Depths of the Dungeon");
 		config.setDecorated(false);
 		config.setWindowIcon("logo.png");
-		new Lwjgl3Application(new DotDGame(), config);
+		new Lwjgl3Application(new DotD(), config);
 	}
 }

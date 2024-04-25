@@ -1,10 +1,11 @@
-package com.shoebob.dotd.util;
+package com.shoebob.dotd.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.components.AnimationComponent;
 import com.shoebob.dotd.systems.AnimationSystem;
+import com.shoebob.dotd.util.AttachableAnimation;
 
 public class Consts {
     // this is such bad java, but why can't it have #define???
