@@ -25,10 +25,11 @@ public class DotD extends Game {
     }
 
     public void render() {
-        super.render();
+        super.render(); // calls the render method of the current screen
     }
 
     public void dispose() {
-
+        batch.dispose();
+        font.dispose();
     }
 }

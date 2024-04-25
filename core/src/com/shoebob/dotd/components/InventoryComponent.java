@@ -1,7 +1,6 @@
 package com.shoebob.dotd.components;
 
 import com.shoebob.dotd.entities.attachments.Attachment;
-import com.shoebob.dotd.entities.attachments.MagicStaffAttachment;
 
 import java.util.ArrayList;
 

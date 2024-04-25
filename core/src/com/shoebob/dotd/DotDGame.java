@@ -122,7 +122,6 @@ public class DotDGame extends ApplicationAdapter {
 	
 	@Override
 	public void dispose() {
-		batch.dispose();
 		player.dispose();
 		tiledMap.dispose();
 
