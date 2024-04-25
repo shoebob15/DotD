@@ -12,6 +12,7 @@ import com.shoebob.dotd.managers.ProjectileManager;
 import com.shoebob.dotd.systems.VelocitySystem;
 import com.shoebob.dotd.util.Consts;
 
+// TODO: This code could be cleaned up a lot and this class could be deleted or turned into a different one
 public class MagicStaffAttachment extends Attachment {
     @Override
     public void create() {
@@ -22,7 +23,15 @@ public class MagicStaffAttachment extends Attachment {
 
     @Override
     public void update() {
+        Vector2 loc = DotDGame.player.animation.currentAnimation.getWorldAttachmentLocation(DotDGame.statetime,
+                DotDGame.player
+        );
 
+        PositionComponent loc2 = new PositionComponent();
+        loc2.x = loc.x;
+        loc2.y = loc.y;
+
+        position = loc2;
     }
 
     @Override

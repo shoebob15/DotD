@@ -45,6 +45,7 @@ public class AttachableAnimation {
         return coordinates[animation.getKeyFrameIndex(statetime)];
     }
 
+    // don't "technically" need to pass in player, but this project is such a mess so oh well
     public Vector2 getWorldAttachmentLocation(float statetime, Player player) {
         Vector2 tmp = getLocalAttachmentLocation(statetime);
         Vector2 tmp2 = new Vector2(tmp.x, tmp.y);

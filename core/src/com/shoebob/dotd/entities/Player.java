@@ -19,6 +19,8 @@ public class Player implements Entity {
     public AnimatedSpriteComponent animation;
     private MagicStaffAttachment magic_staff;
 
+    private InventoryComponent inventory;
+
     public Attachment currentAttachment; // for outside classes -- TODO: Inventory system
 
 
@@ -30,6 +32,9 @@ public class Player implements Entity {
         body.height = 32;
         velocity = new VelocityComponent();
         animation = new AnimatedSpriteComponent();
+        inventory = new InventoryComponent();
+
+        inventory.attachments.add(magic_staff);
 
         magic_staff = new MagicStaffAttachment();
         currentAttachment = magic_staff;
@@ -82,7 +87,7 @@ public class Player implements Entity {
         PositionComponent loc2 = new PositionComponent();
         loc2.x = loc.x;
         loc2.y = loc.y;
-
+        
         magic_staff.position = loc2;
         magic_staff.update();
     }
