@@ -4,10 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.shoebob.dotd.DotDGame;
 import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.components.VelocityComponent;
 import com.shoebob.dotd.entities.projectiles.FireballProjectile;
+import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.managers.ProjectileManager;
 import com.shoebob.dotd.systems.VelocitySystem;
 import com.shoebob.dotd.game.Consts;
@@ -22,9 +22,9 @@ public class MagicStaffAttachment extends Attachment {
     }
 
     @Override
-    public void update() {
-        Vector2 loc = DotDGame.player.animation.currentAnimation.getWorldAttachmentLocation(DotDGame.statetime,
-                DotDGame.player
+    public void update(DotD game) {
+        Vector2 loc = game.player.animation.currentAnimation.getWorldAttachmentLocation(game.statetime,
+                game.player
         );
 
         PositionComponent loc2 = new PositionComponent();
@@ -44,8 +44,7 @@ public class MagicStaffAttachment extends Attachment {
 
 
     @Override
-    public void use() {
-//        if (cooldown()) {
+    public void use(DotD game) {
             // TODO: Fireball shouldn't be its own class - possibly adapt builder model
             FireballProjectile proj = new FireballProjectile();
             VelocityComponent vel = new VelocityComponent();
@@ -60,8 +59,8 @@ public class MagicStaffAttachment extends Attachment {
             proj.velocity = vel;
 
             PositionComponent pos = new PositionComponent();
-            pos.x = DotDGame.player.position.x - 30;
-            pos.y = DotDGame.player.position.y;
+            pos.x = game.player.position.x - 30;
+            pos.y = game.player.position.y;
             proj.position = pos;
 
             proj.animationComponent = Consts.AnimationComponents.fireball;

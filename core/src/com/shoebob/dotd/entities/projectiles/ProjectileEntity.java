@@ -5,8 +5,9 @@ import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.components.TextureComponent;
 import com.shoebob.dotd.components.VelocityComponent;
 import com.shoebob.dotd.entities.Entity;
+import com.shoebob.dotd.game.DotD;
 
-public class ProjectileEntity implements Entity {
+public abstract class ProjectileEntity implements Entity {
     public PositionComponent position;
     public VelocityComponent velocity;
 
@@ -17,13 +18,9 @@ public class ProjectileEntity implements Entity {
         velocity = new VelocityComponent();
     }
 
-    public void draw(SpriteBatch s) {
-
-    }
+    public abstract void draw(DotD game);
     @Override
-    public void update() {
-
-    }
+    public abstract void update(DotD game);
 
     @Override
     public void dispose() {

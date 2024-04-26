@@ -5,17 +5,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
-import com.shoebob.dotd.DotDGame;
 import com.shoebob.dotd.components.AnimatedSpriteComponent;
 import com.shoebob.dotd.components.AnimationComponent;
 import com.shoebob.dotd.components.VelocityComponent;
+import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.util.AttachableAnimation;
 
 public class AnimationSystem {
     // returns sprite's animation frame based on the direction of the sprite and statetime
-    public static TextureRegion getSpriteAnimationFrame(AnimatedSpriteComponent animation, VelocityComponent velocity) {
+    public static TextureRegion getSpriteAnimationFrame(AnimatedSpriteComponent animation, VelocityComponent velocity, DotD game) {
         AttachableAnimation current = getSpriteAnimation(animation, velocity);
-        return current.getAnimation().getKeyFrame(DotDGame.statetime);
+        return current.getAnimation().getKeyFrame(game.statetime);
     }
 
     // returns AttachableAnimation object based on direction
@@ -35,8 +35,8 @@ public class AnimationSystem {
         else return animation.idleAnimation;
     }
 
-    public static TextureRegion getAnimationFrame(AnimationComponent component) {
-        return component.animation.getKeyFrame(DotDGame.statetime);
+    public static TextureRegion getAnimationFrame(AnimationComponent component, DotD game) {
+        return component.animation.getKeyFrame(game.statetime);
     }
 
     // naming system: name1, name2, name3

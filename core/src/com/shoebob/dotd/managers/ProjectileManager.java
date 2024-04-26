@@ -1,8 +1,8 @@
 package com.shoebob.dotd.managers;
 
-import com.shoebob.dotd.DotDGame;
 import com.shoebob.dotd.entities.projectiles.AnimatedProjectile;
 import com.shoebob.dotd.entities.projectiles.ProjectileEntity;
+import com.shoebob.dotd.game.DotD;
 
 import java.util.ArrayList;
 
@@ -11,15 +11,15 @@ public class ProjectileManager {
     private static final ArrayList<ProjectileEntity> projectiles = new ArrayList<>();
     private static final ArrayList<AnimatedProjectile> animatedProjectiles = new ArrayList<>();
 
-    public static void update() {
+    public static void update(DotD game) {
         for (ProjectileEntity projectile : projectiles) {
-            projectile.update();
-            projectile.draw(DotDGame.batch);
+            projectile.update(game);
+            projectile.draw(game);
         }
 
         for (AnimatedProjectile projectile : animatedProjectiles) {
-            projectile.update();
-            projectile.draw(DotDGame.batch);
+            projectile.update(game);
+            projectile.draw(game);
         }
     }
 

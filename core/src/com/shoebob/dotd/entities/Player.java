@@ -5,10 +5,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.shoebob.dotd.DotDGame;
 import com.shoebob.dotd.components.*;
 import com.shoebob.dotd.entities.attachments.Attachment;
 import com.shoebob.dotd.entities.attachments.MagicStaffAttachment;
+import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.systems.LocationSystem;
 
@@ -42,20 +42,20 @@ public class Player implements Entity {
     }
 
     // TODO: Make rendering system - no stupid local calls
-    public void draw(SpriteBatch s) {
-        TextureRegion frame = animation.currentAnimation.getAnimation().getKeyFrame(DotDGame.statetime);
+    public void draw(DotD game) {
+        TextureRegion frame = animation.currentAnimation.getAnimation().getKeyFrame(game.statetime);
 
         if (animation.currentAnimation.shouldRenderOnTop()) {
-            s.draw(frame, position.x, position.y, body.width, body.height);
-            magic_staff.draw(s, animation.currentAnimation.getRotation());
+            game.batch.draw(frame, position.x, position.y, body.width, body.height);
+            magic_staff.draw(game.batch, animation.currentAnimation.getRotation());
         } else {
-            magic_staff.draw(s, animation.currentAnimation.getRotation());
-            s.draw(frame, position.x, position.y, body.width, body.height);
+            magic_staff.draw(game.batch, animation.currentAnimation.getRotation());
+            game.batch.draw(frame, position.x, position.y, body.width, body.height);
         }
 
     }
 
-    public void update() {
+    public void update(DotD game) {
         float expX = 0, expY = 0;
 
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
@@ -72,7 +72,7 @@ public class Player implements Entity {
                 expX += 1;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) { // TODO: temporary control - will probably change later
-                magic_staff.use();
+                magic_staff.use(game);
             }
         }
 
@@ -83,13 +83,13 @@ public class Player implements Entity {
 
         animation.currentAnimation = AnimationSystem.getSpriteAnimation(animation, velocity);
 
-        Vector2 loc = animation.currentAnimation.getWorldAttachmentLocation(DotDGame.statetime, this);
+        Vector2 loc = animation.currentAnimation.getWorldAttachmentLocation(game.statetime, this);
         PositionComponent loc2 = new PositionComponent();
         loc2.x = loc.x;
         loc2.y = loc.y;
         
         magic_staff.position = loc2;
-        magic_staff.update();
+        magic_staff.update(game);
     }
 
     public void dispose() {

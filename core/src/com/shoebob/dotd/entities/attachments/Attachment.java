@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.components.TextureComponent;
 import com.shoebob.dotd.entities.Entity;
+import com.shoebob.dotd.game.DotD;
 
 // renders a texture on a player's hand
 public abstract class Attachment implements Entity {
@@ -43,7 +44,7 @@ public abstract class Attachment implements Entity {
         return false;
     }
 
-    public abstract void use();
+    public abstract void use(DotD game);
 
     @Override
     public void dispose() {

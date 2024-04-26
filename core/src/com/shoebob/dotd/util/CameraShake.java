@@ -1,7 +1,7 @@
 package com.shoebob.dotd.util;
 
 import com.badlogic.gdx.math.Vector2;
-import com.shoebob.dotd.DotDGame;
+import com.shoebob.dotd.game.DotD;
 
 import java.util.Random;
 
@@ -20,14 +20,14 @@ public class CameraShake {
         currentTime = 0;
     }
 
-    public static Vector2 tick() {
+    public static Vector2 tick(DotD game) {
         if (currentTime <= time) {
             currentMagnitude = magnitude * ((time - currentTime) / time);
 
             pos.x = (random.nextFloat() - 0.5f) * 2 * currentMagnitude;
             pos.y = (random.nextFloat() - 0.5f) * 2 * currentMagnitude;
 
-            currentTime += DotDGame.statetime;
+            currentTime += game.statetime;
         } else {
             time = 0;
         }

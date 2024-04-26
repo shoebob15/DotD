@@ -1,5 +1,6 @@
 package com.shoebob.dotd.entities.projectiles;
 
+import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.systems.LocationSystem;
 import com.shoebob.dotd.game.Consts;
 
@@ -14,8 +15,7 @@ public class FireballProjectile extends AnimatedProjectile {
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void update(DotD game) {
         LocationSystem.addVelocity(position, velocity);
     }
 

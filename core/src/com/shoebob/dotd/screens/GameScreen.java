@@ -23,11 +23,7 @@ import com.shoebob.dotd.util.CameraShake;
 public class GameScreen implements Screen {
     final DotD game;
 
-    public Player player;
-
     public TiledMap map;
-
-    public OrthographicCamera camera;
 
     public OrthogonalTiledMapRenderer mapRenderer;
 
@@ -39,22 +35,12 @@ public class GameScreen implements Screen {
     // ui
     private InventoryBar inventoryBar;
 
-    public float statetime;
-
-
 
     public GameScreen(DotD game) {
         this.game = game;
 
-        float h = Gdx.graphics.getHeight();
-        float w = Gdx.graphics.getWidth();
-
-        player = new Player();
-        player.create();
-
         map = new TmxMapLoader().load("maps/testmap.tmx");
 
-        camera = new OrthographicCamera(300, 300 * (h / w));
         mapRenderer = new OrthogonalTiledMapRenderer(map);
 
         inventoryBar = new InventoryBar();
@@ -66,8 +52,8 @@ public class GameScreen implements Screen {
         vfxManager.addEffect(tvEffect);
         vfxManager.addEffect(crtEffect);
 
-        camera.position.set(0, 0, 0);
-        camera.update();
+        game.camera.position.set(0, 0, 0);
+        game.camera.update();
 
     }
 
@@ -82,34 +68,34 @@ public class GameScreen implements Screen {
         vfxManager.cleanUpBuffers();
         vfxManager.beginInputCapture();
 
-        camera.position.x = player.position.x + 8;
-        camera.position.y = player.position.y + 8;
+        game.camera.position.x = game.player.position.x + 8;
+        game.camera.position.y = game.player.position.y + 8;
 
         if (CameraShake.getTime() > 0) {
-            CameraShake.tick();
-            camera.translate(CameraShake.getPos());
+            CameraShake.tick(game);
+            game.camera.translate(CameraShake.getPos());
             System.out.println("translating");
         }
 
-        camera.update();
-        mapRenderer.setView(camera);
+        game.camera.update();
+        mapRenderer.setView(game.camera);
         mapRenderer.render();
 
-        game.batch.setProjectionMatrix(camera.combined);
+        game.batch.setProjectionMatrix(game.camera.combined);
         game.batch.begin();
 
         // START UPDATES
-        player.update();
-        player.draw(game.batch);
+        game.player.update(game);
+        game.player.draw(game);
 
-        ProjectileManager.update();
+        ProjectileManager.update(game);
 
-        inventoryBar.update();
+        inventoryBar.update(game);
 
         // END UPDATES
 
         game.batch.end();
-        statetime += Gdx.graphics.getDeltaTime();
+        game.statetime += Gdx.graphics.getDeltaTime();
 
         vfxManager.endInputCapture();
         vfxManager.applyEffects();
@@ -139,7 +125,7 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         game.batch.dispose();
-        player.dispose();
+        game.player.dispose();
         map.dispose();
 
         vfxManager.dispose();

@@ -1,9 +1,9 @@
 package com.shoebob.dotd.entities.ui;
 
-import com.shoebob.dotd.DotDGame;
 import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.components.TextureComponent;
 import com.shoebob.dotd.entities.Entity;
+import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.systems.UISystem;
 
 // a static entity that renders relative to the camera
@@ -26,10 +26,9 @@ public class OverlayEntity implements Entity {
     }
 
     @Override
-    public void update() {
-        System.out.println(UISystem.getOverlayPosition(this).x + ", " + UISystem.getOverlayPosition(this).y);
-        gamePos = UISystem.getOverlayPosition(this);
-        DotDGame.batch.draw(texture.texture, gamePos.x, gamePos.y);
+    public void update(DotD game) {
+        gamePos = UISystem.getOverlayPosition(this, game);
+        game.batch.draw(texture.texture, gamePos.x, gamePos.y);
     }
 
     @Override
