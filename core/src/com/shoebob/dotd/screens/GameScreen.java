@@ -46,6 +46,8 @@ public class GameScreen implements Screen {
         inventoryBar = new InventoryBar();
         inventoryBar.create();
 
+        inventoryBar.loadInventory(game.player.inventory);
+
         vfxManager = new VfxManager(Pixmap.Format.RGBA8888);
         tvEffect = new OldTvEffect();
         crtEffect = new CrtEffect();

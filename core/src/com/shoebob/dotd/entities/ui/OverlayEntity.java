@@ -18,6 +18,9 @@ public class OverlayEntity implements Entity {
     // represents the actual game-space location of the overlay - used for rendering & math
     public PositionComponent gamePos;
 
+    // will not render if hidden
+    public boolean isHidden = false;
+
     @Override
     public void create() {
         texture = new TextureComponent();
@@ -28,11 +31,13 @@ public class OverlayEntity implements Entity {
     @Override
     public void update(DotD game) {
         gamePos = UISystem.getOverlayPosition(this, game);
-        game.batch.draw(texture.texture, gamePos.x, gamePos.y);
+        if (!isHidden) {
+            game.batch.draw(texture.texture, gamePos.x, gamePos.y);
+        }
     }
 
     @Override
     public void dispose() {
-
+        texture.texture.dispose();
     }
 }

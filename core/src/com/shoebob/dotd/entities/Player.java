@@ -17,11 +17,10 @@ public class Player implements Entity {
     public BodyComponent body;
     public VelocityComponent velocity;
     public AnimatedSpriteComponent animation;
+    public InventoryComponent inventory;
+
     private MagicStaffAttachment magic_staff;
 
-    private InventoryComponent inventory;
-
-    public Attachment currentAttachment; // for outside classes -- TODO: Inventory system
 
 
     @Override
@@ -34,11 +33,14 @@ public class Player implements Entity {
         animation = new AnimatedSpriteComponent();
         inventory = new InventoryComponent();
 
-        inventory.attachments.add(magic_staff);
-
         magic_staff = new MagicStaffAttachment();
-        currentAttachment = magic_staff;
         magic_staff.create();
+
+        inventory.attachments.add(magic_staff);
+        inventory.attachments.add(magic_staff);
+        inventory.attachments.add(magic_staff);
+        inventory.attachments.add(magic_staff);
+        inventory.equipped = magic_staff;
     }
 
     // TODO: Make rendering system - no stupid local calls
