@@ -43,7 +43,14 @@ public class InventoryBar extends OverlayEntity {
 
         // render current cooldown on spell
 
-        game.batch.draw(new Texture("ui/cooldown.png"), x + 3, y + 3, 19, 19);
+        int height = 0;
+
+        if (inventory.equipped.lastAttack + inventory.equipped.cooldown > System.currentTimeMillis()) {
+            height = (int) (19 - (19 * (System.currentTimeMillis() - inventory.equipped.lastAttack) / inventory.equipped.cooldown));
+            System.out.println(height);
+        }
+
+        game.batch.draw(new Texture("ui/cooldown.png"), x + 3, y + 3, 19, height);
 
 
         // render current attachments in inventory

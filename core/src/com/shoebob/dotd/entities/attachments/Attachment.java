@@ -13,8 +13,11 @@ public abstract class Attachment implements Entity {
     public TextureComponent texture;
     public PositionComponent position;
 
-    protected long cooldown = 1000;
-    protected long lastAttack = 0;
+    // time it takes to cooldown
+    public long cooldown = 1000;
+
+    // time of last attack
+    public long lastAttack = 0;
 
     @Override
     public void create() {

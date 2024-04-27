@@ -32,7 +32,6 @@ public class MagicStaffAttachment extends Attachment {
         loc2.y = loc.y;
 
         position = loc2;
-        System.out.println(lastAttack);
     }
 
     @Override
