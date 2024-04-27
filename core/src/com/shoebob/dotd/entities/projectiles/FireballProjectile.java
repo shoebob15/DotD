@@ -7,10 +7,8 @@ import com.shoebob.dotd.game.Consts;
 
 // TODO: shouldn't be its own class
 public class FireballProjectile extends AnimatedProjectile {
-    @Override
-    public void create() {
-        super.create();
-
+    // TODO: create() method stupid for inline object creation - probably refactor
+    public FireballProjectile() {
         animationComponent = Consts.AnimationComponents.fireball;
     }
 

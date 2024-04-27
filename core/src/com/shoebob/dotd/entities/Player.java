@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.components.*;
 import com.shoebob.dotd.entities.attachments.Attachment;
 import com.shoebob.dotd.entities.attachments.MagicStaffAttachment;
+import com.shoebob.dotd.entities.projectiles.FireballProjectile;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.systems.LocationSystem;
@@ -41,6 +42,7 @@ public class Player implements Entity {
         inventory.attachments.add(magic_staff);
         inventory.attachments.add(magic_staff);
         inventory.equipped = magic_staff;
+        inventory.selectedSpell = new FireballProjectile();
     }
 
     // TODO: Make rendering system - no stupid local calls

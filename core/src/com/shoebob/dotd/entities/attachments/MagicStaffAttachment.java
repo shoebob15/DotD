@@ -32,6 +32,7 @@ public class MagicStaffAttachment extends Attachment {
         loc2.y = loc.y;
 
         position = loc2;
+        System.out.println(lastAttack);
     }
 
     @Override
@@ -45,7 +46,8 @@ public class MagicStaffAttachment extends Attachment {
 
     @Override
     public void use(DotD game) {
-            // TODO: Fireball shouldn't be its own class - possibly adapt builder model
+        // TODO: Fireball shouldn't be its own class - possibly adapt builder model
+        if (cooldown()) {
             FireballProjectile proj = new FireballProjectile();
             VelocityComponent vel = new VelocityComponent();
 
@@ -54,7 +56,7 @@ public class MagicStaffAttachment extends Attachment {
 
             vel.vector.nor();
 
-            vel.vector = VelocitySystem.mulVec(vel.vector, .5f);
+            vel.vector = VelocitySystem.mulVec(vel.vector, 2.5f);
 
             proj.velocity = vel;
 
@@ -66,6 +68,6 @@ public class MagicStaffAttachment extends Attachment {
             proj.animationComponent = Consts.AnimationComponents.fireball;
 
             ProjectileManager.addAnimatedProjectile(proj, 5f);
-//        }
+        }
     }
 }

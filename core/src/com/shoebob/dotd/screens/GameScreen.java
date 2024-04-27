@@ -4,17 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.crashinvaders.vfx.VfxManager;
 import com.crashinvaders.vfx.effects.CrtEffect;
 import com.crashinvaders.vfx.effects.OldTvEffect;
-import com.shoebob.dotd.entities.Player;
 import com.shoebob.dotd.entities.ui.InventoryBar;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.managers.ProjectileManager;
@@ -84,7 +81,9 @@ public class GameScreen implements Screen {
         mapRenderer.render();
 
         game.batch.setProjectionMatrix(game.camera.combined);
+        game.shape.setProjectionMatrix(game.camera.combined);
         game.batch.begin();
+        game.shape.begin(ShapeRenderer.ShapeType.Filled);
 
         // START UPDATES
         game.player.update(game);
@@ -97,6 +96,7 @@ public class GameScreen implements Screen {
         // END UPDATES
 
         game.batch.end();
+        game.shape.end();
         game.statetime += Gdx.graphics.getDeltaTime();
 
         vfxManager.endInputCapture();
