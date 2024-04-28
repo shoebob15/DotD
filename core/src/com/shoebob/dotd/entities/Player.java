@@ -18,7 +18,8 @@ public class Player implements Entity {
     public AnimatedSpriteComponent animation;
     public AttachmentInventoryComponent attachmentInventory;
     public SpellInventoryComponent spellInventory;
-
+    public HealthComponent health;
+    public ManaComponent mana;
     private MagicStaffAttachment magic_staff;
 
 
@@ -33,6 +34,8 @@ public class Player implements Entity {
         animation = new AnimatedSpriteComponent();
         attachmentInventory = new AttachmentInventoryComponent();
         spellInventory = new SpellInventoryComponent();
+        health = new HealthComponent();
+        mana = new ManaComponent();
 
         magic_staff = new MagicStaffAttachment();
         magic_staff.create();

@@ -2,6 +2,7 @@ package com.shoebob.dotd.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -105,6 +106,21 @@ public class GameScreen implements Screen {
         spellInventoryBar.update(game);
 
         // END UPDATES
+
+        // render player health and mana
+        game.font.getData().setScale(.5f);
+        game.font.setUseIntegerPositions(false);
+
+        game.font.setColor(Color.WHITE);
+        game.font.draw(game.batch, "HEALTH - ", game.camera.position.x - 140, game.camera.position.y + 95);
+        game.font.setColor(.8f, 0, 0, 1);
+        game.font.draw(game.batch, game.player.health.health + "", game.camera.position.x - 30, game.camera.position.y + 95);
+
+        game.font.setColor(Color.WHITE);
+        game.font.draw(game.batch, "MANA - ", game.camera.position.x - 140, game.camera.position.y + 75);
+        game.font.setColor(0f, 1, 1, 1);
+        game.font.draw(game.batch, game.player.mana.mana + "", game.camera.position.x - 55, game.camera.position.y + 75);
+
 
         game.batch.end();
         game.shape.end();
