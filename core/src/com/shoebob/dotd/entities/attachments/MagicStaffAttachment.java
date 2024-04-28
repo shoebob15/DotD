@@ -67,6 +67,8 @@ public class MagicStaffAttachment extends Attachment {
             proj.animationComponent = Consts.AnimationComponents.fireball;
 
             ProjectileManager.addAnimatedProjectile(proj, 5f);
+
+            game.player.mana.currentMana -= 10;
         }
     }
 }

@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.crashinvaders.vfx.VfxManager;
 import com.crashinvaders.vfx.effects.CrtEffect;
@@ -18,6 +17,7 @@ import com.shoebob.dotd.entities.ui.SpellInventoryBar;
 import com.shoebob.dotd.game.Consts;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.managers.ProjectileManager;
+import com.shoebob.dotd.systems.ManaSystem;
 import com.shoebob.dotd.util.CameraShake;
 
 public class GameScreen implements Screen {
@@ -101,6 +101,7 @@ public class GameScreen implements Screen {
         game.player.draw(game);
 
         ProjectileManager.update(game);
+        ManaSystem.updateMana(game.player);
 
         mainInventoryBar.update(game);
         spellInventoryBar.update(game);
@@ -119,7 +120,7 @@ public class GameScreen implements Screen {
         game.font.setColor(Color.WHITE);
         game.font.draw(game.batch, "MANA - ", game.camera.position.x - 140, game.camera.position.y + 75);
         game.font.setColor(0f, 1, 1, 1);
-        game.font.draw(game.batch, game.player.mana.mana + "", game.camera.position.x - 55, game.camera.position.y + 75);
+        game.font.draw(game.batch, game.player.mana.currentMana + "", game.camera.position.x - 55, game.camera.position.y + 75);
 
 
         game.batch.end();

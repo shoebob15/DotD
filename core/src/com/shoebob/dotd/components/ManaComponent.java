@@ -1,5 +1,6 @@
 package com.shoebob.dotd.components;
 
 public class ManaComponent {
-    public int mana = 100;
+    public int currentMana = 100;
+    public int maxMana = 100;
 }
