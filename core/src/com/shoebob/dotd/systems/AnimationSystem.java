@@ -42,7 +42,7 @@ public class AnimationSystem {
     // naming system: name1, name2, name3
     // path is passed in as: path="weapons/name" - include the /
     // assumes that it is a png
-
+    @Deprecated // this really should only be used for debug purposes - causes performance issues for the SpriteBatch
     public static AnimationComponent buildAnimationComponent(String path, String name, int numFrames, float frameDuration) {
         AnimationComponent component = new AnimationComponent();
         component.animation = new Animation<>(frameDuration,

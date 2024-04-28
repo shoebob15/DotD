@@ -1,5 +1,7 @@
 package com.shoebob.dotd.spells;
 
+import com.shoebob.dotd.entities.projectiles.AnimatedProjectile;
+
 public class Spell {
     // name that shows in info panel
     public String name;
@@ -31,6 +33,9 @@ public class Spell {
     // the current level on the spell - displayed as roman numeral in UI
     public int level = 1;
 
+    // the projectile shown for PROJECTILE-type spells
+    public AnimatedProjectile projectile;
+
     public static class Builder {
         public final String name;
 
@@ -51,6 +56,8 @@ public class Spell {
         public final TargetType target;
 
         public int level = 1;
+
+        public AnimatedProjectile projectile;
 
         public Builder(String name, String description, SpellType type, SpellEffect effect, TargetType target, int manaCost) {
             this.name = name;
@@ -81,6 +88,11 @@ public class Spell {
             return this;
         }
 
+        public Builder projectile(AnimatedProjectile projectile) {
+            this.projectile = projectile;
+            return this;
+        }
+
         public Spell build() {
             Spell spell = new Spell();
             spell.name = name;
@@ -93,6 +105,10 @@ public class Spell {
             spell.duration = duration;
             spell.target = target;
             spell.level = level;
+
+            if (spell.type == SpellType.SPELL_PROJECTILE && spell.projectile == null) {
+                throw new IllegalArgumentException("Projectile-type spells cannot be initialized without a projectile.");
+            }
             return spell;
         }
     }

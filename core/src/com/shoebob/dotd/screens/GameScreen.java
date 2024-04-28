@@ -110,17 +110,17 @@ public class GameScreen implements Screen {
 
         // render player health and mana
         game.font.getData().setScale(.5f);
-        game.font.setUseIntegerPositions(false);
+        game.font.setUseIntegerPositions(false); // removes weird shaking due to int accuracy
 
         game.font.setColor(Color.WHITE);
-        game.font.draw(game.batch, "HEALTH - ", game.camera.position.x - 140, game.camera.position.y + 95);
+        game.font.draw(game.batch, "HEALTH - ", game.camera.position.x - 135, game.camera.position.y + 95);
         game.font.setColor(.8f, 0, 0, 1);
-        game.font.draw(game.batch, game.player.health.health + "", game.camera.position.x - 30, game.camera.position.y + 95);
+        game.font.draw(game.batch, game.player.health.health + "", game.camera.position.x - 25, game.camera.position.y + 95);
 
         game.font.setColor(Color.WHITE);
-        game.font.draw(game.batch, "MANA - ", game.camera.position.x - 140, game.camera.position.y + 75);
+        game.font.draw(game.batch, "MANA - ", game.camera.position.x - 135, game.camera.position.y + 75);
         game.font.setColor(0f, 1, 1, 1);
-        game.font.draw(game.batch, game.player.mana.currentMana + "", game.camera.position.x - 55, game.camera.position.y + 75);
+        game.font.draw(game.batch, game.player.mana.currentMana + "", game.camera.position.x - 50, game.camera.position.y + 75);
 
 
         game.batch.end();
