@@ -2,6 +2,7 @@ package com.shoebob.dotd.systems;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.shoebob.dotd.components.BodyComponent;
 import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.components.VelocityComponent;
 
@@ -37,5 +38,10 @@ public class LocationSystem {
         temp.x = vec.x;
         temp.y = vec.y;
         return temp;
+    }
+
+    // returns if the position is inside the body
+    public static boolean pointOverlaps(PositionComponent pos, PositionComponent targetPos, BodyComponent targetBody) {
+        return pos.x > targetPos.x && pos.x < targetPos.x + targetBody.width && pos.y > targetPos.y - targetBody.height && pos.y < targetPos.y;
     }
 }

@@ -7,11 +7,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.crashinvaders.vfx.VfxManager;
 import com.crashinvaders.vfx.effects.CrtEffect;
 import com.crashinvaders.vfx.effects.OldTvEffect;
 import com.shoebob.dotd.entities.ui.MainInventoryBar;
+import com.shoebob.dotd.entities.ui.SpellInventoryBar;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.managers.ProjectileManager;
 import com.shoebob.dotd.util.CameraShake;
@@ -31,6 +33,8 @@ public class GameScreen implements Screen {
     // ui
     private MainInventoryBar mainInventoryBar;
 
+    private SpellInventoryBar spellInventoryBar;
+
 
     public GameScreen(DotD game) {
         this.game = game;
@@ -42,7 +46,12 @@ public class GameScreen implements Screen {
         mainInventoryBar = new MainInventoryBar();
         mainInventoryBar.create();
 
-        mainInventoryBar.loadInventory(game.player.inventory);
+        mainInventoryBar.loadInventory(game.player.attachmentInventory);
+
+        spellInventoryBar = new SpellInventoryBar();
+        spellInventoryBar.create();
+
+        spellInventoryBar.loadInventory(game.player.spellInventory);
 
         vfxManager = new VfxManager(Pixmap.Format.RGBA8888);
         tvEffect = new OldTvEffect();
@@ -91,6 +100,7 @@ public class GameScreen implements Screen {
         ProjectileManager.update(game);
 
         mainInventoryBar.update(game);
+        spellInventoryBar.update(game);
 
         // END UPDATES
 

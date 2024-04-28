@@ -2,27 +2,27 @@ package com.shoebob.dotd.entities.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.shoebob.dotd.components.InventoryComponent;
+import com.shoebob.dotd.components.AttachmentInventoryComponent;
 import com.shoebob.dotd.entities.attachments.Attachment;
 import com.shoebob.dotd.game.DotD;
 
 // class for the bar at the bottom of the screen that has the selected spell and weapons
 public class MainInventoryBar extends OverlayEntity {
-    InventoryComponent inventory;
+    AttachmentInventoryComponent inventory;
 
     @Override
     public void create() {
         super.create();
-        texture.texture = new Texture(Gdx.files.internal("ui/inventory.png"));
+        texture.texture = new Texture(Gdx.files.internal("ui/horizontal_inventory.png"));
         screenPos.x = .05f;
         screenPos.y = .05f;
 
-        inventory = new InventoryComponent();
+        inventory = new AttachmentInventoryComponent();
     }
 
 
     // Precondition: inventory.size() <= 4 && >= 0 (why did I add this precondition)
-    public void loadInventory(InventoryComponent inventory) {
+    public void loadInventory(AttachmentInventoryComponent inventory) {
         this.inventory = inventory;
     }
 

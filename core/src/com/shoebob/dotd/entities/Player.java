@@ -2,11 +2,9 @@ package com.shoebob.dotd.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.components.*;
-import com.shoebob.dotd.entities.attachments.Attachment;
 import com.shoebob.dotd.entities.attachments.MagicStaffAttachment;
 import com.shoebob.dotd.entities.projectiles.FireballProjectile;
 import com.shoebob.dotd.game.DotD;
@@ -18,7 +16,8 @@ public class Player implements Entity {
     public BodyComponent body;
     public VelocityComponent velocity;
     public AnimatedSpriteComponent animation;
-    public InventoryComponent inventory;
+    public AttachmentInventoryComponent attachmentInventory;
+    public SpellInventoryComponent spellInventory;
 
     private MagicStaffAttachment magic_staff;
 
@@ -32,17 +31,23 @@ public class Player implements Entity {
         body.height = 32;
         velocity = new VelocityComponent();
         animation = new AnimatedSpriteComponent();
-        inventory = new InventoryComponent();
+        attachmentInventory = new AttachmentInventoryComponent();
+        spellInventory = new SpellInventoryComponent();
 
         magic_staff = new MagicStaffAttachment();
         magic_staff.create();
 
-        inventory.attachments.add(magic_staff);
-        inventory.attachments.add(magic_staff);
-        inventory.attachments.add(magic_staff);
-        inventory.attachments.add(magic_staff);
-        inventory.equipped = magic_staff;
-        inventory.selectedSpell = new FireballProjectile();
+        attachmentInventory.attachments.add(magic_staff);
+        attachmentInventory.attachments.add(magic_staff);
+        attachmentInventory.attachments.add(magic_staff);
+        attachmentInventory.attachments.add(magic_staff);
+        attachmentInventory.equipped = magic_staff;
+        attachmentInventory.selectedSpell = new FireballProjectile();
+
+        spellInventory.spells.add(new FireballProjectile());
+        spellInventory.spells.add(new FireballProjectile());
+        spellInventory.spells.add(new FireballProjectile());
+        spellInventory.spells.add(new FireballProjectile());
     }
 
     // TODO: Make rendering system - no stupid local calls
