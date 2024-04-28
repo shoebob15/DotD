@@ -43,7 +43,6 @@ public class SpellInventoryBar extends OverlayEntity {
             }
         }
 
-
         int spacing = 17;
         int index = 0;
 

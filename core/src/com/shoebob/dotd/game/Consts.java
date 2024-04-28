@@ -4,6 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.components.AnimationComponent;
+import com.shoebob.dotd.spells.Spell;
+import com.shoebob.dotd.spells.SpellEffect;
+import com.shoebob.dotd.spells.SpellType;
+import com.shoebob.dotd.spells.TargetType;
 import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.util.AttachableAnimation;
 
@@ -68,5 +72,11 @@ public class Consts {
     public static class AnimationComponents {
         public static final AnimationComponent fireball =
                 AnimationSystem.buildAnimationComponent("projectiles/fireball/", "fireball", 5, 0.1f);
+    }
+
+    public static class Spells {
+        public static final Spell fireball = new Spell.Builder("Fireball", "Kaboom!", SpellType.SPELL_PROJECTILE, SpellEffect.EFFECT_FIRE, TargetType.ENEMY, 10)
+                .damage(10)
+                .build();
     }
 }

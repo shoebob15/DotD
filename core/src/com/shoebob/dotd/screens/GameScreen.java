@@ -14,6 +14,7 @@ import com.crashinvaders.vfx.effects.CrtEffect;
 import com.crashinvaders.vfx.effects.OldTvEffect;
 import com.shoebob.dotd.entities.ui.MainInventoryBar;
 import com.shoebob.dotd.entities.ui.SpellInventoryBar;
+import com.shoebob.dotd.game.Consts;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.managers.ProjectileManager;
 import com.shoebob.dotd.util.CameraShake;
@@ -67,6 +68,7 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         System.out.println("Game!");
+        System.out.println(Consts.Spells.fireball);
     }
 
     @Override
