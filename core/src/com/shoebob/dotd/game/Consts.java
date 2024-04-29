@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.components.AnimationComponent;
 import com.shoebob.dotd.entities.projectiles.AnimatedProjectile;
-import com.shoebob.dotd.spells.Spell;
-import com.shoebob.dotd.spells.SpellEffect;
-import com.shoebob.dotd.spells.SpellType;
-import com.shoebob.dotd.spells.TargetType;
+import com.shoebob.dotd.spells.*;
 import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.util.AttachableAnimation;
 
@@ -80,7 +77,7 @@ public class Consts {
     }
 
     public static class Spells {
-        public static final Spell fireball = new Spell.Builder("Fireball", "Kaboom!", SpellType.SPELL_PROJECTILE, SpellEffect.EFFECT_FIRE, TargetType.ENEMY, 10)
+        public static final Spell fireball = new Spell.Builder("Fireball", "Kaboom!", SpellType.SPELL_PROJECTILE, SpellEffect.EFFECT_FIRE, TargetType.ENEMY, 10, SpellRarity.UNCOMMON)
                 .damage(10)
                 .projectile(Projectiles.fireball) // TODO: should just be inline - no fireball class
                 .build();

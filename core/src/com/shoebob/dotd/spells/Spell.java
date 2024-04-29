@@ -33,6 +33,8 @@ public class Spell {
     // the current level on the spell - displayed as roman numeral in UI
     public int level = 1;
 
+    public SpellRarity rarity;
+
     // the projectile shown for PROJECTILE-type spells
     public AnimatedProjectile projectile;
 
@@ -47,6 +49,8 @@ public class Spell {
 
         public final int manaCost;
 
+        public final SpellRarity rarity;
+
         public int areaRadius;
 
         public int damage;
@@ -59,13 +63,14 @@ public class Spell {
 
         public AnimatedProjectile projectile;
 
-        public Builder(String name, String description, SpellType type, SpellEffect effect, TargetType target, int manaCost) {
+        public Builder(String name, String description, SpellType type, SpellEffect effect, TargetType target, int manaCost, SpellRarity rarity) {
             this.name = name;
             this.decription = description;
             this.type = type;
             this.effect = effect;
             this.target = target;
             this.manaCost = manaCost;
+            this.rarity = rarity;
         }
 
         public Builder areaRadius(int areaRadius) {
@@ -100,6 +105,7 @@ public class Spell {
             spell.type = type;
             spell.effect = effect;
             spell.manaCost = manaCost;
+            spell.rarity = rarity;
             spell.areaRadius = areaRadius;
             spell.damage = damage;
             spell.duration = duration;
