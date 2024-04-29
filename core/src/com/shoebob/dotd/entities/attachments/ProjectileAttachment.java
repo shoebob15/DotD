@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.components.TextureComponent;
 import com.shoebob.dotd.components.VelocityComponent;
-import com.shoebob.dotd.entities.projectiles.FireballProjectile;
 import com.shoebob.dotd.game.Consts;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.managers.ProjectileManager;
@@ -62,7 +61,7 @@ public class ProjectileAttachment extends Attachment {
 
             game.player.mana.currentMana -= 10;
 
-            spell.projectile = new FireballProjectile(); // TODO: this wont work
+            spell.projectile = spell.projectile.copy(); // TODO: this wont work
         }
     }
 

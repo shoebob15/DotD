@@ -3,9 +3,14 @@ package com.shoebob.dotd.entities.projectiles;
 import com.shoebob.dotd.components.AnimationComponent;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.systems.AnimationSystem;
+import com.shoebob.dotd.systems.LocationSystem;
 
-public abstract class AnimatedProjectile extends ProjectileEntity implements Cloneable {
+public class AnimatedProjectile extends ProjectileEntity implements Cloneable {
     public AnimationComponent animationComponent;
+
+    public AnimatedProjectile(AnimationComponent animationComponent) {
+        this.animationComponent = animationComponent;
+    }
 
     @Override
     public void draw(DotD game) {
@@ -25,8 +30,17 @@ public abstract class AnimatedProjectile extends ProjectileEntity implements Clo
     }
 
     @Override
+    public void update(DotD game) {
+        LocationSystem.addVelocity(position, velocity);
+    }
+
+    @Override
     public void create() {
         super.create();
         animationComponent = new AnimationComponent();
+    }
+
+    public AnimatedProjectile copy() {
+        return new AnimatedProjectile(animationComponent);
     }
 }

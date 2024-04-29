@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.components.*;
 import com.shoebob.dotd.entities.attachments.ProjectileAttachment;
-import com.shoebob.dotd.entities.projectiles.FireballProjectile;
 import com.shoebob.dotd.game.Consts;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.systems.AnimationSystem;
@@ -22,7 +21,7 @@ public class Player implements Entity {
     public SpellInventoryComponent spellInventory;
     public HealthComponent health;
     public ManaComponent mana;
-    private ProjectileAttachment magic_staff;
+    private ProjectileAttachment magic_staff; // TODO; should be in cosnts
 
 
 
@@ -46,12 +45,12 @@ public class Player implements Entity {
         attachmentInventory.attachments.add(magic_staff);
         attachmentInventory.attachments.add(magic_staff);
         attachmentInventory.equipped = magic_staff;
-        attachmentInventory.selectedSpell = new FireballProjectile();
+        attachmentInventory.selectedSpell = Consts.Projectiles.fireball;
 
-        spellInventory.spells.add(new FireballProjectile());
-        spellInventory.spells.add(new FireballProjectile());
-        spellInventory.spells.add(new FireballProjectile());
-        spellInventory.spells.add(new FireballProjectile());
+        spellInventory.spells.add(Consts.Projectiles.fireball);
+        spellInventory.spells.add(Consts.Projectiles.fireball);
+        spellInventory.spells.add(Consts.Projectiles.fireball);
+        spellInventory.spells.add(Consts.Projectiles.fireball);
     }
 
     // TODO: Make rendering system - no stupid local calls
