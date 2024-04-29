@@ -21,8 +21,7 @@ public abstract class Attachment implements Entity {
 
     @Override
     public void create() {
-        texture = new TextureComponent();
-        position = new PositionComponent();
+
     }
 
     public void draw(SpriteBatch s) {

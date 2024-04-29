@@ -5,7 +5,7 @@ import com.shoebob.dotd.components.AnimationComponent;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.systems.AnimationSystem;
 
-public abstract class AnimatedProjectile extends ProjectileEntity {
+public abstract class AnimatedProjectile extends ProjectileEntity implements Cloneable {
     public AnimationComponent animationComponent;
 
     @Override

@@ -105,6 +105,7 @@ public class Spell {
             spell.duration = duration;
             spell.target = target;
             spell.level = level;
+            spell.projectile = projectile;
 
             if (spell.type == SpellType.SPELL_PROJECTILE && spell.projectile == null) {
                 throw new IllegalArgumentException("Projectile-type spells cannot be initialized without a projectile.");

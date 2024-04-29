@@ -21,4 +21,9 @@ public class FireballProjectile extends AnimatedProjectile {
     public void dispose() {
         super.dispose();
     }
+
+    @Override
+    public FireballProjectile clone() throws CloneNotSupportedException {
+        return new FireballProjectile();
+    }
 }

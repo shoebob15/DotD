@@ -2,11 +2,13 @@ package com.shoebob.dotd.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.components.*;
-import com.shoebob.dotd.entities.attachments.MagicStaffAttachment;
+import com.shoebob.dotd.entities.attachments.ProjectileAttachment;
 import com.shoebob.dotd.entities.projectiles.FireballProjectile;
+import com.shoebob.dotd.game.Consts;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.systems.LocationSystem;
@@ -20,7 +22,7 @@ public class Player implements Entity {
     public SpellInventoryComponent spellInventory;
     public HealthComponent health;
     public ManaComponent mana;
-    private MagicStaffAttachment magic_staff;
+    private ProjectileAttachment magic_staff;
 
 
 
@@ -37,8 +39,7 @@ public class Player implements Entity {
         health = new HealthComponent();
         mana = new ManaComponent();
 
-        magic_staff = new MagicStaffAttachment();
-        magic_staff.create();
+        magic_staff = new ProjectileAttachment(Consts.Spells.fireball, new TextureComponent(new Texture("weapons/magic_staff.png")));
 
         attachmentInventory.attachments.add(magic_staff);
         attachmentInventory.attachments.add(magic_staff);

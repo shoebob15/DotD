@@ -5,4 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class TextureComponent implements Component {
     public Texture texture = new Texture(Gdx.files.internal("util/broken_texture.png"));
+
+    public TextureComponent(Texture texture) {
+        this.texture = texture;
+    }
+
+    public TextureComponent() {}
 }
