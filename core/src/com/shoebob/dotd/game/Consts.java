@@ -10,7 +10,6 @@ import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.util.AttachableAnimation;
 
 public class Consts {
-    // this is such bad java, but why can't it have #define???
     public static class AttachedAnimations {
         public static final AttachableAnimation playerIdleAnimation = new AttachableAnimation(
                 new Texture(Gdx.files.internal("player/player_idle.png")),

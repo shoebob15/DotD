@@ -6,7 +6,7 @@ import com.shoebob.dotd.components.TextureComponent;
 import com.shoebob.dotd.entities.Entity;
 import com.shoebob.dotd.game.DotD;
 
-// renders a texture on a player's hand
+// renders a texture on a player's hand and stores data for the attachment
 public abstract class Attachment implements Entity {
     public TextureComponent texture;
     public PositionComponent position;

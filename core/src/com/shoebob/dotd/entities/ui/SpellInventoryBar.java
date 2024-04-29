@@ -5,19 +5,24 @@ import com.badlogic.gdx.graphics.Texture;
 import com.shoebob.dotd.components.BodyComponent;
 import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.components.SpellInventoryComponent;
+import com.shoebob.dotd.components.TextureComponent;
 import com.shoebob.dotd.entities.projectiles.AnimatedProjectile;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.systems.LocationSystem;
+import com.shoebob.dotd.util.Util;
 
 // vertical inventory bar that displays selectable spells
 public class SpellInventoryBar extends OverlayEntity {
     SpellInventoryComponent inventory;
 
+    TextureComponent dialogTexture;
+
     @Override
     public void create() {
         super.create();
-
+        dialogTexture = new TextureComponent();
         texture.texture = new Texture("ui/vertical_inventory.png");
+        dialogTexture.texture = new Texture("ui/item_info_dialog.png");
         screenPos.x = 0.05f;
         screenPos.y = 0.17f;
 
@@ -56,6 +61,21 @@ public class SpellInventoryBar extends OverlayEntity {
                 );
 
                 index++;
+            }
+
+            checkInfoDialog(game);
+        }
+    }
+
+    // will, if the mouse is hovered over any of the spells, display an info dialog about the spell
+    private void checkInfoDialog(DotD game) {
+        for (int i = 0; i < inventory.spells.size(); i++) {
+            // yeah, I'm never touching this code again
+            if (LocationSystem.pointOverlaps((Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game)), new PositionComponent(gamePos.x, gamePos.y + texture.texture.getHeight()), new BodyComponent(texture.texture.getWidth(), texture.texture.getHeight()))) {
+                if (Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y > i * (texture.texture.getHeight() / 4f) + gamePos.y && Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y < (i * texture.texture.getHeight() / 4f + texture.texture.getHeight() / 4f) + gamePos.y) {
+
+                    game.batch.draw(dialogTexture.texture, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).x + 10, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y + 10, 140, 70);
+                }
             }
         }
     }
