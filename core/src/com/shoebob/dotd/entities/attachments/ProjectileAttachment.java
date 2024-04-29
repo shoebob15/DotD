@@ -61,7 +61,7 @@ public class ProjectileAttachment extends Attachment {
 
             game.player.mana.currentMana -= 10;
 
-            spell.projectile = spell.projectile.copy(); // TODO: this wont work
+            spell.projectile = spell.projectile.copy();
         }
     }
 

@@ -18,6 +18,7 @@ public class LocationSystem {
         return (float) Math.toDegrees(Math.atan2(velocity.vector.y, velocity.vector.x));
     }
 
+    // to avoid reference issues
     public static PositionComponent clonePos(PositionComponent pos) {
         PositionComponent temp = new PositionComponent();
         temp.x = pos.x;
@@ -32,7 +33,8 @@ public class LocationSystem {
         return temp;
     }
 
-    // we can just ignore the z-axis in this situation, as we are working in a 2d space
+    // we can just ignore the z-axis in this situation, as we are working in a 2d space - mainly just for LibGDX classes
+    // that use Vector3 even in 2D space
     public static PositionComponent vectorToPos(Vector3 vec) {
         PositionComponent temp = new PositionComponent();
         temp.x = vec.x;

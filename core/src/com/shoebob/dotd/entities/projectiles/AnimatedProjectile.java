@@ -5,7 +5,7 @@ import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.systems.LocationSystem;
 
-public class AnimatedProjectile extends ProjectileEntity implements Cloneable {
+public class AnimatedProjectile extends ProjectileEntity {
     public AnimationComponent animationComponent;
 
     public AnimatedProjectile(AnimationComponent animationComponent) {

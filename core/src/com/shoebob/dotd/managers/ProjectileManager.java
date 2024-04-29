@@ -30,8 +30,6 @@ public class ProjectileManager {
 
     public static void addAnimatedProjectile(AnimatedProjectile projectile, float lifespan) {
         animatedProjectiles.add(projectile);
-
-        System.out.println(animatedProjectiles.size());
     }
 
 }
