@@ -1,6 +1,5 @@
 package com.shoebob.dotd.entities.projectiles;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.shoebob.dotd.components.AnimationComponent;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.systems.AnimationSystem;

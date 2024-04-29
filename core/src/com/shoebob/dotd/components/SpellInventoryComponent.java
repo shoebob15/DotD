@@ -1,6 +1,5 @@
 package com.shoebob.dotd.components;
 
-import com.shoebob.dotd.entities.attachments.Attachment;
 import com.shoebob.dotd.entities.projectiles.AnimatedProjectile;
 
 import java.util.ArrayList;
