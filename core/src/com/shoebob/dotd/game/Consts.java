@@ -78,6 +78,7 @@ public class Consts {
     public static class Spells {
         public static final Spell fireball = new Spell.Builder("Fireball", "Kaboom!", SpellType.SPELL_PROJECTILE, SpellEffect.EFFECT_FIRE, TargetType.ENEMY, 10, SpellRarity.UNCOMMON)
                 .damage(10)
+                .level(5)
                 .projectile(Projectiles.fireball) // TODO: should just be inline - no fireball class
                 .build();
     }

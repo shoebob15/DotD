@@ -47,10 +47,10 @@ public class Player implements Entity {
         attachmentInventory.equipped = magic_staff;
         attachmentInventory.selectedSpell = Consts.Projectiles.fireball;
 
-        spellInventory.spells.add(Consts.Projectiles.fireball);
-        spellInventory.spells.add(Consts.Projectiles.fireball);
-        spellInventory.spells.add(Consts.Projectiles.fireball);
-        spellInventory.spells.add(Consts.Projectiles.fireball);
+        spellInventory.spells.add(Consts.Spells.fireball);
+        spellInventory.spells.add(Consts.Spells.fireball);
+        spellInventory.spells.add(Consts.Spells.fireball);
+        spellInventory.spells.add(Consts.Spells.fireball);
     }
 
     // TODO: Make rendering system - no stupid local calls
