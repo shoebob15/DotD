@@ -35,7 +35,6 @@ public class ProjectileAttachment extends Attachment {
 
         if (cooldown()) {
             VelocityComponent vel = new VelocityComponent();
-            PositionComponent pos = new PositionComponent();
 
             // calculate projectile velocity based off mouse position
             vel.vector = new Vector2(Gdx.input.getX() - ((float) Gdx.graphics.getWidth() / 2),
@@ -51,9 +50,10 @@ public class ProjectileAttachment extends Attachment {
             spell.projectile.velocity = vel;
 
             // set the projectiles position to the player
-            pos.x = game.player.position.x - 30;
-            pos.y = game.player.position.y;
-            spell.projectile.position = pos;
+            // pos.x = game.player.position.x - 30;
+            // pos.y = game.player.position.y;
+            // spell.projectile.position = pos;
+            // TODO: this messes with vector math
 
             spell.projectile.animationComponent = Consts.AnimationComponents.fireball;
 
