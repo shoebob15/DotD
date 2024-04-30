@@ -44,7 +44,7 @@ public class AnimationSystem {
         TextureRegion[] tmp = new TextureRegion[numFrames];
 
         for (int i = 0; i < tmp.length; i++) {
-            tmp[i] = new TextureRegion(texture.texture, i * texture.texture.getWidth() / numFrames, 0, texture.texture.getWidth(), texture.texture.getHeight());
+            tmp[i] = new TextureRegion(texture.texture, i * (texture.texture.getWidth() / numFrames), 0, texture.texture.getWidth() / numFrames, texture.texture.getHeight());
         }
 
         Animation<TextureRegion> animation = new Animation<>(frameDuration, tmp);
