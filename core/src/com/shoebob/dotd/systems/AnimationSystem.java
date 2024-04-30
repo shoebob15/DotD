@@ -7,19 +7,20 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.shoebob.dotd.components.AnimatedSpriteComponent;
 import com.shoebob.dotd.components.AnimationComponent;
+import com.shoebob.dotd.components.TextureComponent;
 import com.shoebob.dotd.components.VelocityComponent;
 import com.shoebob.dotd.game.DotD;
-import com.shoebob.dotd.util.AttachableAnimation;
+import com.shoebob.dotd.util.AttachableAnimationComponent;
 
 public class AnimationSystem {
     // returns sprite's animation frame based on the direction of the sprite and statetime
     public static TextureRegion getSpriteAnimationFrame(AnimatedSpriteComponent animation, VelocityComponent velocity, DotD game) {
-        AttachableAnimation current = getSpriteAnimation(animation, velocity);
+        AttachableAnimationComponent current = getSpriteAnimation(animation, velocity);
         return current.getAnimation().getKeyFrame(game.statetime);
     }
 
-    // returns AttachableAnimation object based on direction
-    public static AttachableAnimation getSpriteAnimation(AnimatedSpriteComponent animation, VelocityComponent velocity) {
+    // returns AttachableAnimationComponent object based on direction
+    public static AttachableAnimationComponent getSpriteAnimation(AnimatedSpriteComponent animation, VelocityComponent velocity) {
         float direction = LocationSystem.getDirection(velocity);
 
         if (velocity.vector.isZero()) {
@@ -39,23 +40,26 @@ public class AnimationSystem {
         return component.animation.getKeyFrame(game.statetime);
     }
 
-    // naming system: name1, name2, name3
-    // path is passed in as: path="weapons/name" - include the /
-    // assumes that it is a png
-    @Deprecated // this really should only be used for debug purposes - causes performance issues for the SpriteBatch
-    public static AnimationComponent buildAnimationComponent(String path, String name, int numFrames, float frameDuration) {
-        AnimationComponent component = new AnimationComponent();
-        component.animation = new Animation<>(frameDuration,
-                new Array<TextureRegion>(new TextureRegion[numFrames]),
-                Animation.PlayMode.LOOP
-        );
+    public static AnimationComponent buildHorizontalAnimationComponent(TextureComponent texture, int numFrames, float frameDuration) {
+        TextureRegion[] tmp = new TextureRegion[numFrames];
 
-        for (int i = 0; i < component.animation.getKeyFrames().length; i++) {
-            component.animation.getKeyFrames()[i] = new TextureRegion(
-                    new Texture(Gdx.files.internal(path + name + (i + 1) + ".png"))
-            );
+        for (int i = 0; i < tmp.length; i++) {
+            tmp[i] = new TextureRegion(texture.texture, i * texture.texture.getWidth() / numFrames, 0, texture.texture.getWidth(), texture.texture.getHeight());
         }
-        return component;
+
+        Animation<TextureRegion> animation = new Animation<>(frameDuration, tmp);
+        return new AnimationComponent(animation);
+    }
+
+    public static AnimationComponent buildVerticalAnimationComponent(TextureComponent texture, int numFrames, float frameDuration) {
+        TextureRegion[] tmp = new TextureRegion[numFrames];
+
+        for (int i = 0; i < tmp.length; i++) {
+            tmp[i] = new TextureRegion(texture.texture, 0, i * texture.texture.getHeight() / numFrames, texture.texture.getWidth(), texture.texture.getHeight());
+        }
+
+        Animation<TextureRegion> animation = new Animation<>(frameDuration, tmp);
+        return new AnimationComponent(animation);
     }
 
 

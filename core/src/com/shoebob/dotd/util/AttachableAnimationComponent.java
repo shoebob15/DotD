@@ -8,8 +8,8 @@ import com.badlogic.gdx.utils.Array;
 import com.shoebob.dotd.entities.Player;
 
 // provides coordinate data on where to put a player's attachment based on the current animation frame
-// TODO: Refactor to AttachableAnimationComponent
-public class AttachableAnimation {
+// pseudo-component
+public class AttachableAnimationComponent {
     protected Animation<TextureRegion> animation;
     private Texture spritesheet;
     private Vector2[] coordinates;
@@ -18,7 +18,7 @@ public class AttachableAnimation {
     private float rotation;
 
 
-    public AttachableAnimation(Texture spritesheet, float update, Vector2[] coordinates, float rotation) {
+    public AttachableAnimationComponent(Texture spritesheet, float update, Vector2[] coordinates, float rotation) {
         this.spritesheet = spritesheet;
         this.animation = new Animation<>(
                 update,
@@ -29,7 +29,7 @@ public class AttachableAnimation {
         this.rotation = rotation;
     }
 
-    public AttachableAnimation(Texture spritesheet, float update, Vector2[] coordinates, boolean renderOnTop, float rotation) {
+    public AttachableAnimationComponent(Texture spritesheet, float update, Vector2[] coordinates, boolean renderOnTop, float rotation) {
         this.spritesheet = spritesheet;
         this.animation = new Animation<>(
                 update,

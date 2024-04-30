@@ -37,6 +37,7 @@ public class Player implements Entity {
         spellInventory = new SpellInventoryComponent();
         health = new HealthComponent();
         mana = new ManaComponent();
+        mana.currentMana = 9999999;
 
         magic_staff = new ProjectileAttachment(Consts.Spells.fireball, new TextureComponent(new Texture("weapons/magic_staff.png")));
 
@@ -53,7 +54,6 @@ public class Player implements Entity {
         spellInventory.spells.add(Consts.Spells.fireball);
     }
 
-    // TODO: Make rendering system - no stupid local calls
     public void draw(DotD game) {
         TextureRegion frame = animation.currentAnimation.getAnimation().getKeyFrame(game.statetime);
 
@@ -83,7 +83,7 @@ public class Player implements Entity {
             if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
                 expX += 1;
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) { // TODO: temporary control - will probably change later
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                 magic_staff.use(game);
             }
         }

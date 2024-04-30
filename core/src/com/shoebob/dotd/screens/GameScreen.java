@@ -103,24 +103,12 @@ public class GameScreen implements Screen {
         ProjectileManager.update(game);
         ManaSystem.updateMana(game.player);
 
+        drawPlayerInfo();
+
         mainInventoryBar.update(game);
         spellInventoryBar.update(game);
 
         // END UPDATES
-
-        // render player health and mana
-        game.font.getData().setScale(.5f);
-        game.font.setUseIntegerPositions(false); // removes weird shaking due to int accuracy
-
-        game.font.setColor(Color.WHITE);
-        game.font.draw(game.batch, "HEALTH - ", game.camera.position.x - 135, game.camera.position.y + 95);
-        game.font.setColor(.8f, 0, 0, 1);
-        game.font.draw(game.batch, game.player.health.health + "", game.camera.position.x - 25, game.camera.position.y + 95);
-
-        game.font.setColor(Color.WHITE);
-        game.font.draw(game.batch, "MANA - ", game.camera.position.x - 135, game.camera.position.y + 75);
-        game.font.setColor(0f, 1, 1, 1);
-        game.font.draw(game.batch, game.player.mana.currentMana + "", game.camera.position.x - 50, game.camera.position.y + 75);
 
 
         game.batch.end();
@@ -160,5 +148,21 @@ public class GameScreen implements Screen {
 
         vfxManager.dispose();
         tvEffect.dispose();
+    }
+
+    private void drawPlayerInfo() {
+        // render player health and mana
+        game.font.getData().setScale(.5f);
+        game.font.setUseIntegerPositions(false); // removes weird shaking due to int accuracy
+
+        game.font.setColor(Color.WHITE);
+        game.font.draw(game.batch, "HEALTH - ", game.camera.position.x - 135, game.camera.position.y + 95);
+        game.font.setColor(.8f, 0, 0, 1);
+        game.font.draw(game.batch, game.player.health.health + "", game.camera.position.x - 25, game.camera.position.y + 95);
+
+        game.font.setColor(Color.WHITE);
+        game.font.draw(game.batch, "MANA - ", game.camera.position.x - 135, game.camera.position.y + 75);
+        game.font.setColor(0f, 1, 1, 1);
+        game.font.draw(game.batch, game.player.mana.currentMana + "", game.camera.position.x - 50, game.camera.position.y + 75);
     }
 }

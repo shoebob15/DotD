@@ -4,14 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.components.AnimationComponent;
+import com.shoebob.dotd.components.TextureComponent;
 import com.shoebob.dotd.entities.projectiles.AnimatedProjectile;
 import com.shoebob.dotd.spells.*;
 import com.shoebob.dotd.systems.AnimationSystem;
-import com.shoebob.dotd.util.AttachableAnimation;
+import com.shoebob.dotd.util.AttachableAnimationComponent;
 
 public class Consts {
     public static class AttachedAnimations {
-        public static final AttachableAnimation playerIdleAnimation = new AttachableAnimation(
+        public static final AttachableAnimationComponent playerIdleAnimation = new AttachableAnimationComponent(
                 new Texture(Gdx.files.internal("player/player_idle.png")),
                 0.5f,
                 new Vector2[]{
@@ -21,7 +22,7 @@ public class Consts {
                 0
         );
 
-        public static final AttachableAnimation playerWalkRAnimation = new AttachableAnimation(
+        public static final AttachableAnimationComponent playerWalkRAnimation = new AttachableAnimationComponent(
                 new Texture(Gdx.files.internal("player/player_walk_r.png")),
                 0.25f,
                 new Vector2[]{
@@ -31,7 +32,7 @@ public class Consts {
                 0
         );
 
-        public static final AttachableAnimation playerWalkLAnimation = new AttachableAnimation(
+        public static final AttachableAnimationComponent playerWalkLAnimation = new AttachableAnimationComponent(
                 new Texture(Gdx.files.internal("player/player_walk_l.png")),
                 0.25f,
                 new Vector2[]{
@@ -42,7 +43,7 @@ public class Consts {
                 0
         );
 
-        public static final AttachableAnimation playerWalkBAnimation = new AttachableAnimation(
+        public static final AttachableAnimationComponent playerWalkBAnimation = new AttachableAnimationComponent(
                 new Texture(Gdx.files.internal("player/player_walk_b.png")),
                 0.25f,
                 // just make it render behind the player - doesn't need to be completely visible
@@ -55,7 +56,7 @@ public class Consts {
         );
 
         // sheet for forward walk is just sped up idle
-        public static final AttachableAnimation playerWalkFAnimation = new AttachableAnimation(
+        public static final AttachableAnimationComponent playerWalkFAnimation = new AttachableAnimationComponent(
                 new Texture(Gdx.files.internal("player/player_idle.png")),
                 0.25f,
                 new Vector2[]{
@@ -68,7 +69,7 @@ public class Consts {
 
     public static class AnimationComponents {
         public static final AnimationComponent fireball =
-                AnimationSystem.buildAnimationComponent("projectiles/fireball/", "fireball", 5, 0.1f);
+                AnimationSystem.buildHorizontalAnimationComponent(new TextureComponent(new Texture("projectiles/fireball.png")), 5, 0.1f);
     }
 
     public static class Projectiles {
@@ -79,7 +80,7 @@ public class Consts {
         public static final Spell fireball = new Spell.Builder("Fireball", "Kaboom!", SpellType.SPELL_PROJECTILE, SpellEffect.EFFECT_FIRE, TargetType.ENEMY, 10, SpellRarity.UNCOMMON)
                 .damage(10)
                 .level(5)
-                .projectile(Projectiles.fireball) // TODO: should just be inline - no fireball class
+                .projectile(Projectiles.fireball)
                 .build();
     }
 }

@@ -6,6 +6,5 @@ import com.shoebob.dotd.spells.Spell;
 import java.util.ArrayList;
 
 public class SpellInventoryComponent implements Component {
-    // TODO: spell class
     public ArrayList<Spell> spells = new ArrayList<>();
 }

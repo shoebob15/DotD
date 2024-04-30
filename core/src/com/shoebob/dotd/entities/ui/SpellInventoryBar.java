@@ -56,9 +56,9 @@ public class SpellInventoryBar extends OverlayEntity {
         if (!isHidden) {
             // render current spells in inventory
             for (Spell spell : inventory.spells) {
-                game.batch.draw(spell.projectile.animationComponent.animation.getKeyFrame(game.statetime), x - 3, y + 6 + (spacing * index),
-                        spell.projectile.animationComponent.animation.getKeyFrames()[0].getRegionWidth() * .4f,
-                        spell.projectile.animationComponent.animation.getKeyFrames()[0].getRegionHeight() * .4f
+                game.batch.draw(spell.projectile.animationComponent.animation.getKeyFrames()[0], x - 3, y + 6 + (spacing * index),
+                        spell.projectile.animationComponent.animation.getKeyFrames()[0].getRegionWidth() * .7f,
+                        spell.projectile.animationComponent.animation.getKeyFrames()[0].getRegionHeight() * .7f
                 );
 
                 index++;
