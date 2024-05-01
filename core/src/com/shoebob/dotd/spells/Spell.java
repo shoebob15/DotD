@@ -1,5 +1,6 @@
 package com.shoebob.dotd.spells;
 
+import com.shoebob.dotd.components.AnimationComponent;
 import com.shoebob.dotd.entities.projectiles.AnimatedProjectile;
 
 public class Spell {
@@ -38,6 +39,9 @@ public class Spell {
     // the projectile shown for PROJECTILE-type spells
     public AnimatedProjectile projectile;
 
+    // the animation shown for POINT and AREA-type spells
+    public AnimationComponent animation;
+
     public static class Builder {
         public final String name;
 
@@ -62,6 +66,8 @@ public class Spell {
         public int level = 1;
 
         public AnimatedProjectile projectile;
+
+        public AnimationComponent animation;
 
         public Builder(String name, String description, SpellType type, SpellEffect effect, TargetType target, int manaCost, SpellRarity rarity) {
             this.name = name;
@@ -98,6 +104,11 @@ public class Spell {
             return this;
         }
 
+        public Builder animation(AnimationComponent animation) {
+            this.animation = animation;
+            return this;
+        }
+
         public Spell build() {
             Spell spell = new Spell();
             spell.name = name;
@@ -112,10 +123,20 @@ public class Spell {
             spell.target = target;
             spell.level = level;
             spell.projectile = projectile;
+            spell.animation = animation;
 
             if (spell.type == SpellType.SPELL_PROJECTILE && spell.projectile == null) {
                 throw new IllegalArgumentException("Projectile-type spells cannot be initialized without a projectile.");
             }
+
+            if (!(spell.type == SpellType.SPELL_PROJECTILE) && spell.projectile != null) {
+                throw new IllegalArgumentException("Non-projectile type spells cannot be initialized with a projectile.");
+            }
+
+            if ((spell.type == SpellType.SPELL_POINT || spell.type == SpellType.SPELL_AREA) && animation == null) {
+                throw new IllegalArgumentException("Point and area spells must have an animation.");
+            }
+
             return spell;
         }
     }

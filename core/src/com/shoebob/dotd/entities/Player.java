@@ -46,10 +46,10 @@ public class Player implements Entity {
         attachmentInventory.attachments.add(magic_staff);
         attachmentInventory.attachments.add(magic_staff);
         attachmentInventory.equipped = magic_staff;
-        attachmentInventory.selectedSpell = Consts.Projectiles.fireball;
+        attachmentInventory.selectedSpell = Consts.Spells.fireball;
 
         spellInventory.spells.add(Consts.Spells.fireball);
-        spellInventory.spells.add(Consts.Spells.fireball);
+        spellInventory.spells.add(Consts.Spells.lightning_strike);
         spellInventory.spells.add(Consts.Spells.iceball);
         spellInventory.spells.add(Consts.Spells.iceball);
     }

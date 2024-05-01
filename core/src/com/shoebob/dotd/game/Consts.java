@@ -75,6 +75,9 @@ public class Consts {
 
         public static final AnimationComponent iceball =
                 AnimationSystem.buildHorizontalAnimationComponent(new TextureComponent(new Texture("projectiles/iceball.png")), 3, 0.1f);
+
+        public static final AnimationComponent lightning_strike =
+                AnimationSystem.buildHorizontalAnimationComponent(new TextureComponent(new Texture("projectiles/lightning_strike.png")), 8, 0.1f);
     }
 
     public static class Projectiles {
@@ -93,6 +96,12 @@ public class Consts {
                 .damage(10)
                 .level(3)
                 .projectile(Projectiles.iceball)
+                .build();
+
+        public static final Spell lightning_strike = new Spell.Builder("Lightning", "An electrifying zap", SpellType.SPELL_POINT, SpellEffect.EFFECT_NONE, TargetType.ENEMY, 20, SpellRarity.COMMON)
+                .damage(15)
+                .level(3)
+                .animation(AnimationComponents.lightning_strike)
                 .build();
     }
 }

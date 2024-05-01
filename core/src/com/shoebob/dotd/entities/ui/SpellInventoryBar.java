@@ -56,10 +56,18 @@ public class SpellInventoryBar extends OverlayEntity {
         if (!isHidden) {
             // render current spells in inventory
             for (Spell spell : inventory.spells) {
-                game.batch.draw(spell.projectile.animationComponent.animation.getKeyFrame(game.statetime, true), x - 3, y + 6 + (spacing * index),
-                        spell.projectile.animationComponent.animation.getKeyFrames()[0].getRegionWidth() * .4f,
-                        spell.projectile.animationComponent.animation.getKeyFrames()[0].getRegionHeight() * .4f
-                );
+                if (spell.projectile != null) {
+                    game.batch.draw(spell.projectile.animationComponent.animation.getKeyFrame(game.statetime, true), x - 3, y + 6 + (spacing * index),
+                            spell.projectile.animationComponent.animation.getKeyFrames()[0].getRegionWidth() * .4f,
+                            spell.projectile.animationComponent.animation.getKeyFrames()[0].getRegionHeight() * .4f
+                    );
+                } else {
+                    game.batch.draw(spell.animation.animation.getKeyFrame(game.statetime, true), x + 10, y + 6 + (spacing * index),
+                            spell.animation.animation.getKeyFrames()[0].getRegionWidth() * .4f,
+                            spell.animation.animation.getKeyFrames()[0].getRegionHeight() * .4f
+                    );
+                }
+
 
                 index++;
             }
@@ -103,6 +111,11 @@ public class SpellInventoryBar extends OverlayEntity {
 
                     // draw effect
                     game.font.draw(game.batch, "Effect: " + currentSpell.effect.str.toUpperCase(), Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).x + 23, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y + 30);
+
+                    if (Gdx.input.justTouched()) {
+                        game.player.attachmentInventory.selectedSpell = currentSpell;
+                        isHidden = true;
+                    }
                 }
             }
         }

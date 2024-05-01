@@ -33,8 +33,11 @@ public class MainInventoryBar extends OverlayEntity {
         float y = gamePos.y;
 
         // render currently selected spell
-        game.batch.draw(inventory.selectedSpell.animationComponent.animation.getKeyFrame(game.statetime, true), x - 2, y + 6, 24, 12);
-
+        if (inventory.selectedSpell.projectile != null) {
+            game.batch.draw(inventory.selectedSpell.projectile.animationComponent.animation.getKeyFrame(game.statetime, true), x - 2, y + 6, 24, 12);
+        } else {
+            game.batch.draw(inventory.selectedSpell.animation.animation.getKeyFrame(game.statetime, true), x + 6, y + 6, 14, 14);
+        }
 
         // render current cooldown on spell
 
