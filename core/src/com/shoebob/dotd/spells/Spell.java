@@ -67,9 +67,9 @@ public class Spell {
 
         public AnimatedProjectile projectile;
 
-        public AnimationComponent animation;
+        public final AnimationComponent animation;
 
-        public Builder(String name, String description, SpellType type, SpellEffect effect, TargetType target, int manaCost, SpellRarity rarity) {
+        public Builder(String name, String description, SpellType type, SpellEffect effect, TargetType target, int manaCost, SpellRarity rarity, AnimationComponent animation) {
             this.name = name;
             this.decription = description;
             this.type = type;
@@ -77,6 +77,7 @@ public class Spell {
             this.target = target;
             this.manaCost = manaCost;
             this.rarity = rarity;
+            this.animation = animation;
         }
 
         public Builder areaRadius(int areaRadius) {
@@ -104,10 +105,6 @@ public class Spell {
             return this;
         }
 
-        public Builder animation(AnimationComponent animation) {
-            this.animation = animation;
-            return this;
-        }
 
         public Spell build() {
             Spell spell = new Spell();
@@ -154,6 +151,9 @@ public class Spell {
                 ", duration=" + duration +
                 ", target=" + target +
                 ", level=" + level +
+                ", rarity=" + rarity +
+                ", projectile=" + projectile +
+                ", animation=" + animation +
                 '}';
     }
 }

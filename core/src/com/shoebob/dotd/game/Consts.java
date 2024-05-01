@@ -86,22 +86,21 @@ public class Consts {
     }
 
     public static class Spells {
-        public static final Spell fireball = new Spell.Builder("Fireball", "Kaboom! Applies an ice effect when hit", SpellType.SPELL_PROJECTILE, SpellEffect.EFFECT_FIRE, TargetType.ENEMY, 10, SpellRarity.UNCOMMON)
+        public static final Spell fireball = new Spell.Builder("Fireball", "Kaboom! Applies an fire effect when hit", SpellType.SPELL_PROJECTILE, SpellEffect.EFFECT_FIRE, TargetType.ENEMY, 10, SpellRarity.UNCOMMON, AnimationComponents.fireball)
                 .damage(10)
                 .level(5)
                 .projectile(Projectiles.fireball)
                 .build();
 
-        public static final Spell iceball = new Spell.Builder("Iceball", "Chilly... Applies a ice effect when hit", SpellType.SPELL_PROJECTILE, SpellEffect.EFFECT_ICE, TargetType.ENEMY, 15, SpellRarity.RARE)
+        public static final Spell iceball = new Spell.Builder("Iceball", "Chilly... Applies a ice effect when hit", SpellType.SPELL_PROJECTILE, SpellEffect.EFFECT_ICE, TargetType.ENEMY, 15, SpellRarity.RARE, AnimationComponents.iceball)
                 .damage(10)
                 .level(3)
                 .projectile(Projectiles.iceball)
                 .build();
 
-        public static final Spell lightning_strike = new Spell.Builder("Lightning", "An electrifying zap", SpellType.SPELL_POINT, SpellEffect.EFFECT_NONE, TargetType.ENEMY, 20, SpellRarity.COMMON)
+        public static final Spell lightning_strike = new Spell.Builder("Lightning", "An electrifying zap", SpellType.SPELL_POINT, SpellEffect.EFFECT_NONE, TargetType.ENEMY, 20, SpellRarity.COMMON, AnimationComponents.lightning_strike)
                 .damage(15)
                 .level(3)
-                .animation(AnimationComponents.lightning_strike)
                 .build();
     }
 }

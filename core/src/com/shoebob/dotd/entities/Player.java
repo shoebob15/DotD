@@ -39,7 +39,7 @@ public class Player implements Entity {
         mana = new ManaComponent();
         mana.currentMana = 9999999;
 
-        magic_staff = new ProjectileAttachment(Consts.Spells.fireball, new TextureComponent(new Texture("weapons/magic_staff.png")));
+        magic_staff = new ProjectileAttachment(attachmentInventory.selectedSpell, new TextureComponent(new Texture("weapons/magic_staff.png")));
 
         attachmentInventory.attachments.add(magic_staff);
         attachmentInventory.attachments.add(magic_staff);

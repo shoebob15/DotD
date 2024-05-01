@@ -29,7 +29,7 @@ public class ProjectileAttachment extends Attachment {
 
     @Override
     public void use(DotD game) {
-        if (!(game.player.mana.currentMana - 10 >= 0)) {
+        if (!(game.player.mana.currentMana - game.player.attachmentInventory.selectedSpell.manaCost >= 0)) {
             return;
         }
 
@@ -54,13 +54,12 @@ public class ProjectileAttachment extends Attachment {
              tmp.x = game.player.position.x;
              tmp.y = game.player.position.y;
              spell.projectile.position = tmp;
-            // TODO: this messes with vector math
 
-            spell.projectile.animationComponent = Consts.AnimationComponents.fireball;
+            spell.projectile.animationComponent = game.player.attachmentInventory.selectedSpell.animation;
 
             ProjectileManager.addAnimatedProjectile(spell.projectile, 5f);
 
-            game.player.mana.currentMana -= 10;
+            game.player.mana.currentMana -= game.player.attachmentInventory.selectedSpell.manaCost;
 
             spell.projectile = spell.projectile.copy();
         }
@@ -73,5 +72,7 @@ public class ProjectileAttachment extends Attachment {
         );
 
         position = new PositionComponent(loc.x, loc.y);
+
+        spell = game.player.attachmentInventory.selectedSpell;
     }
 }
