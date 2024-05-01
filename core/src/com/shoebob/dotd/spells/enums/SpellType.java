@@ -1,4 +1,4 @@
-package com.shoebob.dotd.spells;
+package com.shoebob.dotd.spells.enums;
 
 public enum SpellType {
     // area spells start at the position of the player and will move out based on the areaRadius

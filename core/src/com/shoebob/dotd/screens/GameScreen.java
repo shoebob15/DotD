@@ -17,6 +17,7 @@ import com.shoebob.dotd.entities.ui.SpellInventoryBar;
 import com.shoebob.dotd.game.Consts;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.managers.ProjectileManager;
+import com.shoebob.dotd.managers.SpellEntityManager;
 import com.shoebob.dotd.systems.ManaSystem;
 import com.shoebob.dotd.util.CameraShake;
 
@@ -101,6 +102,7 @@ public class GameScreen implements Screen {
         game.player.draw(game);
 
         ProjectileManager.update(game);
+        SpellEntityManager.update(game);
         ManaSystem.updateMana(game.player);
 
         drawPlayerInfo();

@@ -7,6 +7,10 @@ import com.shoebob.dotd.components.AnimationComponent;
 import com.shoebob.dotd.components.TextureComponent;
 import com.shoebob.dotd.entities.projectiles.AnimatedProjectile;
 import com.shoebob.dotd.spells.*;
+import com.shoebob.dotd.spells.enums.SpellEffect;
+import com.shoebob.dotd.spells.enums.SpellRarity;
+import com.shoebob.dotd.spells.enums.SpellType;
+import com.shoebob.dotd.spells.enums.TargetType;
 import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.components.AttachableAnimationComponent;
 

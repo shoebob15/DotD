@@ -1,4 +1,4 @@
-package com.shoebob.dotd.spells;
+package com.shoebob.dotd.spells.enums;
 
 public enum SpellEffect {
     EFFECT_NONE("none"),

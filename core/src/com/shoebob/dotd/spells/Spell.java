@@ -2,6 +2,10 @@ package com.shoebob.dotd.spells;
 
 import com.shoebob.dotd.components.AnimationComponent;
 import com.shoebob.dotd.entities.projectiles.AnimatedProjectile;
+import com.shoebob.dotd.spells.enums.SpellEffect;
+import com.shoebob.dotd.spells.enums.SpellRarity;
+import com.shoebob.dotd.spells.enums.SpellType;
+import com.shoebob.dotd.spells.enums.TargetType;
 
 public class Spell {
     // name that shows in info panel

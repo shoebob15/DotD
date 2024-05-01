@@ -1,4 +1,4 @@
-package com.shoebob.dotd.spells;
+package com.shoebob.dotd.spells.enums;
 
 import com.badlogic.gdx.graphics.Color;
 

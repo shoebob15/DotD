@@ -8,12 +8,10 @@ import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.components.TextureComponent;
 import com.shoebob.dotd.components.VelocityComponent;
 import com.shoebob.dotd.entities.spells.SpellEntity;
-import com.shoebob.dotd.game.Consts;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.managers.ProjectileManager;
 import com.shoebob.dotd.managers.SpellEntityManager;
-import com.shoebob.dotd.spells.Spell;
-import com.shoebob.dotd.spells.SpellType;
+import com.shoebob.dotd.spells.enums.SpellType;
 import com.shoebob.dotd.systems.VelocitySystem;
 import com.shoebob.dotd.util.Util;
 
@@ -66,11 +64,11 @@ public class ProjectileAttachment extends Attachment {
 
                 game.player.attachmentInventory.selectedSpell.projectile = game.player.attachmentInventory.selectedSpell.projectile.copy();
             } else if (game.player.attachmentInventory.selectedSpell.type == SpellType.SPELL_POINT) {
-                SpellEntity entity = new SpellEntity(new PositionComponent(Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game)), new BodyComponent(8, 8), game.player.attachmentInventory.selectedSpell);
+                SpellEntity entity = new SpellEntity((Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game)), new BodyComponent(8, 8), game.player.attachmentInventory.selectedSpell);
 
                 SpellEntityManager.addSpellEntity(entity);
             } else {
-                throw new IllegalStateException("Unrecognized spell type.");
+                throw new IllegalStateException("Unrecognized spell type. (program it)");
             }
         }
     }
@@ -82,7 +80,5 @@ public class ProjectileAttachment extends Attachment {
         );
 
         position = new PositionComponent(loc.x, loc.y);
-
-        game.player.attachmentInventory.selectedSpell = game.player.attachmentInventory.selectedSpell;
     }
 }
