@@ -1,4 +1,4 @@
-package com.shoebob.dotd.util;
+package com.shoebob.dotd.components;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;

@@ -8,7 +8,7 @@ import com.shoebob.dotd.components.TextureComponent;
 import com.shoebob.dotd.entities.projectiles.AnimatedProjectile;
 import com.shoebob.dotd.spells.*;
 import com.shoebob.dotd.systems.AnimationSystem;
-import com.shoebob.dotd.util.AttachableAnimationComponent;
+import com.shoebob.dotd.components.AttachableAnimationComponent;
 
 // a class that stores project-wide spells, animation, etc.
 

@@ -1,16 +1,13 @@
 package com.shoebob.dotd.systems;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
 import com.shoebob.dotd.components.AnimatedSpriteComponent;
 import com.shoebob.dotd.components.AnimationComponent;
 import com.shoebob.dotd.components.TextureComponent;
 import com.shoebob.dotd.components.VelocityComponent;
 import com.shoebob.dotd.game.DotD;
-import com.shoebob.dotd.util.AttachableAnimationComponent;
+import com.shoebob.dotd.components.AttachableAnimationComponent;
 
 public class AnimationSystem {
     // returns sprite's animation frame based on the direction of the sprite and statetime
