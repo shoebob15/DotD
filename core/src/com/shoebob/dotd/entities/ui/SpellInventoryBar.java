@@ -23,7 +23,7 @@ public class SpellInventoryBar extends OverlayEntity {
         super.create();
         dialogTexture = new TextureComponent();
         texture.texture = new Texture("ui/vertical_inventory.png");
-        dialogTexture.texture = new Texture("ui/item_info_dialog.png");
+        dialogTexture.texture = new Texture("ui/panel.png");
         screenPos.x = 0.05f;
         screenPos.y = 0.17f;
 
@@ -85,24 +85,24 @@ public class SpellInventoryBar extends OverlayEntity {
                     game.font.setColor(Color.WHITE);
 
                     // draw name of spell
-                    game.font.draw(game.batch, currentSpell.name + " - Level " + Util.getRomanNumber(currentSpell.level), Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).x + 18, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y + 70);
+                    game.font.draw(game.batch, currentSpell.name + " - Level " + Util.getRomanNumber(currentSpell.level), Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).x + 23, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y + 70);
 
                     // set color to rarity color
                     game.font.setColor(currentSpell.rarity.color);
 
                     // draw rarity level
-                    game.font.draw(game.batch, currentSpell.rarity.str.toUpperCase(), Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).x + 18, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y + 60);
+                    game.font.draw(game.batch, currentSpell.rarity.str.toUpperCase(), Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).x + 23, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y + 60);
 
                     game.font.setColor(Color.WHITE);
 
                     // draw damage level
-                    game.font.draw(game.batch, "Damage: " + currentSpell.damage, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).x + 18, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y + 50);
+                    game.font.draw(game.batch, "Damage: " + currentSpell.damage, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).x + 23, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y + 50);
 
                     // draw mana level
-                    game.font.draw(game.batch, "Mana: " + currentSpell.manaCost, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).x + 18, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y + 40);
+                    game.font.draw(game.batch, "Mana: " + currentSpell.manaCost, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).x + 23, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y + 40);
 
                     // draw effect
-                    game.font.draw(game.batch, "Effect: " + currentSpell.effect.str.toUpperCase(), Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).x + 18, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y + 30);
+                    game.font.draw(game.batch, "Effect: " + currentSpell.effect.str.toUpperCase(), Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).x + 23, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y + 30);
                 }
             }
         }
