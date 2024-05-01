@@ -16,7 +16,6 @@ public class AnimatedProjectile extends ProjectileEntity {
 
     @Override
     public void draw(DotD game) {
-        position = game.player.position;
         float angle = velocity.vector.angleDeg();
         
         float constantSize = 16;
@@ -42,8 +41,8 @@ public class AnimatedProjectile extends ProjectileEntity {
                 projectileHeight / 2,
                 projectileWidth,
                 projectileHeight,
-                1,
-                1,
+                2,
+                2,
                 angle
         );
     }

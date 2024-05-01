@@ -37,7 +37,7 @@ public class AnimationSystem {
     }
 
     public static TextureRegion getAnimationFrame(AnimationComponent component, DotD game) {
-        return component.animation.getKeyFrame(game.statetime);
+        return component.animation.getKeyFrame(game.statetime, true);
     }
 
     public static AnimationComponent buildHorizontalAnimationComponent(TextureComponent texture, int numFrames, float frameDuration) {

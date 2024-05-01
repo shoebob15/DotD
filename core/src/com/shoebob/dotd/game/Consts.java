@@ -10,6 +10,8 @@ import com.shoebob.dotd.spells.*;
 import com.shoebob.dotd.systems.AnimationSystem;
 import com.shoebob.dotd.util.AttachableAnimationComponent;
 
+// a class that stores project-wide spells, animation, etc.
+
 public class Consts {
     public static class AttachedAnimations {
         public static final AttachableAnimationComponent playerIdleAnimation = new AttachableAnimationComponent(
@@ -69,18 +71,28 @@ public class Consts {
 
     public static class AnimationComponents {
         public static final AnimationComponent fireball =
-                AnimationSystem.buildHorizontalAnimationComponent(new TextureComponent(new Texture("projectiles/fireball.png")), 5, 0.1f);
+                AnimationSystem.buildHorizontalAnimationComponent(new TextureComponent(new Texture("projectiles/fireball.png")), 3, 0.1f);
+
+        public static final AnimationComponent iceball =
+                AnimationSystem.buildHorizontalAnimationComponent(new TextureComponent(new Texture("projectiles/iceball.png")), 3, 0.1f);
     }
 
     public static class Projectiles {
         public static final AnimatedProjectile fireball = new AnimatedProjectile(AnimationComponents.fireball);
+        public static final AnimatedProjectile iceball = new AnimatedProjectile(AnimationComponents.iceball);
     }
 
     public static class Spells {
-        public static final Spell fireball = new Spell.Builder("Fireball", "Kaboom!", SpellType.SPELL_PROJECTILE, SpellEffect.EFFECT_FIRE, TargetType.ENEMY, 10, SpellRarity.UNCOMMON)
+        public static final Spell fireball = new Spell.Builder("Fireball", "Kaboom! Applies an ice effect when hit", SpellType.SPELL_PROJECTILE, SpellEffect.EFFECT_FIRE, TargetType.ENEMY, 10, SpellRarity.UNCOMMON)
                 .damage(10)
                 .level(5)
                 .projectile(Projectiles.fireball)
+                .build();
+
+        public static final Spell iceball = new Spell.Builder("Iceball", "Chilly... Applies a ice effect when hit", SpellType.SPELL_PROJECTILE, SpellEffect.EFFECT_ICE, TargetType.ENEMY, 15, SpellRarity.RARE)
+                .damage(10)
+                .level(3)
+                .projectile(Projectiles.iceball)
                 .build();
     }
 }

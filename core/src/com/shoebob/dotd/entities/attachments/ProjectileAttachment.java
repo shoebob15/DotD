@@ -50,9 +50,10 @@ public class ProjectileAttachment extends Attachment {
             spell.projectile.velocity = vel;
 
             // set the projectiles position to the player
-            // pos.x = game.player.position.x - 30;
-            // pos.y = game.player.position.y;
-            // spell.projectile.position = pos;
+            PositionComponent tmp = new PositionComponent();
+             tmp.x = game.player.position.x;
+             tmp.y = game.player.position.y;
+             spell.projectile.position = tmp;
             // TODO: this messes with vector math
 
             spell.projectile.animationComponent = Consts.AnimationComponents.fireball;

@@ -50,8 +50,8 @@ public class Player implements Entity {
 
         spellInventory.spells.add(Consts.Spells.fireball);
         spellInventory.spells.add(Consts.Spells.fireball);
-        spellInventory.spells.add(Consts.Spells.fireball);
-        spellInventory.spells.add(Consts.Spells.fireball);
+        spellInventory.spells.add(Consts.Spells.iceball);
+        spellInventory.spells.add(Consts.Spells.iceball);
     }
 
     public void draw(DotD game) {
