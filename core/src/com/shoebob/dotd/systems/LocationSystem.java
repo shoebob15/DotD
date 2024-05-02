@@ -42,8 +42,15 @@ public class LocationSystem {
         return temp;
     }
 
-    // returns if the position is inside the body, if both points start at the top left
-    public static boolean pointOverlaps(PositionComponent pos, PositionComponent targetPos, BodyComponent targetBody) {
+    public static boolean bodyOverlaps(PositionComponent pos, PositionComponent targetPos, BodyComponent targetBody) {
         return pos.x > targetPos.x && pos.x < targetPos.x + targetBody.width && pos.y > targetPos.y - targetBody.height && pos.y < targetPos.y;
     }
+
+    public static boolean bodyOverlaps(PositionComponent pos1, BodyComponent body1, PositionComponent pos2, BodyComponent body2) {
+        return (pos1.x < pos2.x + body2.width) &&
+                (pos1.y < pos2.y + body2.height) &&
+                (pos2.x < pos1.x + body1.width) &&
+                (pos2.y < pos1.y + body1.height);
+    }
+
 }

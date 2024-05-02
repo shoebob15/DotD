@@ -9,5 +9,11 @@ public class PositionComponent implements Component {
         this.y = y;
     } // not technically supposed to have a constructor, but java doesn't have structs
 
-
+    @Override
+    public String toString() {
+        return "PositionComponent{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

@@ -1,7 +1,5 @@
 package com.shoebob.dotd.managers;
 
-import com.shoebob.dotd.components.BodyComponent;
-import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.entities.enemies.EnemyEntity;
 import com.shoebob.dotd.entities.spells.SpellEntity;
 import com.shoebob.dotd.game.DotD;
@@ -13,11 +11,11 @@ public class EnemyManager {
     private static final ArrayList<EnemyEntity> enemies = new ArrayList<>();
 
     public static void checkEnemies(DotD game) {
-        for (int i = 0; i < enemies.size(); i++) {
+        for (int i = 0 ; i < enemies.size(); i++) {
             for (SpellEntity entity : SpellEntityManager.getSpellEntities()) {
-                boolean overlaps = LocationSystem.pointOverlaps()
-                if (overlaps) {
-                    System.out.println(overlaps);
+                if (LocationSystem.bodyOverlaps(entity.position, entity.body, enemies.get(i).position, enemies.get(i).body)) {
+                    enemies.remove(i);
+                    i--;
                 }
             }
         }
