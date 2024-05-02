@@ -6,10 +6,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.crashinvaders.vfx.VfxManager;
 import com.crashinvaders.vfx.effects.CrtEffect;
@@ -30,9 +33,10 @@ public class GameScreen implements Screen {
 
     public TiledMap map;
 
-    TiledMapTileLayer wallLayer = (TiledMapTileLayer)map.getLayers().get(4);
-
     public OrthogonalTiledMapRenderer mapRenderer;
+
+    TiledMapTileLayer collisionObjectLayer;
+    MapObjects objects;
 
     // vfx shader stuff
     private VfxManager vfxManager;
@@ -51,6 +55,11 @@ public class GameScreen implements Screen {
 
         map = new TmxMapLoader().load("maps/testmap.tmx");
 
+        collisionObjectLayer = (TiledMapTileLayer)map.getLayers().get("walls");
+
+        objects = collisionObjectLayer.getObjects();
+
+        System.out.println(objects.getCount());
 
         mapRenderer = new OrthogonalTiledMapRenderer(map);
 
@@ -109,6 +118,8 @@ public class GameScreen implements Screen {
         game.shape.setProjectionMatrix(game.camera.combined);
         game.batch.begin();
         game.shape.begin(ShapeRenderer.ShapeType.Filled);
+
+        checkPlayerCollisions();
 
         // START UPDATES
         game.player.update(game);
@@ -180,5 +191,33 @@ public class GameScreen implements Screen {
         game.font.draw(game.batch, "MANA - ", game.camera.position.x - 135, game.camera.position.y + 75);
         game.font.setColor(0f, 1, 1, 1);
         game.font.draw(game.batch, game.player.mana.currentMana + "", game.camera.position.x - 50, game.camera.position.y + 75);
+    }
+
+    private void checkPlayerCollisions() {
+        int columns = collisionObjectLayer.getWidth();
+        int rows = collisionObjectLayer.getHeight();
+
+        int cellWidth = collisionObjectLayer.getTileWidth();
+        int cellHeight = collisionObjectLayer.getTileHeight();
+
+        // THIS ARRAY CONTAINS NULL OBJECTS - ALWAYS CHECK IF IT IS NULL
+        TiledMapTileLayer.Cell[][] cells = new TiledMapTileLayer.Cell[columns][rows];
+
+        // generate array of cells
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                TiledMapTileLayer.Cell cell = collisionObjectLayer.getCell(r, c);
+                if (cell != null) {
+                    cells[r][c] = cell;
+                }
+            }
+        }
+
+        int playerTileX = (int) (game.player.position.x / cellWidth);
+        int playerTileY= (int) (game.player.position.y / cellHeight);
+
+        System.out.println(playerTileX + ", " + playerTileY);
+
+
     }
 }

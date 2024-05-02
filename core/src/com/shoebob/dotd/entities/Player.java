@@ -27,7 +27,7 @@ public class Player implements Entity {
 
     @Override
     public void create() {
-        position = new PositionComponent();
+        position = new PositionComponent(40, 40);
         body = new BodyComponent();
         body.width = 32;
         body.height = 32;
