@@ -2,22 +2,18 @@ package com.shoebob.dotd.systems;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.shoebob.dotd.components.AnimatedSpriteComponent;
-import com.shoebob.dotd.components.AnimationComponent;
-import com.shoebob.dotd.components.TextureComponent;
-import com.shoebob.dotd.components.VelocityComponent;
+import com.shoebob.dotd.components.*;
 import com.shoebob.dotd.game.DotD;
-import com.shoebob.dotd.components.AttachableAnimationComponent;
 
 public class AnimationSystem {
     // returns sprite's animation frame based on the direction of the sprite and statetime
-    public static TextureRegion getSpriteAnimationFrame(AnimatedSpriteComponent animation, VelocityComponent velocity, DotD game) {
+    public static TextureRegion getSpriteAnimationFrame(AttachedAnimatedSpriteComponent animation, VelocityComponent velocity, DotD game) {
         AttachableAnimationComponent current = getSpriteAnimation(animation, velocity);
         return current.getAnimation().getKeyFrame(game.statetime);
     }
 
     // returns AttachableAnimationComponent object based on direction
-    public static AttachableAnimationComponent getSpriteAnimation(AnimatedSpriteComponent animation, VelocityComponent velocity) {
+    public static AttachableAnimationComponent getSpriteAnimation(AttachedAnimatedSpriteComponent animation, VelocityComponent velocity) {
         float direction = LocationSystem.getDirection(velocity);
 
         if (velocity.vector.isZero()) {
@@ -32,6 +28,24 @@ public class AnimationSystem {
 
         else return animation.idleAnimation;
     }
+
+    public static AnimationComponent getSpriteAnimation(SpriteAnimationComponent animation, VelocityComponent velocity) {
+        float direction = LocationSystem.getDirection(velocity);
+
+        if (velocity.vector.isZero()) {
+            return animation.idleAnimation;
+        }
+
+        if (direction == 180) return animation.moveLAnimation;
+        else if (direction == 0) return animation.moveRAnimation;
+        else if (direction >= -135 && direction <= -45) return animation.moveFAnimation;
+        else if (direction <= 135 && direction >= 45) return animation.moveBAnimation;
+
+
+        else return animation.idleAnimation;
+    }
+
+
 
     public static TextureRegion getAnimationFrame(AnimationComponent component, DotD game) {
         return component.animation.getKeyFrame(game.statetime, true);
@@ -60,7 +74,7 @@ public class AnimationSystem {
     }
 
 
-    public static void disposeSpriteAnimation(AnimatedSpriteComponent animationComponent) {
+    public static void disposeSpriteAnimation(AttachedAnimatedSpriteComponent animationComponent) {
         animationComponent.idleAnimation.dispose();
         animationComponent.moveLAnimation.dispose();
         animationComponent.moveRAnimation.dispose();

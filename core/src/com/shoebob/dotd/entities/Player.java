@@ -16,7 +16,7 @@ public class Player implements Entity {
     public PositionComponent position; // bad oop, but idc
     public BodyComponent body;
     public VelocityComponent velocity;
-    public AnimatedSpriteComponent animation;
+    public AttachedAnimatedSpriteComponent animation;
     public AttachmentInventoryComponent attachmentInventory;
     public SpellInventoryComponent spellInventory;
     public HealthComponent health;
@@ -32,7 +32,7 @@ public class Player implements Entity {
         body.width = 32;
         body.height = 32;
         velocity = new VelocityComponent();
-        animation = new AnimatedSpriteComponent();
+        animation = new AttachedAnimatedSpriteComponent();
         attachmentInventory = new AttachmentInventoryComponent();
         spellInventory = new SpellInventoryComponent();
         health = new HealthComponent();

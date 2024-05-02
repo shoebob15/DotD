@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.crashinvaders.vfx.VfxManager;
 import com.crashinvaders.vfx.effects.CrtEffect;
 import com.crashinvaders.vfx.effects.OldTvEffect;
+import com.shoebob.dotd.entities.enemies.EnemyEntity;
 import com.shoebob.dotd.entities.ui.MainInventoryBar;
 import com.shoebob.dotd.entities.ui.SpellInventoryBar;
 import com.shoebob.dotd.game.Consts;
@@ -38,11 +39,16 @@ public class GameScreen implements Screen {
 
     private SpellInventoryBar spellInventoryBar;
 
+    // temp
+    private EnemyEntity zombie;
+
+
 
     public GameScreen(DotD game) {
         this.game = game;
 
         map = new TmxMapLoader().load("maps/testmap.tmx");
+
 
         mapRenderer = new OrthogonalTiledMapRenderer(map);
 
@@ -65,6 +71,9 @@ public class GameScreen implements Screen {
         game.camera.position.set(0, 0, 0);
         game.camera.update();
 
+        zombie = new EnemyEntity();
+
+        System.out.println(map.getTileSets().iterator().next().iterator().next().getTextureRegion().getRegionWidth());
     }
 
     @Override
@@ -100,6 +109,9 @@ public class GameScreen implements Screen {
         // START UPDATES
         game.player.update(game);
         game.player.draw(game);
+
+        zombie.update(game);
+        zombie.position.x = game.player.position.x + 10;
 
         ProjectileManager.update(game);
         SpellEntityManager.update(game);

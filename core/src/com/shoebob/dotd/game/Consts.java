@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.components.AnimationComponent;
 import com.shoebob.dotd.components.TextureComponent;
+import com.shoebob.dotd.entities.enemies.EnemyEntity;
 import com.shoebob.dotd.entities.projectiles.AnimatedProjectile;
 import com.shoebob.dotd.spells.*;
 import com.shoebob.dotd.spells.enums.SpellEffect;
@@ -82,11 +83,32 @@ public class Consts {
 
         public static final AnimationComponent lightning_strike =
                 AnimationSystem.buildHorizontalAnimationComponent(new TextureComponent(new Texture("projectiles/lightning_strike.png")), 8, 0.1f);
+
+
+        // zombie animation components
+        public static final AnimationComponent zombieIdle =
+                AnimationSystem.buildHorizontalAnimationComponent(new TextureComponent(new Texture("enemies/zombie/zombie_idle.png")), 2, 0.5f);
+
+        public static final AnimationComponent zombieWalkR =
+                AnimationSystem.buildHorizontalAnimationComponent(new TextureComponent(new Texture("enemies/zombie/zombie_walk_r.png")), 2, 0.25f);
+
+        public static final AnimationComponent zombieWalkL =
+                AnimationSystem.buildHorizontalAnimationComponent(new TextureComponent(new Texture("enemies/zombie/zombie_walk_l.png")), 2, 0.25f);
+
+        public static final AnimationComponent zombieWalkB =
+                AnimationSystem.buildHorizontalAnimationComponent(new TextureComponent(new Texture("enemies/zombie/zombie_walk_b.png")), 2, 0.25f);
+
+        public static final AnimationComponent zombieWalkF =
+                AnimationSystem.buildHorizontalAnimationComponent(new TextureComponent(new Texture("enemies/zombie/zombie_idle.png")), 2, 0.25f);
     }
 
     public static class Projectiles {
         public static final AnimatedProjectile fireball = new AnimatedProjectile(AnimationComponents.fireball);
         public static final AnimatedProjectile iceball = new AnimatedProjectile(AnimationComponents.iceball);
+    }
+
+    public static class Enemies {
+
     }
 
     public static class Spells {
