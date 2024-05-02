@@ -9,15 +9,16 @@ public class SpellEntityManager {
     private static final ArrayList<SpellEntity> spellEntities = new ArrayList<>();
 
     public static void update(DotD game) {
-//        for (SpellEntity entity : spellEntities) {
-//            if (entity.spell.animation.animation.getKeyFrameIndex(game.statetime) == entity.spell.animation.animation.getKeyFrames().length - 1) {
-//                entity.dispose();
-//                spellEntities.remove(entity);
-//            }
-//        }
+        for (int i = 0; i < spellEntities.size(); i++) {
+            spellEntities.get(i).update(game);
+            if (spellEntities.get(i).spell.animation.animation.getKeyFrameIndex(spellEntities.get(i).localtime) == spellEntities.get(i).spell.animation.animation.getKeyFrames().length - 1) {
+                spellEntities.remove(i);
+                i--;
+            }
+        }
 
         for (SpellEntity entity : spellEntities) {
-            game.batch.draw(entity.spell.animation.animation.getKeyFrame(game.statetime, true), entity.position.x, entity.position.y);
+            game.batch.draw(entity.spell.animation.animation.getKeyFrame(entity.localtime, true), entity.position.x, entity.position.y);
         }
     }
 

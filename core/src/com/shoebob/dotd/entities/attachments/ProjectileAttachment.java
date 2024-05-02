@@ -64,7 +64,7 @@ public class ProjectileAttachment extends Attachment {
 
                 game.player.attachmentInventory.selectedSpell.projectile = game.player.attachmentInventory.selectedSpell.projectile.copy();
             } else if (game.player.attachmentInventory.selectedSpell.type == SpellType.SPELL_POINT) {
-                SpellEntity entity = new SpellEntity((Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game)), new BodyComponent(8, 8), game.player.attachmentInventory.selectedSpell);
+                SpellEntity entity = new SpellEntity((Util.screenToWorld(new PositionComponent(Gdx.input.getX() - game.player.attachmentInventory.selectedSpell.animation.animation.getKeyFrames()[0].getRegionWidth() / 2f, Gdx.input.getY()), game)), new BodyComponent(8, 8), game.player.attachmentInventory.selectedSpell);
 
                 SpellEntityManager.addSpellEntity(entity);
             } else {

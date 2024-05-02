@@ -1,5 +1,7 @@
 package com.shoebob.dotd.entities.spells;
 
+import com.badlogic.gdx.Gdx;
+import com.shoebob.dotd.components.AnimationComponent;
 import com.shoebob.dotd.components.BodyComponent;
 import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.entities.Entity;
@@ -11,21 +13,23 @@ public class SpellEntity implements Entity {
     public PositionComponent position;
     public BodyComponent body;
     public Spell spell;
+    public float localtime;
 
     public SpellEntity(PositionComponent position, BodyComponent body, Spell spell) {
         this.position = position;
         this.body = body;
         this.spell = spell;
+        this.localtime = 0;
     }
 
     @Override
     public void create() {
-        // stupid method
+        // stupid method - in the process of phasing out
     }
 
     @Override
     public void update(DotD game) {
-        game.batch.draw(spell.animation.animation.getKeyFrame(game.statetime, false), position.x, position.y, body.width, body.height);
+        localtime += Gdx.graphics.getDeltaTime();
     }
 
     @Override
