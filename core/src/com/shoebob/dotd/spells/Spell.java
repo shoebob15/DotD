@@ -23,8 +23,8 @@ public class Spell {
     // amount of mana the spell costs
     public int manaCost;
 
-    // radius of area-type spells
-    public int areaRadius;
+    // radius of area-type spells and range of point-type spells - initialize to -1 for error checking
+    public int range = -1;
 
     // damage the spell deals when it makes contact with an enemy
     public int damage;
@@ -59,7 +59,7 @@ public class Spell {
 
         public final SpellRarity rarity;
 
-        public int areaRadius;
+        public int range = -1;
 
         public int damage;
 
@@ -84,8 +84,8 @@ public class Spell {
             this.animation = animation;
         }
 
-        public Builder areaRadius(int areaRadius) {
-            this.areaRadius = areaRadius;
+        public Builder range(int range) {
+            this.range = range;
             return this;
         }
 
@@ -118,7 +118,7 @@ public class Spell {
             spell.effect = effect;
             spell.manaCost = manaCost;
             spell.rarity = rarity;
-            spell.areaRadius = areaRadius;
+            spell.range = range;
             spell.damage = damage;
             spell.duration = duration;
             spell.target = target;
@@ -138,6 +138,10 @@ public class Spell {
                 throw new IllegalArgumentException("Point and area spells must have an animation.");
             }
 
+            if (spell.type == SpellType.SPELL_POINT && range == -1) {
+                throw new IllegalArgumentException("Point spells must have an area radius");
+            }
+
             return spell;
         }
     }
@@ -150,7 +154,7 @@ public class Spell {
                 ", type=" + type +
                 ", effect=" + effect +
                 ", manaCost=" + manaCost +
-                ", areaRadius=" + areaRadius +
+                ", areaRadius=" + range +
                 ", damage=" + damage +
                 ", duration=" + duration +
                 ", target=" + target +

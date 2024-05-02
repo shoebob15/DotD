@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.components.*;
-import com.shoebob.dotd.entities.attachments.ProjectileAttachment;
+import com.shoebob.dotd.entities.attachments.SpellAttachment;
 import com.shoebob.dotd.game.Consts;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.systems.AnimationSystem;
@@ -21,7 +21,7 @@ public class Player implements Entity {
     public SpellInventoryComponent spellInventory;
     public HealthComponent health;
     public ManaComponent mana;
-    private ProjectileAttachment magic_staff; // TODO; should be in cosnts
+    private SpellAttachment magic_staff; // TODO; should be in cosnts
 
 
 
@@ -39,7 +39,7 @@ public class Player implements Entity {
         mana = new ManaComponent();
         mana.currentMana = 9999999;
 
-        magic_staff = new ProjectileAttachment(new TextureComponent(new Texture("weapons/magic_staff.png")));
+        magic_staff = new SpellAttachment(new TextureComponent(new Texture("weapons/magic_staff.png")));
 
         attachmentInventory.attachments.add(magic_staff);
         attachmentInventory.attachments.add(magic_staff);

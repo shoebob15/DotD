@@ -105,6 +105,7 @@ public class Consts {
         public static final Spell lightning_strike = new Spell.Builder("Lightning", "An electrifying zap", SpellType.SPELL_POINT, SpellEffect.EFFECT_NONE, TargetType.ENEMY, 20, SpellRarity.COMMON, AnimationComponents.lightning_strike)
                 .damage(15)
                 .level(3)
+                .range(175)
                 .build();
     }
 }

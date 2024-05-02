@@ -7,7 +7,8 @@ import com.shoebob.dotd.entities.attachments.Attachment;
 import com.shoebob.dotd.game.DotD;
 
 // class for the bar at the bottom of the screen that has the selected spell and weapons
-@Deprecated
+@Deprecated // deprecation due to not fitting with the style of the game
+// spell-casting game, not attachment game
 public class MainInventoryBar extends OverlayEntity {
     AttachmentInventoryComponent inventory;
 
@@ -15,6 +16,7 @@ public class MainInventoryBar extends OverlayEntity {
     public void create() {
         super.create();
         texture.texture = new Texture(Gdx.files.internal("ui/horizontal_inventory.png"));
+
         screenPos.x = .05f;
         screenPos.y = .05f;
 
@@ -56,13 +58,13 @@ public class MainInventoryBar extends OverlayEntity {
         int index = 0;
 
         // render current attachments in inventory
-        for (Attachment attachment : inventory.attachments) {
-            game.batch.draw(attachment.texture.texture, x + 33 + (spacing * index), y + 6,
-                    attachment.texture.texture.getWidth() * .8f,
-                    attachment.texture.texture.getHeight() * .8f
-            );
-
-            index++;
-        }
+//        for (Attachment attachment : inventory.attachments) {
+//            game.batch.draw(attachment.texture.texture, x + 33 + (spacing * index), y + 6,
+//                    attachment.texture.texture.getWidth() * .8f,
+//                    attachment.texture.texture.getHeight() * .8f
+//            );
+//
+//            index++;
+//        }
     }
 }

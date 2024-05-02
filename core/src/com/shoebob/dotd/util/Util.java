@@ -18,6 +18,10 @@ public class Util {
         return new PositionComponent(tmp.x, tmp.y);
     }
 
+    public static PositionComponent screenToWorld(int x, int y, DotD game) {
+        return screenToWorld(new PositionComponent(x, y), game);
+    }
+
     public static String getRomanNumber(int number) {
         return join("", nCopies(number, "I"))
                 .replace("IIIII", "V")
