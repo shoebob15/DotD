@@ -19,6 +19,7 @@ import com.shoebob.dotd.game.Consts;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.managers.ProjectileManager;
 import com.shoebob.dotd.managers.SpellEntityManager;
+import com.shoebob.dotd.managers.EnemyManager;
 import com.shoebob.dotd.systems.ManaSystem;
 import com.shoebob.dotd.util.CameraShake;
 
@@ -38,9 +39,6 @@ public class GameScreen implements Screen {
     private MainInventoryBar mainInventoryBar;
 
     private SpellInventoryBar spellInventoryBar;
-
-    // temp
-    private EnemyEntity zombie;
 
 
 
@@ -71,7 +69,9 @@ public class GameScreen implements Screen {
         game.camera.position.set(0, 0, 0);
         game.camera.update();
 
-        zombie = new EnemyEntity();
+        EnemyManager.addEnemy(new EnemyEntity());
+        EnemyManager.addEnemy(new EnemyEntity());
+        EnemyManager.addEnemy(new EnemyEntity());
 
         System.out.println(map.getTileSets().iterator().next().iterator().next().getTextureRegion().getRegionWidth());
     }
@@ -110,11 +110,9 @@ public class GameScreen implements Screen {
         game.player.update(game);
         game.player.draw(game);
 
-        zombie.update(game);
-        zombie.position.x = game.player.position.x + 10;
-
         ProjectileManager.update(game);
         SpellEntityManager.update(game);
+        EnemyManager.update(game);
         ManaSystem.updateMana(game.player);
 
         drawPlayerInfo();
