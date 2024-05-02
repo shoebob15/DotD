@@ -34,7 +34,6 @@ public class GameScreen implements Screen {
     private CrtEffect crtEffect;
 
     // ui
-    private MainInventoryBar mainInventoryBar;
 
     private SpellInventoryBar spellInventoryBar;
 
@@ -45,11 +44,6 @@ public class GameScreen implements Screen {
         map = new TmxMapLoader().load("maps/testmap.tmx");
 
         mapRenderer = new OrthogonalTiledMapRenderer(map);
-
-        mainInventoryBar = new MainInventoryBar();
-        mainInventoryBar.create();
-
-        mainInventoryBar.loadInventory(game.player.attachmentInventory);
 
         spellInventoryBar = new SpellInventoryBar();
         spellInventoryBar.create();
@@ -107,7 +101,6 @@ public class GameScreen implements Screen {
 
         drawPlayerInfo();
 
-        mainInventoryBar.update(game);
         spellInventoryBar.update(game);
 
         // END UPDATES

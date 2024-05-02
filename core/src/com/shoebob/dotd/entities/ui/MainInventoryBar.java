@@ -7,6 +7,7 @@ import com.shoebob.dotd.entities.attachments.Attachment;
 import com.shoebob.dotd.game.DotD;
 
 // class for the bar at the bottom of the screen that has the selected spell and weapons
+@Deprecated
 public class MainInventoryBar extends OverlayEntity {
     AttachmentInventoryComponent inventory;
 
