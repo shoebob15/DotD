@@ -13,7 +13,7 @@ public class EnemyManager {
     private static final ArrayList<EnemyEntity> enemies = new ArrayList<>();
 
     public static void checkEnemies(DotD game) {
-        for (int i = 0 ; i < enemies.size(); i++) {
+        for (int i = 0 ; i < enemies.size(); i++) { // no enhanced for because removing items
             for (SpellEntity entity : SpellEntityManager.getSpellEntities()) {
                 if (LocationSystem.bodyOverlaps(entity.position, entity.body, enemies.get(i).position, enemies.get(i).body)) {
                     enemies.remove(i);
