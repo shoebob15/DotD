@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -217,6 +218,28 @@ public class GameScreen implements Screen {
         int playerTileY= (int) (game.player.position.y / cellHeight);
 
         System.out.println(playerTileX + ", " + playerTileY);
+        TiledMapTileLayer.Cell leftCell;
+        TiledMapTileLayer.Cell rightCell;
+        TiledMapTileLayer.Cell topCell;
+        TiledMapTileLayer.Cell bottomCell;
+
+        if (playerTileX > 0) {
+            leftCell = collisionObjectLayer.getCell(playerTileX - 1, playerTileY);
+        }
+
+        if (playerTileX < rows - 1) {
+            rightCell = collisionObjectLayer.getCell(playerTileX + 1, playerTileY);
+        }
+
+        if (playerTileY > 0) {
+            bottomCell = collisionObjectLayer.getCell(playerTileX, playerTileY - 1);
+        }
+
+        if (playerTileY < cellHeight - 1) {
+            topCell = collisionObjectLayer.getCell(playerTileX, playerTileY + 1);
+        }
+
+
 
 
     }
