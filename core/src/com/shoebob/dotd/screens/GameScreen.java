@@ -120,7 +120,7 @@ public class GameScreen implements Screen {
         game.batch.begin();
         game.shape.begin(ShapeRenderer.ShapeType.Filled);
 
-        checkPlayerCollisions();
+        game.player.checkPlayerCollisions(collisionObjectLayer);
 
         // START UPDATES
         game.player.update(game);
@@ -194,53 +194,5 @@ public class GameScreen implements Screen {
         game.font.draw(game.batch, game.player.mana.currentMana + "", game.camera.position.x - 50, game.camera.position.y + 75);
     }
 
-    private void checkPlayerCollisions() {
-        int columns = collisionObjectLayer.getWidth();
-        int rows = collisionObjectLayer.getHeight();
 
-        int cellWidth = collisionObjectLayer.getTileWidth();
-        int cellHeight = collisionObjectLayer.getTileHeight();
-
-        // THIS ARRAY CONTAINS NULL OBJECTS - ALWAYS CHECK IF IT IS NULL
-        TiledMapTileLayer.Cell[][] cells = new TiledMapTileLayer.Cell[columns][rows];
-
-        // generate array of cells
-        for (int r = 0; r < rows; r++) {
-            for (int c = 0; c < columns; c++) {
-                TiledMapTileLayer.Cell cell = collisionObjectLayer.getCell(r, c);
-                if (cell != null) {
-                    cells[r][c] = cell;
-                }
-            }
-        }
-
-        int playerTileX = (int) (game.player.position.x / cellWidth);
-        int playerTileY= (int) (game.player.position.y / cellHeight);
-
-        System.out.println(playerTileX + ", " + playerTileY);
-        TiledMapTileLayer.Cell leftCell;
-        TiledMapTileLayer.Cell rightCell;
-        TiledMapTileLayer.Cell topCell;
-        TiledMapTileLayer.Cell bottomCell;
-
-        if (playerTileX > 0) {
-            leftCell = collisionObjectLayer.getCell(playerTileX - 1, playerTileY);
-        }
-
-        if (playerTileX < rows - 1) {
-            rightCell = collisionObjectLayer.getCell(playerTileX + 1, playerTileY);
-        }
-
-        if (playerTileY > 0) {
-            bottomCell = collisionObjectLayer.getCell(playerTileX, playerTileY - 1);
-        }
-
-        if (playerTileY < cellHeight - 1) {
-            topCell = collisionObjectLayer.getCell(playerTileX, playerTileY + 1);
-        }
-
-
-
-
-    }
 }
