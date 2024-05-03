@@ -1,7 +1,6 @@
 package com.shoebob.dotd.entities.spells;
 
 import com.badlogic.gdx.Gdx;
-import com.shoebob.dotd.components.AnimationComponent;
 import com.shoebob.dotd.components.BodyComponent;
 import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.entities.Entity;

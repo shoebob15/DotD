@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.shoebob.dotd.components.*;
 import com.shoebob.dotd.entities.attachments.SpellAttachment;
@@ -23,14 +24,18 @@ public class Player implements Entity {
     public ManaComponent mana;
     private SpellAttachment magic_staff; // TODO; should be in cosnts
 
+    // if there is a collision tile
+    private boolean tileLeft = false;
+    private boolean tileRight = false;
+    private boolean tileBottom = false;
+    private boolean tileTop = false;
+
 
 
     @Override
     public void create() {
-        position = new PositionComponent();
-        body = new BodyComponent();
-        body.width = 32;
-        body.height = 32;
+        position = new PositionComponent(40, 40);
+        body = new BodyComponent(32, 32);
         velocity = new VelocityComponent();
         animation = new AttachedAnimatedSpriteComponent();
         attachmentInventory = new AttachmentInventoryComponent();
@@ -71,16 +76,16 @@ public class Player implements Entity {
         float expX = 0, expY = 0;
 
         if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
-            if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if ((Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) && !tileTop) {
                 expY += 1;
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            if ((Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) && !tileBottom) {
                 expY -= 1;
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            if ((Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) && !tileLeft) {
                 expX -= 1;
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            if ((Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) && !tileRight) {
                 expX += 1;
             }
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
@@ -103,6 +108,57 @@ public class Player implements Entity {
         magic_staff.position = loc2;
         magic_staff.update(game);
     }
+
+    public void checkPlayerCollisions(TiledMapTileLayer collisionObjectLayer) {
+        int columns = collisionObjectLayer.getWidth();
+        int rows = collisionObjectLayer.getHeight();
+
+        int cellWidth = collisionObjectLayer.getTileWidth();
+        int cellHeight = collisionObjectLayer.getTileHeight();
+
+        // THIS ARRAY CONTAINS NULL OBJECTS - ALWAYS CHECK IF IT IS NULL
+        TiledMapTileLayer.Cell[][] cells = new TiledMapTileLayer.Cell[columns][rows];
+
+        // generate array of cells
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                TiledMapTileLayer.Cell cell = collisionObjectLayer.getCell(r, c);
+                if (cell != null) {
+                    cells[r][c] = cell;
+                }
+            }
+        }
+
+        int playerTileX = (int) (position.x / cellWidth);
+        int playerTileY= (int) (position.y / cellHeight);
+
+        TiledMapTileLayer.Cell leftCell = null;
+        TiledMapTileLayer.Cell rightCell = null;
+        TiledMapTileLayer.Cell topCell = null;
+        TiledMapTileLayer.Cell bottomCell = null;
+
+        leftCell = collisionObjectLayer.getCell(playerTileX, playerTileY);
+
+
+        rightCell = collisionObjectLayer.getCell(playerTileX + 2, playerTileY);
+
+
+        bottomCell = collisionObjectLayer.getCell(playerTileX, playerTileY);
+
+        topCell = collisionObjectLayer.getCell(playerTileX, playerTileY + 1);
+
+
+
+        tileLeft = leftCell != null;
+
+        tileRight = rightCell != null;
+        System.out.println(tileRight);
+
+        tileBottom = bottomCell != null;
+
+        tileTop = topCell != null;
+    }
+
 
     public void dispose() {
         AnimationSystem.disposeSpriteAnimation(animation);

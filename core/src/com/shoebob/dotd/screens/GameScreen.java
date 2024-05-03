@@ -5,9 +5,15 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.crashinvaders.vfx.VfxManager;
 import com.crashinvaders.vfx.effects.CrtEffect;
@@ -19,6 +25,7 @@ import com.shoebob.dotd.game.Consts;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.managers.ProjectileManager;
 import com.shoebob.dotd.managers.SpellEntityManager;
+import com.shoebob.dotd.managers.EnemyManager;
 import com.shoebob.dotd.systems.ManaSystem;
 import com.shoebob.dotd.util.CameraShake;
 
@@ -28,6 +35,9 @@ public class GameScreen implements Screen {
     public TiledMap map;
 
     public OrthogonalTiledMapRenderer mapRenderer;
+
+    TiledMapTileLayer collisionObjectLayer;
+    MapObjects objects;
 
     // vfx shader stuff
     private VfxManager vfxManager;
@@ -39,9 +49,6 @@ public class GameScreen implements Screen {
 
     private SpellInventoryBar spellInventoryBar;
 
-    // temp
-    private EnemyEntity zombie;
-
 
 
     public GameScreen(DotD game) {
@@ -49,6 +56,11 @@ public class GameScreen implements Screen {
 
         map = new TmxMapLoader().load("maps/testmap.tmx");
 
+        collisionObjectLayer = (TiledMapTileLayer)map.getLayers().get("walls");
+
+        objects = collisionObjectLayer.getObjects();
+
+        System.out.println(objects.getCount());
 
         mapRenderer = new OrthogonalTiledMapRenderer(map);
 
@@ -71,7 +83,9 @@ public class GameScreen implements Screen {
         game.camera.position.set(0, 0, 0);
         game.camera.update();
 
-        zombie = new EnemyEntity();
+        EnemyManager.addEnemy(new EnemyEntity());
+        EnemyManager.addEnemy(new EnemyEntity());
+        EnemyManager.addEnemy(new EnemyEntity());
 
         System.out.println(map.getTileSets().iterator().next().iterator().next().getTextureRegion().getRegionWidth());
     }
@@ -106,15 +120,15 @@ public class GameScreen implements Screen {
         game.batch.begin();
         game.shape.begin(ShapeRenderer.ShapeType.Filled);
 
+        game.player.checkPlayerCollisions(collisionObjectLayer);
+
         // START UPDATES
         game.player.update(game);
         game.player.draw(game);
 
-        zombie.update(game);
-        zombie.position.x = game.player.position.x + 10;
-
         ProjectileManager.update(game);
         SpellEntityManager.update(game);
+        EnemyManager.update(game);
         ManaSystem.updateMana(game.player);
 
         drawPlayerInfo();
@@ -179,4 +193,6 @@ public class GameScreen implements Screen {
         game.font.setColor(0f, 1, 1, 1);
         game.font.draw(game.batch, game.player.mana.currentMana + "", game.camera.position.x - 50, game.camera.position.y + 75);
     }
+
+
 }

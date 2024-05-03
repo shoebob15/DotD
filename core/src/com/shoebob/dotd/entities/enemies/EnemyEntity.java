@@ -41,20 +41,6 @@ public class EnemyEntity implements Entity {
     public void update(DotD game) {
         float expX = 0, expY = 0;
 
-        if (Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
-            if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
-                expY += 1;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-                expY -= 1;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                expX -= 1;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                expX += 1;
-            }
-        }
 
         velocity.vector.set(expX, expY);
         velocity.vector.nor();

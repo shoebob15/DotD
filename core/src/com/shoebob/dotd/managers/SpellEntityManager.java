@@ -25,4 +25,8 @@ public class SpellEntityManager {
     public static void addSpellEntity(SpellEntity entity) {
         spellEntities.add(entity);
     }
+
+    public static ArrayList<SpellEntity> getSpellEntities() {
+        return spellEntities;
+    }
 }

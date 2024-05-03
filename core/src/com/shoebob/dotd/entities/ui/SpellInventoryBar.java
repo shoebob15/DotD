@@ -44,7 +44,7 @@ public class SpellInventoryBar extends OverlayEntity {
 
         // check if clicked - if yes, then flip isHidden
         if (Gdx.input.justTouched()) {
-            if (LocationSystem.pointOverlaps(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), new PositionComponent(35, 454), new BodyComponent(48, 48))) {
+            if (LocationSystem.bodyOverlaps(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), new PositionComponent(35, 454), new BodyComponent(48, 48))) {
                 isHidden = !isHidden;
             }
         }
@@ -80,7 +80,7 @@ public class SpellInventoryBar extends OverlayEntity {
     private void checkInfoDialog(DotD game) {
         for (int i = 0; i < inventory.spells.size(); i++) {
             // yeah, I'm never touching this code again
-            if (LocationSystem.pointOverlaps((Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game)), new PositionComponent(gamePos.x, gamePos.y + texture.texture.getHeight()), new BodyComponent(texture.texture.getWidth(), texture.texture.getHeight()))) {
+            if (LocationSystem.bodyOverlaps((Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game)), new PositionComponent(gamePos.x, gamePos.y + texture.texture.getHeight()), new BodyComponent(texture.texture.getWidth(), texture.texture.getHeight()))) {
                 if (Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y > i * (texture.texture.getHeight() / 4f) + gamePos.y && Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y < (i * texture.texture.getHeight() / 4f + texture.texture.getHeight() / 4f) + gamePos.y) {
                     // get currently selected spell
                     Spell currentSpell = inventory.spells.get(i);

@@ -32,4 +32,8 @@ public class ProjectileManager {
         animatedProjectiles.add(projectile);
     }
 
+    public static ArrayList<AnimatedProjectile> getAnimatedProjectiles() {
+        return animatedProjectiles;
+    }
+
 }
