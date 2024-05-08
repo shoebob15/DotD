@@ -27,12 +27,12 @@ import com.shoebob.dotd.managers.ProjectileManager;
 import com.shoebob.dotd.managers.SpellEntityManager;
 import com.shoebob.dotd.managers.EnemyManager;
 import com.shoebob.dotd.systems.ManaSystem;
+import com.shoebob.dotd.systems.PathfindingSystem;
 import com.shoebob.dotd.util.CameraShake;
+import com.shoebob.dotd.util.Util;
 
 public class GameScreen implements Screen {
     final DotD game;
-
-    public TiledMap map;
 
     public OrthogonalTiledMapRenderer mapRenderer;
 
@@ -54,15 +54,15 @@ public class GameScreen implements Screen {
     public GameScreen(DotD game) {
         this.game = game;
 
-        map = new TmxMapLoader().load("maps/testmap.tmx");
+        game.map = new TmxMapLoader().load("maps/testmap.tmx");
 
-        collisionObjectLayer = (TiledMapTileLayer)map.getLayers().get("walls");
+        collisionObjectLayer = (TiledMapTileLayer)game.map.getLayers().get("walls");
 
         objects = collisionObjectLayer.getObjects();
 
         System.out.println(objects.getCount());
 
-        mapRenderer = new OrthogonalTiledMapRenderer(map);
+        mapRenderer = new OrthogonalTiledMapRenderer(game.map);
 
         mainInventoryBar = new MainInventoryBar();
         mainInventoryBar.create();
@@ -86,14 +86,11 @@ public class GameScreen implements Screen {
         EnemyManager.addEnemy(new EnemyEntity());
         EnemyManager.addEnemy(new EnemyEntity());
         EnemyManager.addEnemy(new EnemyEntity());
-
-        System.out.println(map.getTileSets().iterator().next().iterator().next().getTextureRegion().getRegionWidth());
     }
 
     @Override
     public void show() {
         System.out.println("Game!");
-        System.out.println(Consts.Spells.fireball);
     }
 
     @Override
@@ -172,7 +169,8 @@ public class GameScreen implements Screen {
     public void dispose() {
         game.batch.dispose();
         game.player.dispose();
-        map.dispose();
+        game.map.dispose();
+        game.dispose();
 
         vfxManager.dispose();
         tvEffect.dispose();

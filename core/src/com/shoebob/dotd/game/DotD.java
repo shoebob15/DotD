@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.shoebob.dotd.entities.Player;
 import com.shoebob.dotd.screens.MainMenuScreen;
 
@@ -29,6 +30,9 @@ public class DotD extends Game {
 
     // stores the statetime
     public float statetime;
+
+    // the map
+    public TiledMap map;
 
 
     public void create() {

@@ -1,18 +1,19 @@
 package com.shoebob.dotd.systems;
 
+import com.shoebob.dotd.util.Util;
+
 import java.util.HashSet;
 import java.util.Set;
 
 public class PathfindingSystem {
-    private enum NodeType {
+    public enum NodeType {
         AIR,
         WALL,
         START,
-        END,
-        EXPLORED
+        END
     }
 
-    private class Node {
+    public static class Node {
         public int x, y;
         public double distance; // calculated value of the distance
         public NodeType type;
@@ -40,8 +41,9 @@ public class PathfindingSystem {
     }
 
 
-    // uses the a* pathfinding
-    public static boolean[][] pathfind(Node[][] map) {
+    // uses the a* pathfinding algorithm
+    public static Util.Directions[] pathfind(Node[][] map) {
+        Set<Node> explored = new HashSet<>();
         Set<Node> unexplored = new HashSet<>(); // can not contain duplicate objects - "fancy" ArrayList
 
         Node startNode = null;
@@ -83,13 +85,83 @@ public class PathfindingSystem {
         }
 
         while (!unexplored.isEmpty()) {
+            Node currentNode = null;
+            double minDistance = Double.MAX_VALUE;
 
+            // Find the node with the smallest distance in the unexplored set
+            for (Node node : unexplored) {
+                if (node.distance < minDistance) {
+                    currentNode = node;
+                    minDistance = node.distance;
+                }
+            }
+
+            if (currentNode == null) {
+                break; // No path found
+            }
+
+            if (currentNode == endNode) {
+                // Path found, construct and return the path
+                return constructPath(startNode, endNode);
+            }
+
+            unexplored.remove(currentNode);
+            explored.add(currentNode);
+
+            // Get neighboring nodes - top, right, bottom, left
+            Node[] adjacentNodes = null;
+            try {
+                adjacentNodes = new Node[]{
+                        map[currentNode.x][currentNode.y - 1],
+                        map[currentNode.x + 1][currentNode.y],
+                        map[currentNode.x][currentNode.y + 1],
+                        map[currentNode.x - 1][currentNode.y]
+                };
+            } catch (ArrayIndexOutOfBoundsException e) {
+            }
+
+            for (Node neighbor : adjacentNodes) {
+                if (neighbor == null || explored.contains(neighbor) || neighbor.type == NodeType.WALL) {
+                    continue; // Skip walls or already explored nodes
+                }
+
+                double tentativeDistance = currentNode.distance + 1; // Assuming each step has a distance of 1
+
+                if (tentativeDistance < neighbor.distance) {
+                    neighbor.distance = tentativeDistance;
+                    neighbor.parent = currentNode;
+                    if (!unexplored.contains(neighbor)) {
+                        unexplored.add(neighbor);
+                    }
+                }
+            }
         }
 
-        startNode.distance = 0;
+// No path found
+        return null;
+    }
 
+    private static Util.Directions[] constructPath(Node startNode, Node endNode) {
+        // Trace back from end node to start node
+        Node currentNode = endNode;
+        int length = (int) Math.ceil(currentNode.distance); // Length of the path
+        Util.Directions[] path = new Util.Directions[length];
+        int index = length - 1;
 
+        while (currentNode != startNode) {
+            Node parent = currentNode.parent;
+            if (parent.x < currentNode.x) {
+                path[index--] = Util.Directions.WEST;
+            } else if (parent.x > currentNode.x) {
+                path[index--] = Util.Directions.EAST;
+            } else if (parent.y < currentNode.y) {
+                path[index--] = Util.Directions.NORTH;
+            } else if (parent.y > currentNode.y) {
+                path[index--] = Util.Directions.SOUTH;
+            }
+            currentNode = parent;
+        }
 
-        return new boolean[1][1];
+        return path;
     }
 }

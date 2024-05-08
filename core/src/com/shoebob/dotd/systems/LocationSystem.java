@@ -1,10 +1,12 @@
 package com.shoebob.dotd.systems;
 
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.shoebob.dotd.components.BodyComponent;
 import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.components.VelocityComponent;
+import com.shoebob.dotd.game.DotD;
 
 public class LocationSystem {
     // takes position and velocity, and adds velocity to position
@@ -51,6 +53,18 @@ public class LocationSystem {
                 (pos1.y < pos2.y + body2.height) &&
                 (pos2.x < pos1.x + body1.width) &&
                 (pos2.y < pos1.y + body1.height);
+    }
+
+    public static PositionComponent gameToMap(PositionComponent pos, DotD game) {
+        TiledMapTileLayer layer = (TiledMapTileLayer)game.map.getLayers().get("base");
+
+        int cellWidth = layer.getTileWidth();
+        int cellHeight = layer.getTileHeight();
+
+        int tileX = (int) (pos.x / cellWidth);
+        int tileY= (int) (pos.y / cellHeight);
+
+        return new PositionComponent(tileX, tileY);
     }
 
 }
