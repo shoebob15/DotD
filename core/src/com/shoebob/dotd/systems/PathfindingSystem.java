@@ -84,6 +84,7 @@ public class PathfindingSystem {
             throw new IllegalArgumentException("The Node map must contain 1 end node.");
         }
 
+        Node[] adjacentNodes = new Node[0];
         while (!unexplored.isEmpty()) {
             Node currentNode = null;
             double minDistance = Double.MAX_VALUE;
@@ -109,16 +110,25 @@ public class PathfindingSystem {
             explored.add(currentNode);
 
             // Get neighboring nodes - top, right, bottom, left
-            Node[] adjacentNodes = null;
-            try {
-                adjacentNodes = new Node[]{
-                        map[currentNode.x][currentNode.y - 1],
-                        map[currentNode.x + 1][currentNode.y],
-                        map[currentNode.x][currentNode.y + 1],
-                        map[currentNode.x - 1][currentNode.y]
-                };
-            } catch (ArrayIndexOutOfBoundsException e) {
-            }
+            adjacentNodes = new Node[4];
+
+            // make the algorithm ignore any nodes
+            if (currentNode.y == map.length - 1)
+                adjacentNodes[0] = new Node(currentNode.x, currentNode.y + 1, NodeType.WALL);
+            else adjacentNodes[0] = map[currentNode.x][currentNode.y + 1];
+
+            if (currentNode.x == map.length - 1)
+                adjacentNodes[1] = new Node(currentNode.x + 1, currentNode.y, NodeType.WALL);
+            else adjacentNodes[1] = map[currentNode.x + 1][currentNode.y];
+
+            if (currentNode.y == 0)
+                adjacentNodes[2] = new Node(currentNode.x, currentNode.y - 1, NodeType.WALL);
+            else adjacentNodes[2] = map[currentNode.x][currentNode.y - 1];
+
+            if (currentNode.x == 0)
+                adjacentNodes[3] = new Node(currentNode.x - 1, currentNode.y, NodeType.WALL);
+            else adjacentNodes[3] = map[currentNode.x - 1][currentNode.y];
+
 
             for (Node neighbor : adjacentNodes) {
                 if (neighbor == null || explored.contains(neighbor) || neighbor.type == NodeType.WALL) {
@@ -136,8 +146,7 @@ public class PathfindingSystem {
                 }
             }
         }
-
-// No path found
+        // No path found
         return null;
     }
 
@@ -145,6 +154,11 @@ public class PathfindingSystem {
         // Trace back from end node to start node
         Node currentNode = endNode;
         int length = (int) Math.ceil(currentNode.distance); // Length of the path
+
+        if (length == Integer.MAX_VALUE) {
+            return null;
+        }
+
         Util.Directions[] path = new Util.Directions[length];
         int index = length - 1;
 

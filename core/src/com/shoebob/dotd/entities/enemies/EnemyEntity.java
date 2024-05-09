@@ -54,11 +54,13 @@ public class EnemyEntity implements Entity {
         game.batch.draw(animation.currentAnimation.animation.getKeyFrame(game.statetime, true), position.x, position.y, body.width, body.height);
         PathfindingSystem.Node[][] pathfind = Util.tiledMapToNodeMap(game.map);
         pathfind[(int) LocationSystem.gameToMap(position, game).x][(int) LocationSystem.gameToMap(position, game).y].type = PathfindingSystem.NodeType.START;
-        pathfind[(int) LocationSystem.gameToMap(game.player.position, game).x][(int) LocationSystem.gameToMap(game.player.position, game).y].type = PathfindingSystem.NodeType.END;
+        pathfind[(int) LocationSystem.gameToMap(game.player.position, game).x - 1][(int) LocationSystem.gameToMap(game.player.position, game).y - 1].type = PathfindingSystem.NodeType.END;
 
         pathfindingDirections = PathfindingSystem.pathfind(pathfind);
-
-        System.out.println(pathfindingDirections);
+        if (pathfindingDirections != null) {
+            velocity.vector = pathfindingDirections[0].vec;
+            System.out.println(pathfindingDirections);
+        }
 
     }
 

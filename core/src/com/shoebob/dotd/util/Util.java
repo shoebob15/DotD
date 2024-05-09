@@ -65,9 +65,14 @@ public class Util {
 
 
     public enum Directions {
-        NORTH,
-        EAST,
-        SOUTH,
-        WEST,
+        NORTH(new Vector2(0, 1)),
+        EAST(new Vector2(1, 0)),
+        SOUTH(new Vector2(0, -1)),
+        WEST(new Vector2(-1, 0));
+
+        public final Vector2 vec;
+        Directions(Vector2 vec) {
+            this.vec = vec;
+        }
     }
 }
