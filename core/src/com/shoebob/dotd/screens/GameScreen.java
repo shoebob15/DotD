@@ -54,7 +54,7 @@ public class GameScreen implements Screen {
     public GameScreen(DotD game) {
         this.game = game;
 
-        map = new TmxMapLoader().load("maps/testmap.tmx");
+        map = new TmxMapLoader().load("maps/build.tmx");
 
         collisionObjectLayer = (TiledMapTileLayer)map.getLayers().get("walls");
 

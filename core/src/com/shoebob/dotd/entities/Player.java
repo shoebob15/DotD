@@ -35,7 +35,7 @@ public class Player implements Entity {
     @Override
     public void create() {
         position = new PositionComponent(40, 40);
-        body = new BodyComponent(32, 32);
+        body = new BodyComponent(16, 16);
         velocity = new VelocityComponent();
         animation = new AttachedAnimatedSpriteComponent();
         attachmentInventory = new AttachmentInventoryComponent();

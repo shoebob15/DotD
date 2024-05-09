@@ -20,7 +20,7 @@ public class EnemyEntity implements Entity {
 
     public EnemyEntity() {
         this.position = new PositionComponent(15, 15);
-        this.body = new BodyComponent(32, 32);
+        this.body = new BodyComponent(16, 16);
         this.velocity = new VelocityComponent();
         this.animation = new SpriteAnimationComponent();
 
