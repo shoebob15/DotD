@@ -63,11 +63,11 @@ public class Player implements Entity {
         TextureRegion frame = animation.currentAnimation.getAnimation().getKeyFrame(game.statetime);
 
         if (animation.currentAnimation.shouldRenderOnTop()) {
-            game.batch.draw(frame, position.x, position.y, body.width, body.height);
+            game.batch.draw(frame, position.x + 8, position.y, body.width, body.height);
             magic_staff.draw(game.batch, animation.currentAnimation.getRotation());
         } else {
             magic_staff.draw(game.batch, animation.currentAnimation.getRotation());
-            game.batch.draw(frame, position.x, position.y, body.width, body.height);
+            game.batch.draw(frame, position.x + 8, position.y, body.width, body.height);
         }
 
     }

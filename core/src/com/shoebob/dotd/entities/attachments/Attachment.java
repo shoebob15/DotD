@@ -28,7 +28,7 @@ public abstract class Attachment implements Entity {
 
     public void draw(SpriteBatch s, float rotation) {
         s.draw(texture.texture, position.x + 8, position.y + 8, 8, 8,
-                8, 8, 2, 2, rotation, 0, 0, texture.texture.getWidth(),
+                8, 8, 1, 1, rotation, 0, 0, texture.texture.getWidth(),
                 texture.texture.getHeight(), false, false);
     }
 

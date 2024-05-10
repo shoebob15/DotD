@@ -3,6 +3,7 @@ package com.shoebob.dotd.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObjects;
@@ -83,17 +84,18 @@ public class GameScreen implements Screen {
         game.camera.position.set(0, 0, 0);
         game.camera.update();
 
-        EnemyManager.addEnemy(new EnemyEntity());
-        EnemyManager.addEnemy(new EnemyEntity());
-        EnemyManager.addEnemy(new EnemyEntity());
+        game.camera = new OrthographicCamera(200,
+                200 * ((float) Gdx.graphics.getHeight() / Gdx.graphics.getWidth())
+        );
 
-        System.out.println(map.getTileSets().iterator().next().iterator().next().getTextureRegion().getRegionWidth());
+        EnemyManager.addEnemy(new EnemyEntity());
+        EnemyManager.addEnemy(new EnemyEntity());
+        EnemyManager.addEnemy(new EnemyEntity());
     }
 
     @Override
     public void show() {
         System.out.println("Game!");
-        System.out.println(Consts.Spells.fireball);
     }
 
     @Override

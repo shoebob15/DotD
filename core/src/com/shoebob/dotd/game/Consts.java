@@ -23,8 +23,8 @@ public class Consts {
                 new Texture(Gdx.files.internal("player/player_idle.png")),
                 0.5f,
                 new Vector2[]{
-                        new Vector2(2, 11),
-                        new Vector2(2, 8.5f),
+                        new Vector2(5, 1),
+                        new Vector2(5, -1.5f),
                 },
                 0
         );
@@ -33,8 +33,8 @@ public class Consts {
                 new Texture(Gdx.files.internal("player/player_walk_r.png")),
                 0.25f,
                 new Vector2[]{
-                        new Vector2(3, 11),
-                        new Vector2(3, 8.5f)
+                        new Vector2(5, 0f),
+                        new Vector2(5, -1.5f)
                 },
                 0
         );
@@ -43,8 +43,8 @@ public class Consts {
                 new Texture(Gdx.files.internal("player/player_walk_l.png")),
                 0.25f,
                 new Vector2[]{
-                        new Vector2(6, 11),
-                        new Vector2(6, 8.5f)
+                        new Vector2(5, 0),
+                        new Vector2(5, -1.5f)
                 },
                 false,
                 0
@@ -55,8 +55,8 @@ public class Consts {
                 0.25f,
                 // just make it render behind the player - doesn't need to be completely visible
                 new Vector2[]{
-                        new Vector2(23, -1), // sort of jank, but whatever
-                        new Vector2(23, -3.5f)
+                        new Vector2(16, -3), // sort of jank, but whatever
+                        new Vector2(16, -5.5f)
                 },
                 false,
                 -90
@@ -67,8 +67,8 @@ public class Consts {
                 new Texture(Gdx.files.internal("player/player_idle.png")),
                 0.25f,
                 new Vector2[]{
-                        new Vector2(2, 11),
-                        new Vector2(2, 8.5f)
+                        new Vector2(5, 1),
+                        new Vector2(5, -1.5f),
                 },
                 0
         );
@@ -127,7 +127,7 @@ public class Consts {
         public static final Spell lightning_strike = new Spell.Builder("Lightning", "An electrifying zap", SpellType.SPELL_POINT, SpellEffect.EFFECT_NONE, TargetType.ENEMY, 20, SpellRarity.COMMON, AnimationComponents.lightning_strike)
                 .damage(15)
                 .level(3)
-                .range(175)
+                .range(100)
                 .build();
     }
 }
