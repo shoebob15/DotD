@@ -32,7 +32,7 @@ public class OverlayEntity implements Entity {
     public void update(DotD game) {
         gamePos = UISystem.getOverlayPosition(this, game);
         if (!isHidden) {
-            game.batch.draw(texture.texture, gamePos.x, gamePos.y);
+            game.batch.draw(texture.texture, gamePos.x, gamePos.y, texture.texture.getWidth() / 2, texture.texture.getHeight() / 2);
         }
     }
 

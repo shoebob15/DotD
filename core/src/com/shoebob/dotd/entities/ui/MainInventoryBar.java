@@ -29,6 +29,8 @@ public class MainInventoryBar extends OverlayEntity {
         this.inventory = inventory;
     }
 
+
+
     @Override
     public void update(DotD game) {
         super.update(game);
@@ -37,9 +39,9 @@ public class MainInventoryBar extends OverlayEntity {
 
         // render currently selected spell
         if (inventory.selectedSpell.projectile != null) {
-            game.batch.draw(inventory.selectedSpell.projectile.animationComponent.animation.getKeyFrame(game.statetime, true), x - 2, y + 6, 24, 12);
+            game.batch.draw(inventory.selectedSpell.projectile.animationComponent.animation.getKeyFrame(game.statetime, true), x - 1, y + 3, 12, 6);
         } else {
-            game.batch.draw(inventory.selectedSpell.animation.animation.getKeyFrame(game.statetime, true), x + 6, y + 6, 14, 14);
+            game.batch.draw(inventory.selectedSpell.animation.animation.getKeyFrame(game.statetime, true), x + 6, y + 6, 7, 7);
         }
 
         // render current cooldown on spell

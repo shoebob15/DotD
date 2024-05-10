@@ -152,7 +152,6 @@ public class Player implements Entity {
         tileLeft = leftCell != null;
 
         tileRight = rightCell != null;
-        System.out.println(tileRight);
 
         tileBottom = bottomCell != null;
 

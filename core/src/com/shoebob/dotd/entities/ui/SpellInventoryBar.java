@@ -49,7 +49,7 @@ public class SpellInventoryBar extends OverlayEntity {
             }
         }
 
-        int spacing = 17;
+        int spacing = 8;
         int index = 0;
 
 
@@ -58,13 +58,13 @@ public class SpellInventoryBar extends OverlayEntity {
             for (Spell spell : inventory.spells) {
                 if (spell.projectile != null) {
                     game.batch.draw(spell.projectile.animationComponent.animation.getKeyFrame(game.statetime, true), x - 3, y + 6 + (spacing * index),
-                            spell.projectile.animationComponent.animation.getKeyFrames()[0].getRegionWidth() * .4f,
-                            spell.projectile.animationComponent.animation.getKeyFrames()[0].getRegionHeight() * .4f
+                            spell.projectile.animationComponent.animation.getKeyFrames()[0].getRegionWidth() * .2f,
+                            spell.projectile.animationComponent.animation.getKeyFrames()[0].getRegionHeight() * .2f
                     );
                 } else {
                     game.batch.draw(spell.animation.animation.getKeyFrame(game.statetime, true), x + 10, y + 6 + (spacing * index),
-                            spell.animation.animation.getKeyFrames()[0].getRegionWidth() * .4f,
-                            spell.animation.animation.getKeyFrames()[0].getRegionHeight() * .4f
+                            spell.animation.animation.getKeyFrames()[0].getRegionWidth() * .2f,
+                            spell.animation.animation.getKeyFrames()[0].getRegionHeight() * .2f
                     );
                 }
 
@@ -81,7 +81,7 @@ public class SpellInventoryBar extends OverlayEntity {
         for (int i = 0; i < inventory.spells.size(); i++) {
             // yeah, I'm never touching this code again
             if (LocationSystem.bodyOverlaps((Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game)), new PositionComponent(gamePos.x, gamePos.y + texture.texture.getHeight()), new BodyComponent(texture.texture.getWidth(), texture.texture.getHeight()))) {
-                if (Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y > i * (texture.texture.getHeight() / 4f) + gamePos.y && Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y < (i * texture.texture.getHeight() / 4f + texture.texture.getHeight() / 4f) + gamePos.y) {
+                if (Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y > i * (texture.texture.getHeight() / 8f) + gamePos.y && Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y < (i * texture.texture.getHeight() / 8f + texture.texture.getHeight() / 8f) + gamePos.y) {
                     // get currently selected spell
                     Spell currentSpell = inventory.spells.get(i);
                     // draw dialog window
