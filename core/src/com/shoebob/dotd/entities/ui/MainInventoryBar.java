@@ -49,11 +49,11 @@ public class MainInventoryBar extends OverlayEntity {
         int height = 0;
 
         if (inventory.equipped.lastAttack + inventory.equipped.cooldown > System.currentTimeMillis()) {
-            height = (int) (19 - (19 * (System.currentTimeMillis() - inventory.equipped.lastAttack) / inventory.equipped.cooldown));
+            height = (int) (9 - (9 * (System.currentTimeMillis() - inventory.equipped.lastAttack) / inventory.equipped.cooldown));
         }
 
         // cooldown.png is a 1x1 semi-transparent image
-        game.batch.draw(new Texture("ui/cooldown.png"), x + 3, y + 3, 19, height);
+        game.batch.draw(new Texture("ui/cooldown.png"), x + 2, y + 2, 9, height);
 
 
         int spacing = 17; // it just works! (completely meaningless number)
