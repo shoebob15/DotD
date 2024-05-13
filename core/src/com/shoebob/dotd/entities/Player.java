@@ -42,7 +42,6 @@ public class Player implements Entity {
         spellInventory = new SpellInventoryComponent();
         health = new HealthComponent();
         mana = new ManaComponent();
-        mana.currentMana = 9999999;
 
         magic_staff = new SpellAttachment(new TextureComponent(new Texture("weapons/magic_staff.png")));
 
@@ -116,36 +115,19 @@ public class Player implements Entity {
         int cellWidth = collisionObjectLayer.getTileWidth();
         int cellHeight = collisionObjectLayer.getTileHeight();
 
-        // THIS ARRAY CONTAINS NULL OBJECTS - ALWAYS CHECK IF IT IS NULL
-        TiledMapTileLayer.Cell[][] cells = new TiledMapTileLayer.Cell[columns][rows];
+        int playerTileX = (int) (position.x / cellWidth) + 1;
+        int playerTileY = (int) (position.y / cellHeight);
 
-        // generate array of cells
-        for (int r = 0; r < rows; r++) {
-            for (int c = 0; c < columns; c++) {
-                TiledMapTileLayer.Cell cell = collisionObjectLayer.getCell(r, c);
-                if (cell != null) {
-                    cells[r][c] = cell;
-                }
-            }
+        TiledMapTileLayer.Cell leftCell = collisionObjectLayer.getCell(playerTileX, playerTileY);
+        TiledMapTileLayer.Cell rightCell = collisionObjectLayer.getCell(playerTileX + 1, playerTileY);
+        TiledMapTileLayer.Cell bottomCell = collisionObjectLayer.getCell(playerTileX, playerTileY - 1);
+        TiledMapTileLayer.Cell topCell = collisionObjectLayer.getCell(playerTileX, playerTileY +     1);
+
+        System.out.println(playerTileX + ", " + playerTileY);
+
+        if (topCell != null) {
+            System.out.println(topCell);
         }
-
-        int playerTileX = (int) (position.x / cellWidth);
-        int playerTileY= (int) (position.y / cellHeight);
-
-        TiledMapTileLayer.Cell leftCell = null;
-        TiledMapTileLayer.Cell rightCell = null;
-        TiledMapTileLayer.Cell topCell = null;
-        TiledMapTileLayer.Cell bottomCell = null;
-
-        leftCell = collisionObjectLayer.getCell(playerTileX, playerTileY);
-
-
-        rightCell = collisionObjectLayer.getCell(playerTileX + 2, playerTileY);
-
-
-        bottomCell = collisionObjectLayer.getCell(playerTileX, playerTileY);
-
-        topCell = collisionObjectLayer.getCell(playerTileX, playerTileY + 1);
 
 
 
