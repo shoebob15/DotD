@@ -7,22 +7,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.crashinvaders.vfx.VfxManager;
 import com.crashinvaders.vfx.effects.CrtEffect;
 import com.crashinvaders.vfx.effects.OldTvEffect;
+import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.entities.enemies.EnemyEntity;
 import com.shoebob.dotd.entities.ui.MainInventoryBar;
 import com.shoebob.dotd.entities.ui.SpellInventoryBar;
-import com.shoebob.dotd.game.Consts;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.managers.ProjectileManager;
 import com.shoebob.dotd.managers.SpellEntityManager;
@@ -88,9 +84,9 @@ public class GameScreen implements Screen {
                 200 * ((float) Gdx.graphics.getHeight() / Gdx.graphics.getWidth())
         );
 
-        EnemyManager.addEnemy(new EnemyEntity());
-        EnemyManager.addEnemy(new EnemyEntity());
-        EnemyManager.addEnemy(new EnemyEntity());
+        EnemyManager.addEnemy(new EnemyEntity(new PositionComponent(75, 75)));
+        EnemyManager.addEnemy(new EnemyEntity(new PositionComponent(125, 100)));
+        EnemyManager.addEnemy(new EnemyEntity(new PositionComponent(100, 50)));
     }
 
     @Override

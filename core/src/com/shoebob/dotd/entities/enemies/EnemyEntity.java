@@ -18,8 +18,8 @@ public class EnemyEntity implements Entity {
     public VelocityComponent velocity;
     public SpriteAnimationComponent animation;
 
-    public EnemyEntity() {
-        this.position = new PositionComponent(15, 15);
+    public EnemyEntity(PositionComponent pos) {
+        this.position = pos;
         this.body = new BodyComponent(16, 16);
         this.velocity = new VelocityComponent();
         this.animation = new SpriteAnimationComponent();

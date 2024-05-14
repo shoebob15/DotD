@@ -123,13 +123,6 @@ public class Player implements Entity {
         TiledMapTileLayer.Cell bottomCell = collisionObjectLayer.getCell(playerTileX, playerTileY - 1);
         TiledMapTileLayer.Cell topCell = collisionObjectLayer.getCell(playerTileX, playerTileY +     1);
 
-        System.out.println(playerTileX + ", " + playerTileY);
-
-        if (topCell != null) {
-            System.out.println(topCell);
-        }
-
-
 
         tileLeft = leftCell != null;
 
