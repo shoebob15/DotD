@@ -23,6 +23,9 @@ public class EnemyManager {
                 }
             }
 
+            if (i < 0) i = 0;
+            if (enemies.isEmpty()) break;
+
             for (AnimatedProjectile projectile : ProjectileManager.getAnimatedProjectiles()) {
                 if (LocationSystem.bodyOverlaps(projectile.position, new BodyComponent(projectile.animationComponent.animation.getKeyFrames()[0].getRegionWidth(), projectile.animationComponent.animation.getKeyFrames()[0].getRegionHeight()), enemies.get(i).position, enemies.get(i).body)) {
                     enemies.remove(i);
