@@ -29,13 +29,6 @@ import com.shoebob.dotd.util.CameraShake;
 public class GameScreen implements Screen {
     final DotD game;
 
-    public TiledMap map;
-
-    public OrthogonalTiledMapRenderer mapRenderer;
-
-    TiledMapTileLayer collisionObjectLayer;
-    MapObjects objects;
-
     // vfx shader stuff
     private VfxManager vfxManager;
     private OldTvEffect tvEffect;
@@ -51,15 +44,13 @@ public class GameScreen implements Screen {
     public GameScreen(DotD game) {
         this.game = game;
 
-        map = new TmxMapLoader().load("maps/build.tmx");
+        game.map = new TmxMapLoader().load("maps/build.tmx");
 
-        collisionObjectLayer = (TiledMapTileLayer)map.getLayers().get("walls");
+        game.collisionObjectLayer = (TiledMapTileLayer)game.map.getLayers().get("walls");
 
-        objects = collisionObjectLayer.getObjects();
+        game.objects = game.collisionObjectLayer.getObjects();
 
-        System.out.println(objects.getCount());
-
-        mapRenderer = new OrthogonalTiledMapRenderer(map);
+        game.mapRenderer = new OrthogonalTiledMapRenderer(game.map);
 
         mainInventoryBar = new MainInventoryBar();
         mainInventoryBar.create();
@@ -110,15 +101,15 @@ public class GameScreen implements Screen {
         }
 
         game.camera.update();
-        mapRenderer.setView(game.camera);
-        mapRenderer.render();
+        game.mapRenderer.setView(game.camera);
+        game.mapRenderer.render();
 
         game.batch.setProjectionMatrix(game.camera.combined);
         game.shape.setProjectionMatrix(game.camera.combined);
         game.batch.begin();
         game.shape.begin(ShapeRenderer.ShapeType.Filled);
 
-        game.player.checkPlayerCollisions(collisionObjectLayer);
+        game.player.checkPlayerCollisions(game.collisionObjectLayer);
 
         // START UPDATES
         game.player.update(game);
@@ -170,7 +161,7 @@ public class GameScreen implements Screen {
     public void dispose() {
         game.batch.dispose();
         game.player.dispose();
-        map.dispose();
+        game.map.dispose();
 
         vfxManager.dispose();
         tvEffect.dispose();
