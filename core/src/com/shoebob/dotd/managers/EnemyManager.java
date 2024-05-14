@@ -41,10 +41,10 @@ public class EnemyManager {
         // spawn enemies
         if (enemies.size() <= 4 && System.currentTimeMillis() - lastSpawn > 3000) {
             lastSpawn = System.currentTimeMillis();
-            PositionComponent tmp = new PositionComponent((int) (Math.random() * 250), (int) (Math.random() * 200));
+            PositionComponent tmp = new PositionComponent((int) (Math.random() * (30 * 8)), (int) (Math.random() * (20 * 8)));
             System.out.println(tmp);
             while (game.collisionObjectLayer.getCell((int) tmp.x / 8, (int) tmp.y / 8) != null) {
-                tmp = new PositionComponent((int) (Math.random() * 150), (int) (Math.random() * 100));
+                tmp = new PositionComponent((int) (Math.random() * (30 * 8)), (int) (Math.random() * (20 * 8)));
             }
             System.out.println(tmp);
             addEnemy(new EnemyEntity(tmp));
