@@ -7,6 +7,7 @@ import com.shoebob.dotd.components.BodyComponent;
 import com.shoebob.dotd.components.PositionComponent;
 import com.shoebob.dotd.components.SpellInventoryComponent;
 import com.shoebob.dotd.components.TextureComponent;
+import com.shoebob.dotd.game.Consts;
 import com.shoebob.dotd.game.DotD;
 import com.shoebob.dotd.spells.Spell;
 import com.shoebob.dotd.systems.LocationSystem;
@@ -113,7 +114,7 @@ public class SpellInventoryBar extends OverlayEntity {
                     game.font.draw(game.batch, "Effect: " + currentSpell.effect.str.toUpperCase(), Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).x + 23, Util.screenToWorld(new PositionComponent(Gdx.input.getX(), Gdx.input.getY()), game).y + 30);
 
                     if (Gdx.input.justTouched()) {
-                        game.player.attachmentInventory.selectedSpell = currentSpell;
+                        game.player.attachmentInventory.selectedSpell = Consts.Spells.elPrimo;
                         isHidden = true;
                     }
                 }

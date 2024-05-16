@@ -100,11 +100,15 @@ public class Consts {
 
         public static final AnimationComponent zombieWalkF =
                 AnimationSystem.buildHorizontalAnimationComponent(new TextureComponent(new Texture("enemies/zombie/zombie_idle.png")), 2, 0.25f);
+
+        public static final AnimationComponent elprimo =
+                AnimationSystem.buildHorizontalAnimationComponent(new TextureComponent(new Texture("projectiles/elprimo.png")), 1, 0.1f);
     }
 
     public static class Projectiles {
         public static final AnimatedProjectile fireball = new AnimatedProjectile(AnimationComponents.fireball);
         public static final AnimatedProjectile iceball = new AnimatedProjectile(AnimationComponents.iceball);
+        public static final AnimatedProjectile elprimo = new AnimatedProjectile(AnimationComponents.elprimo);
     }
 
     public static class Enemies {
@@ -128,6 +132,12 @@ public class Consts {
                 .damage(15)
                 .level(3)
                 .range(100)
+                .build();
+
+        public static final Spell elPrimo = new Spell.Builder("El PRIMOOOO", "NERF", SpellType.SPELL_PROJECTILE, SpellEffect.EFFECT_FIRE, TargetType.ENEMY, 0, SpellRarity.MYTHIC, AnimationComponents.elprimo)
+                .damage(9999)
+                .level(9999)
+                .projectile(Projectiles.elprimo)
                 .build();
     }
 }
