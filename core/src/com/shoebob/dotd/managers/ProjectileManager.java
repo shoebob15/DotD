@@ -21,6 +21,8 @@ public class ProjectileManager {
             projectile.update(game);
             projectile.draw(game);
         }
+
+        System.out.println(animatedProjectiles.size());
     }
 
     // TODO!!: This is so unoptimized - max of 1000 projectiles before lag (IMPLEMENT LIFESPAN THIS IS SO BAD)

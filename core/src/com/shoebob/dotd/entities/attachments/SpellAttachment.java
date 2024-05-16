@@ -38,7 +38,6 @@ public class SpellAttachment extends Attachment {
             return;
         }
 
-        if (cooldown()) {
             // PROJECTILE ATTACHMENTS
             if (game.player.attachmentInventory.selectedSpell.type == SpellType.SPELL_PROJECTILE) {
                 VelocityComponent vel = new VelocityComponent();
@@ -84,7 +83,7 @@ public class SpellAttachment extends Attachment {
 
             game.player.mana.currentMana -= game.player.attachmentInventory.selectedSpell.manaCost;
         }
-    }
+
 
     @Override
     public void update(DotD game) {
