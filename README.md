@@ -1,6 +1,8 @@
 ![logo](https://github.com/shoebob15/DotD/assets/55066087/c52341f5-c11e-4af0-9992-cda9c8c42d14)
 
-A top-down 2D dungeon crawler written in Java using the [LibGDX](https://github.com/libgdx/libgdx) framework
+A top-down 2D dungeon crawler written in Java using the [LibGDX](https://github.com/libgdx/libgdx) framework - final project for my AP Computer Science A class
+
+**This project has been retired due to lack of time and desire to program it**
 
 
 ## Code structure
